@@ -2,11 +2,11 @@
 
 [![Site preview](/public/site-preview.png)](https://www.moarabi.dev)
 
-My design portfolio to showcase a few projects. Built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://www.moarabi.dev) or check out a live version of the [components storybook](https://storybook.portfolio-mashakos.vercel.app).
+My design portfolio to showcase a few projects. Built with [Remix](https://remix.run/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://hamishw.com) or check out a live version of the [components storybook](https://storybook.hamishw.com).
 
 ## Install & run
 
-Make sure you have nodejs `18.0.0` or higher and npm `8.6.0` or higher installed. Install dependencies with:
+Make sure you have nodejs `19.9.0` or higher and npm `9.6.3` or higher installed. Install dependencies with:
 
 ```bash
 npm install
@@ -21,33 +21,15 @@ npm run dev
 To view the components storybook:
 
 ```bash
-npm run storybook
-```
-
-To create a production build:
-
-```bash
-npm run build
+npm run dev:storybook
 ```
 
 ## Deployment
 
-I've set up the site using AWS for hosting and serverless functions. You'll need an AWS account and the AWS CLI installed in order to deploy.
-
-Deploy the site to s3:
+I've set up the site using Cloudflare for hosting. Deploy the site to Cloudflare Pages:
 
 ```bash
 npm run deploy
-```
-
-Deploy serverless functions:
-
-```bash
-cd functions
-```
-
-```bash
-npm run deploy:api
 ```
 
 ## Permissions
@@ -67,5 +49,6 @@ You'll need to edit the fragment shader. [Check out this issue for more details]
 <details>
   <summary>How do I get the contact form to work?</summary>
 
-It's set up using a serverless function with AWS Lambda. You'll need to set up an AWS account and deploy the function. [Refer to this issue for more details](https://github.com/HamishMW/portfolio/issues/21#issuecomment-958727113).
+To get the contact form working create an AWS account and set up SES (Simple Email service). Then plug in your details into `.dev.vars.example` and rename it to `.dev.vars`. You'll also need to add these as enviroment variables in the Cloudflare dashboard for it to work in production. Or if you don't mind sending through gmail use [nodemailer](https://nodemailer.com/) instead.
 </details>
+

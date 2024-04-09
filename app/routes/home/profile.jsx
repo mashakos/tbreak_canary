@@ -18,7 +18,8 @@ import styles from './profile.module.css';
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-      <DecoderText text="Hi there" start={visible} delay={500} />
+      {/*<DecoderText text="Hi there" start={visible} delay={500} />*/}
+      Hi there
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       I’m Hamish, currently I live in Sydney working as a senior product designer at{' '}

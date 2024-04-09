@@ -1,16 +1,18 @@
-__  __  __
-\ \ \ \ \/
- \ \/\ \
-  \/  \/
-
+ _ _
+ |   \
+ |  _  \
+ | |  \  \
+ |  _ /  /
+ |      /
+   ﹋﹋
 The humans.txt file explains the team, technology,
 and graphic assets behind this site humanstxt.org.
 
 _______________________________________________________________________________
 
-DESIGNER | デザイナー
+DESIGN | デザイナー
 
-Hamish Williams
+Delosian
 Hand crafted design & web development
 
 Design tools:
@@ -18,8 +20,6 @@ Figma
 Photoshop
 Blender
 
-twitter.com/hamishmw
-github.com/hamishmw
 
 _______________________________________________________________________________
 

@@ -9,4 +9,4 @@ export {
   ProjectTextRow,
   ProjectSectionColumns,
   ProjectSection,
-} from './project';
+} from './project.jsx';

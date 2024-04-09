@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "homepage": "https://hamishw.com",
+  "homepage": "https://delosian.pro",
   "description": "Portfolio site for Hamish Williams",
   "repository": "https://github.com/HamishMW/portfolio.git",
   "author": "Hamish Williams",
@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "node ./scripts/dev.cjs && remix vite:dev",
+    "dev": "npx tinacms dev -c \"node ./scripts/dev.cjs && remix vite:dev\"",
     "start": "wrangler pages dev ./build/client",
     "postinstall": "node ./scripts/draco.cjs",
     "deploy": "npm run build && wrangler pages deploy ./build/client --project-name portfolio",
@@ -30,7 +30,8 @@
     "rehype-img-size": "^1.0.1",
     "rehype-slug": "^6.0.0",
     "three": "^0.161.0",
-    "three-stdlib": "^2.29.4"
+    "three-stdlib": "^2.29.4",
+    "tinacms": "^1.6.1"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^2.1.1",
@@ -45,6 +46,7 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
     "@storybook/test": "^7.6.17",
+    "@tinacms/cli": "^1.5.43",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",

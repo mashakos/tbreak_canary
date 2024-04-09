@@ -80,8 +80,15 @@ export const DisplacementSphere = props => {
     };
 
     startTransition(() => {
-      geometry.current = new SphereGeometry(32, 128, 128);
+      let scaleConstant = 0.4;
+      geometry.current = new SphereGeometry(32, 128, 64);
       sphere.current = new Mesh(geometry.current, material.current);
+      //sphere.current.scale.x = scaleConstant;
+      sphere.current.scale.y = scaleConstant;
+      //sphere.current.scale.z = scaleConstant;
+      sphere.current.rotation.x = 2;
+      sphere.current.rotation.y = 2;
+      sphere.current.rotation.z = 0.2;
       sphere.current.position.z = 0;
       sphere.current.modifier = Math.random();
       scene.current.add(sphere.current);
@@ -98,7 +105,7 @@ export const DisplacementSphere = props => {
     const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 2.7 : 0.4);
 
     dirLight.position.z = 200;
-    dirLight.position.x = 100;
+    dirLight.position.x = -100;
     dirLight.position.y = 100;
 
     lights.current = [dirLight, ambientLight];
@@ -134,25 +141,25 @@ export const DisplacementSphere = props => {
     }
   }, [reduceMotion, windowSize]);
 
-  useEffect(() => {
-    const onMouseMove = throttle(event => {
-      const position = {
-        x: event.clientX / window.innerWidth,
-        y: event.clientY / window.innerHeight,
-      };
-
-      rotationX.set(position.y / 2);
-      rotationY.set(position.x / 2);
-    }, 100);
-
-    if (!reduceMotion && isInViewport) {
-      window.addEventListener('mousemove', onMouseMove);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-    };
-  }, [isInViewport, reduceMotion, rotationX, rotationY]);
+  // useEffect(() => {
+  //   const onMouseMove = throttle(event => {
+  //     const position = {
+  //       x: event.clientX / window.innerWidth,
+  //       y: event.clientY / window.innerHeight,
+  //     };
+  //
+  //     rotationX.set(position.y / 2);
+  //     rotationY.set(position.x / 2);
+  //   }, 100);
+  //
+  //   if (!reduceMotion && isInViewport) {
+  //     window.addEventListener('mousemove', onMouseMove);
+  //   }
+  //
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMouseMove);
+  //   };
+  // }, [isInViewport, reduceMotion, rotationX, rotationY]);
 
   useEffect(() => {
     let animation;
@@ -164,7 +171,7 @@ export const DisplacementSphere = props => {
         uniforms.current.time.value = 0.00005 * (Date.now() - start.current);
       }
 
-      sphere.current.rotation.z += 0.001;
+      //sphere.current.rotation.z += 0.001;
       sphere.current.rotation.x = rotationX.get();
       sphere.current.rotation.y = rotationY.get();
 

@@ -174,14 +174,14 @@ float pnoise(vec3 P, vec3 rep)
   vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
   vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
   float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
-  return 2.2 * n_xyz;
+  return 0.8 * n_xyz;
 }
 
 float turbulence(vec3 p) {
   float w = 100.0;
   float t = -.5;
   for (float f = 1.0 ; f <= 10.0 ; f++) {
-    float power = pow(2.0, f);
+    float power = pow(3.0, f);
     t += abs(pnoise(vec3(power * p), vec3(10.0, 10.0, 10.0)) / power);
   }
   return t;
@@ -239,7 +239,7 @@ void main() {
 
   vUv = uv;
 
-  noise = turbulence(0.01 * position + normal + time * 0.8);
+  noise = turbulence(0.01 * position + normal + time * 0.3);
   vec3 displacement = vec3((position.x) * noise, position.y * noise, position.z * noise);
   gl_Position = projectionMatrix * modelViewMatrix * vec4((position + normal) + displacement, 1.0);
 }

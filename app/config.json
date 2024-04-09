@@ -1,11 +1,11 @@
 {
-  "name": "Hamish Williams",
-  "role": "Designer",
-  "disciplines": ["Developer", "Prototyper", "Animator", "Illustrator", "Modder"],
-  "url": "https://hamishw.com",
-  "twitter": "@hamishMW",
-  "figma": "@Hamish",
-  "github": "HamishMW",
-  "repo": "https://github.com/HamishMW/portfolio",
-  "ascii": "__  __  __\n\u005C \u005C \u005C \u005C \u005C\u2215\n \u005C \u005C\u2215\u005C \u005C\n  \u005C\u2215  \u005C\u2215\n"
+  "name": "Delosian",
+  "role": "Digital",
+  "disciplines": ["Design", "Creative", "Media", "Mobile", "DevOps"],
+  "url": "https://delosian.pro",
+  "twitter": "",
+  "figma": "",
+  "github": "",
+  "repo": "https://github.com/mashakos/delosian",
+  "ascii": "\u0020 \u005F \u005F\n \u007C \u0020 \u0020 \u005C\n \u007C \u0020 \u005F \u0020 \u005C\n \u007C \u007C \u0020 \u005C \u0020 \u005C\n \u007C \u0020 \u005F \u002F \u0020 \u002F\n \u007C \u0020 \u0020 \u0020 \u002F\n \u0020 \uFE4B\n"
 }

@@ -12,3 +12,5 @@ storybook-static
 
 node_modules
 .env
+
+wrangler.toml

@@ -5,6 +5,7 @@
 #binding = "MY_KV"
 #id = "12035954d5f34578ab51022223570ffd"
 
+name = "delosian"
 kv_namespaces = [
   { id = "12035954d5f34578ab51022223570ffd", binding="MY_KV" }
 ]

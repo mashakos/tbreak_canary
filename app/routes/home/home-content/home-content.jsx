@@ -241,12 +241,12 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               labels={useMemo(
                 () => [
                   {
-                    position: [-0.3, 0.26, 0.45],
+                    position: [0.54, 0.19, 0.18],
                     text: 'Dubai',
                     hidden: true,
                   },
                   {
-                    position: [-0.5, 0.275, 0.275],
+                    position: [-0.47, 0.22, -0.08],
                     text: 'Cairo',
                     hidden: true,
                   },
@@ -303,7 +303,7 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="start" width="s">
+                    <HomeTextRow justify="end" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         CMS & CRM Systems
                       </HomeSectionHeading>
@@ -326,7 +326,7 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="end" width="s">
+                    <HomeTextRow justify="start" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         Global Talent
                       </HomeSectionHeading>
@@ -336,22 +336,10 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
                     </HomeTextRow>
                   </HomeSectionContent>
                 </HomeSection>
-                <HomeSection>
-                  <HomeSectionContent width="xl">
-                    <HomeTextRow justify="start" width="s">
-                      <HomeSectionHeading level={4} as="h3">
-                        Mobile Applications
-                      </HomeSectionHeading>
-                      <HomeSectionText>
-                        Building apps that enchant and empower.
-                      </HomeSectionText>
-                    </HomeTextRow>
-                  </HomeSectionContent>
-                </HomeSection>
               </EarthSection>
               <EarthSection
                 animations={['0:loop']}
-                camera={[-1.81, 0.51, 0.43]}
+                camera={[1.81, 0.51, 0.43]}
                 meshes={['Atmosphere', 'EarthFull']}
                 labels={[
                   'Dubai',
@@ -361,14 +349,14 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               />
               <EarthSection
                 animations={['0:loop']}
-                camera={[0.37, 1.02, 0.84]}
+                camera={[0.37, 1.02, 1.84]}
                 meshes={['Atmosphere', 'EarthFull']}
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
                     <HomeTextRow justify="end" width="s">
                       <HomeSectionHeading level={4} as="h3">
-                        SEO & Analytics
+                        Mobile Applications
                       </HomeSectionHeading>
                       <HomeSectionText>
                         Building apps that enchant and empower.

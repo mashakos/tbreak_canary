@@ -12,5 +12,3 @@ storybook-static
 
 node_modules
 .env
-/build/
-.vercel

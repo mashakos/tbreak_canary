@@ -2,15 +2,15 @@ import { jsx, jsxs, Fragment as Fragment$1 } from "react/jsx-runtime";
 import { RemixServer, Link as Link$1, useLocation, useNavigate, useNavigation, useLoaderData, useFetcher, Meta, Links, Outlet, ScrollRestoration, Scripts, useRouteError, useActionData, Form } from "@remix-run/react";
 import * as isbotModule from "isbot";
 //import { renderToReadableStream } from "react-dom/server";
-import react from "react-dom/server";
-import { renderToStream } from "react-dom/server";
+import pkg from 'react-dom/server';
+const { renderToReadableStream } = pkg;
 import { createCookieSessionStorage, json } from "@remix-run/cloudflare";
 import { createContext, useContext, forwardRef, useRef, useEffect, useState, memo, Fragment, useCallback, useId, lazy, Suspense, useMemo, Children, useSyncExternalStore } from "react";
 import { useReducedMotion, AnimatePresence, usePresence, useSpring } from "framer-motion";
 import { useMDXComponents, MDXProvider } from "@mdx-js/react";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 async function handleRequest(request, responseStatusCode, responseHeaders, remixContext, loadContext) {
-  const body = await renderToStream(
+  const body = await renderToReadableStream(
     /* @__PURE__ */ jsx(RemixServer, { context: remixContext, url: request.url }),
     {
       signal: request.signal,

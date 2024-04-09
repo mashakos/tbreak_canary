@@ -1,9 +1,8 @@
 import { jsx, jsxs, Fragment as Fragment$1 } from "react/jsx-runtime";
 import { RemixServer, Link as Link$1, useLocation, useNavigate, useNavigation, useLoaderData, useFetcher, Meta, Links, Outlet, ScrollRestoration, Scripts, useRouteError, useActionData, Form } from "@remix-run/react";
 import * as isbotModule from "isbot";
-//import { renderToReadableStream } from "react-dom/server";
-import pkg from 'react-dom/server';
-const { renderToReadableStream } = pkg;
+import { renderToReadableStream } from "react-dom/server.browser";
+
 import { createCookieSessionStorage, json } from "@remix-run/cloudflare";
 import { createContext, useContext, forwardRef, useRef, useEffect, useState, memo, Fragment, useCallback, useId, lazy, Suspense, useMemo, Children, useSyncExternalStore } from "react";
 import { useReducedMotion, AnimatePresence, usePresence, useSpring } from "framer-motion";

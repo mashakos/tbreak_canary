@@ -20,6 +20,14 @@ export default defineConfig({
   },
   server: {
     port: 7777,
+    proxy: {
+      '/cms': {
+        target: 'http://localhost:7777/admin/index.html',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/cms/, ''),
+      },
+    },
   },
   plugins: [
     mdx({

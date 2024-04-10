@@ -14,7 +14,7 @@ import rehypePrism from '@mapbox/rehype-prism';
 const isStorybook = process.argv[1]?.includes('storybook');
 
 export default defineConfig({
-  base: `/public/`,
+  base: `/build/`,
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
   build: {
     assetsInlineLimit: 1024,

@@ -286,12 +286,12 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               />
               <HomeSection>
                 <HomeSectionContent width="xl">
-                  <HomeTextRow justify="end" width="s">
+                  <HomeTextRow justify="start" width="s">
                     <HomeSectionHeading level={4} as="h3">
                       Web Development
                     </HomeSectionHeading>
                     <HomeSectionText>
-                      Crafting responsive websites that resonate with users.
+                      We work closely with our clients to create outstanding websites. From content management to e-commerce, the flexibility of our in-house tech stack allows for tailored solutions.
                     </HomeSectionText>
                   </HomeTextRow>
                 </HomeSectionContent>
@@ -303,7 +303,7 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="start" width="s">
+                    <HomeTextRow justify="end" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         CMS & CRM Systems
                       </HomeSectionHeading>
@@ -326,7 +326,7 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="end" width="s">
+                    <HomeTextRow justify="start" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         Global Talent
                       </HomeSectionHeading>
@@ -338,12 +338,12 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
                 </HomeSection>
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="start" width="s">
+                    <HomeTextRow justify="end" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         Mobile Applications
                       </HomeSectionHeading>
                       <HomeSectionText>
-                        Building apps that enchant and empower.
+                        Building apps that enchant and empower. We build with cross-platform and a UX first approach in mind.
                       </HomeSectionText>
                     </HomeTextRow>
                   </HomeSectionContent>
@@ -366,12 +366,12 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
               >
                 <HomeSection>
                   <HomeSectionContent width="xl">
-                    <HomeTextRow justify="end" width="s">
+                    <HomeTextRow justify="start" width="s">
                       <HomeSectionHeading level={4} as="h3">
                         SEO & Analytics
                       </HomeSectionHeading>
                       <HomeSectionText>
-                        Building apps that enchant and empower.
+                        Crafting bespoke strategies based on your industry needs and target audience. Our SEO wizards with their wealth of knowledge are focused on one goal - turning clicks into conversions.
                       </HomeSectionText>
                     </HomeTextRow>
                   </HomeSectionContent>

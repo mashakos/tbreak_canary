@@ -1,5 +1,5 @@
 #name = "delosian"
-pages_build_output_dir = "./build"
+#pages_build_output_dir = "./build"
 #
 #[[kv_namespaces]]
 #binding = "MY_KV"

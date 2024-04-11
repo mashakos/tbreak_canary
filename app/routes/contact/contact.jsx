@@ -82,10 +82,10 @@ export async function action({ context, request }) {
           },
         },
         Subject: {
-          Data: `Portfolio message from ${email}`,
+          Data: `Delosian Digital | message from ${email}`,
         },
       },
-      Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
+      Source: `Delosian Digital <${context.cloudflare.env.FROM_EMAIL}>`,
       ReplyToAddresses: [email],
     })
   );

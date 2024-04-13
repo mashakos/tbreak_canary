@@ -119,7 +119,6 @@ export const Post = ({ timecode }) => {
               data-tina-field={tinaField(data.post, "body")}
         >
           <TinaMarkdown content={data.post.body} components={postMarkdown} />
-          {/*{body.children}*/}
         </Text>
       </Section>
       <Footer />

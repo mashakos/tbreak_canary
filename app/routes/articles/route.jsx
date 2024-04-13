@@ -5,6 +5,8 @@ import { Post, postMarkdown } from '~/layouts/post';
 import { baseMeta } from '~/utils/meta';
 import config from '~/config.json';
 import { formatTimecode, readingTime } from '~/utils/timecode';
+import client from '../../../tina/__generated__/client.js';
+import { useTina } from 'tinacms/dist/react';
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);
@@ -13,10 +15,19 @@ export async function loader({ request }) {
   const readTime = readingTime(text.default);
   const ogImage = `${config.url}/static/${slug}-og.jpg`;
 
+  const { data, query, variables } = await client.queries.post({
+    relativePath: "articles." + slug + ".mdx",
+  });
+
   return json({
     ogImage,
     frontmatter: module.frontmatter,
     timecode: formatTimecode(readTime),
+    props: {
+      data,
+      query,
+      variables,
+    },
   });
 }
 
@@ -26,11 +37,11 @@ export function meta({ data }) {
 }
 
 export default function Articles() {
-  const { frontmatter, timecode } = useLoaderData();
+  const { timecode } = useLoaderData();
 
   return (
     <MDXProvider components={postMarkdown}>
-      <Post {...frontmatter} timecode={timecode}>
+      <Post timecode={timecode}>
         <Outlet />
       </Post>
     </MDXProvider>

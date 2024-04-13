@@ -12,16 +12,22 @@ import { clamp } from '~/utils/clamp';
 import { formatDate } from '~/utils/date';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import styles from './post.module.css';
-import { Link as RouterLink } from '@remix-run/react';
+import { Link as RouterLink, useLoaderData } from '@remix-run/react';
+import { tinaField, useTina } from 'tinacms/dist/react';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
+import { postMarkdown } from '~/layouts/post/post-markdown.jsx';
 
-export const Post = ({ children, title, date, banner, timecode }) => {
+export const Post = ({ timecode }) => {
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
   const [dateTime, setDateTime] = useState(null);
 
+  const { props } = useLoaderData();
+  const { data } = useTina(props);
+
   useEffect(() => {
-    setDateTime(formatDate(date));
-  }, [date, dateTime]);
+    setDateTime(formatDate(data.post.date));
+  }, [data.post.date, dateTime]);
 
   useParallax(0.004, value => {
     if (!imageRef.current) return;
@@ -33,15 +39,15 @@ export const Post = ({ children, title, date, banner, timecode }) => {
     scrollToHash(event.currentTarget.href);
   };
 
-  const placeholder = `${banner?.split('.')[0]}-placeholder.jpg`;
+  const placeholder = `${data.post.banner?.split('.')[0]}-placeholder.jpg`;
 
   return (
     <article className={styles.post}>
       <Section>
-        {banner && (
+        {data.post.banner && (
           <div className={styles.banner} ref={imageRef}>
             <div className={styles.bannerImage}>
-              <Image role="presentation" src={banner} placeholder={placeholder} alt="" />
+              <Image role="presentation" src={data.post.banner} placeholder={placeholder} alt="" />
             </div>
             <div className={styles.bannerImageBlur}>
               <Image
@@ -59,21 +65,27 @@ export const Post = ({ children, title, date, banner, timecode }) => {
               {({ visible, nodeRef }) => (
                 <div className={styles.date} ref={nodeRef}>
                   <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
-                  <Text className={styles.dateText} data-visible={visible}>
+                  <Text className={styles.dateText}
+                        data-visible={visible}
+                        data-tina-field={tinaField(data.post, "date")}
+                  >
                     {dateTime}
                   </Text>
                 </div>
               )}
             </Transition>
-            <Heading level={2} as="h1" className={styles.title} aria-label={title}>
-              {title.split(' ').map((word, index) => (
+            <Heading level={2} as="h1"
+                     className={styles.title}
+                     aria-label={data.post.title}
+                     data-tina-field={tinaField(data.post, "title")}>
+              {data.post.title.split(' ').map((word, index) => (
                 <span className={styles.titleWordWrapper} key={`${word}-${index}`}>
                   <span
                     className={styles.titleWord}
                     style={cssProps({ delay: numToMs(index * 100 + 100) })}
                   >
                     {word}
-                    {index !== title.split(' ').length - 1 ? ' ' : ''}
+                    {index !== data.post.title.split(' ').length - 1 ? ' ' : ''}
                   </span>
                 </span>
               ))}
@@ -101,8 +113,13 @@ export const Post = ({ children, title, date, banner, timecode }) => {
         </header>
       </Section>
       <Section className={styles.wrapper} id="postContent" tabIndex={-1}>
-        <Text as="div" size="l" className={styles.content}>
-          {children}
+        <Text as="div"
+              size="l"
+              className={styles.content}
+              data-tina-field={tinaField(data.post, "body")}
+        >
+          <TinaMarkdown content={data.post.body} components={postMarkdown} />
+          {/*{body.children}*/}
         </Text>
       </Section>
       <Footer />

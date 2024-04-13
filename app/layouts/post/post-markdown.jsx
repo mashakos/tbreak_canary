@@ -100,11 +100,19 @@ const PostStrong = props => {
   return <strong className={styles.strong} {...props} />;
 };
 
-const PostImage = ({ src, alt, width, height, ...rest }) => {
+// changed src to url
+// in PostImage:
+// const PostImage = ({ src, url, alt, width, height, ...rest }) => {
+//   const PostImage = ({ url, url, alt, width, height, ...rest }) => {
+//     src={src}
+//     src={url}
+
+const PostImage = ({ url, alt, width, height, ...rest }) => {
+  console.log(url);
   return (
     <img
       className={styles.image}
-      src={src}
+      src={url}
       loading="lazy"
       alt={alt}
       width={width}

@@ -13,6 +13,8 @@ import { useState, useEffect } from 'react';
 import { formatDate } from '~/utils/date';
 import { classes, cssProps } from '~/utils/style';
 import styles from './articles.module.css';
+import client from '../../../tina/__generated__/client.js';
+import { useTina } from 'tinacms/dist/react';
 
 function ArticlesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);

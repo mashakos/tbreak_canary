@@ -5,8 +5,7 @@ import { Post, postMarkdown } from '~/layouts/post';
 import { baseMeta } from '~/utils/meta';
 import config from '~/config.json';
 import { formatTimecode, readingTime } from '~/utils/timecode';
-import client from '../../../tina/__generated__/client.js';
-import { useTina } from 'tinacms/dist/react';
+import client from 'tina/__generated__/client.js';
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);

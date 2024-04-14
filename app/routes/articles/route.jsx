@@ -15,6 +15,7 @@ export async function loader({ request }) {
   const readTime = readingTime(text.default);
   const ogImage = `${config.url}/static/${slug}-og.jpg`;
 
+  // Tina query, read using useLoaderData in app/layouts/post/post.jsx template
   const { data, query, variables } = await client.queries.post({
     relativePath: "articles." + slug + ".mdx",
   });

@@ -22,6 +22,7 @@ export const Post = ({ timecode }) => {
   const imageRef = useRef();
   const [dateTime, setDateTime] = useState(null);
 
+  //Tina props and useTina for live editing
   const { props } = useLoaderData();
   const { data } = useTina(props);
 
@@ -118,6 +119,8 @@ export const Post = ({ timecode }) => {
               className={styles.content}
               data-tina-field={tinaField(data.post, "body")}
         >
+          {/*json post object for testing*/}
+          {/*{JSON.stringify(data.post, null, 2)}*/}
           <TinaMarkdown content={data.post.body} components={postMarkdown} />
         </Text>
       </Section>

@@ -1,83 +1,34 @@
 ---
+title: Hello Tina
 abstract: >-
   I originally built this portfolio site back in 2018, and since then it's
   evolved quite a bit. Recently I migrated from Create React App to Next.js and
   made some major upgrades in the process.
-title: Hello Tina
 banner: /static/modern-styling-in-react-banner-placeholder.jpg
 date: 2023-04-21T00:00:00.000Z
 ---
 
-### file structure
-
-* package.json
-  dependencies, project parameters
-* package-lock.json
-
-### Components:
-
-* variables can be raw html - no need for quotes. eg:
-
-```jsx
- const email = <h2> ded@ded.ded</h2>;
-```
-
-* component: function that returns JSX/html content - like component variables can be raw html. Component name must be capitalised
-* function: returns variable or none. Function name can be any case
-* Components are for templating. Return statement can be inline JSX. eg:
-
-```jsx
- const User = () => {
- return (
-   <div>
-       <h1>Jack</h1>
-       <h1>22</h1>
-       <h1>jack@ded.com</h1>
- );
- }
-```
-
-* Injecting component into html, other components as a tag. eg:
-
-```jsx
- function App() {
- return (
-   <div className="App">
-       <User />
-   </div>
- );
- }
-```
-
-### Props:
-
-* Parameters passed to components as key/value pairs. Passed to component as props. eg:
-
-```jsx
- const User = (props) => {}
-```
-
-* props prefix for each variable surrounded by curly braces. eg:
-
-```jsx
- const User = (props) => {
- return (
-   <div>
-       <h1>{props.name}</h1>
-       <h1>{props.age}</h1>
-       <h1>{props.email}</h1>
- );
- }
-```
-
-* Props values are passed as tag variable elements. Strings in double quotes, numbers in curly braces. eg:
-
-```jsx
- function App() {
- return (
-   <div className="App">
-       <User name="Jack" age={21} email="jack@ded.com" />
-   </div>
- );
- }
-```
+* Hero
+* Blurb/About
+* Showcase
+  * Hero
+  * Title
+  * Paragraph
+  * Side image
+  * Full length image
+* Past Projects
+  * Title
+  * Thumbnail/Hero
+  * Description
+  * Gallery:
+    * images
+* Contact
+  * Name
+  * Surname
+  * Email
+  * Message
+* Footer
+  * Links
+    * text
+    * url
+  * Copyright

@@ -1,0 +1,13 @@
+diff --git a/node_modules/@tinacms/cli/dist/index.js b/node_modules/@tinacms/cli/dist/index.js
+index 4425c1f..1748e62 100644
+--- a/node_modules/@tinacms/cli/dist/index.js
++++ b/node_modules/@tinacms/cli/dist/index.js
+@@ -974,7 +974,7 @@ var createConfig = async ({
+     appType: "spa",
+     resolve: {
+       alias,
+-      dedupe: ["graphql", "tinacms", "react", "react-dom"]
++      dedupe: ["graphql", "tinacms", "react", "react-dom", "react-router-dom"]
+     },
+     define: {
+       "process.env": `new Object(${JSON.stringify(publicEnv)})`,

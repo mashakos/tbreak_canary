@@ -1,4 +1,4 @@
 ---
-post: app/routes/articles.modernising-a-sudanese-institution.mdx
+post: app/routes/articles.hello-tina.mdx
 ---
 

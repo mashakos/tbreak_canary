@@ -83,6 +83,8 @@ export type Query = {
   document: DocumentNode;
   post: Post;
   postConnection: PostConnection;
+  featured: Featured;
+  featuredConnection: FeaturedConnection;
 };
 
 
@@ -121,8 +123,24 @@ export type QueryPostConnectionArgs = {
   filter?: InputMaybe<PostFilter>;
 };
 
+
+export type QueryFeaturedArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFeaturedConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FeaturedFilter>;
+};
+
 export type DocumentFilter = {
   post?: InputMaybe<PostFilter>;
+  featured?: InputMaybe<FeaturedFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -162,7 +180,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Post | Folder;
+export type DocumentNode = Post | Featured | Folder;
 
 export type Post = Node & Document & {
   __typename?: 'Post';
@@ -225,6 +243,37 @@ export type PostConnection = Connection & {
   edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
 };
 
+export type FeaturedPost = Post;
+
+export type Featured = Node & Document & {
+  __typename?: 'Featured';
+  post: FeaturedPost;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FeaturedPostFilter = {
+  post?: InputMaybe<PostFilter>;
+};
+
+export type FeaturedFilter = {
+  post?: InputMaybe<FeaturedPostFilter>;
+};
+
+export type FeaturedConnectionEdges = {
+  __typename?: 'FeaturedConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Featured>;
+};
+
+export type FeaturedConnection = Connection & {
+  __typename?: 'FeaturedConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FeaturedConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -233,6 +282,8 @@ export type Mutation = {
   createDocument: DocumentNode;
   updatePost: Post;
   createPost: Post;
+  updateFeatured: Featured;
+  createFeatured: Featured;
 };
 
 
@@ -274,13 +325,27 @@ export type MutationCreatePostArgs = {
   params: PostMutation;
 };
 
+
+export type MutationUpdateFeaturedArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FeaturedMutation;
+};
+
+
+export type MutationCreateFeaturedArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FeaturedMutation;
+};
+
 export type DocumentUpdateMutation = {
   post?: InputMaybe<PostMutation>;
+  featured?: InputMaybe<FeaturedMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   post?: InputMaybe<PostMutation>;
+  featured?: InputMaybe<FeaturedMutation>;
 };
 
 export type PostMutation = {
@@ -291,7 +356,13 @@ export type PostMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type FeaturedMutation = {
+  post?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PostPartsFragment = { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null };
+
+export type FeaturedPartsFragment = { __typename: 'Featured', post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -312,6 +383,25 @@ export type PostConnectionQueryVariables = Exact<{
 
 export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename: 'Post', id: string, title: string, abstract: string, banner?: string | null, date: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type FeaturedQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type FeaturedQuery = { __typename?: 'Query', featured: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } };
+
+export type FeaturedConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FeaturedFilter>;
+}>;
+
+
+export type FeaturedConnectionQuery = { __typename?: 'Query', featuredConnection: { __typename?: 'FeaturedConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FeaturedConnectionEdges', cursor: string, node?: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } | null } | null> | null } };
+
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
   __typename
@@ -320,6 +410,32 @@ export const PostPartsFragmentDoc = gql`
   banner
   date
   body
+}
+    `;
+export const FeaturedPartsFragmentDoc = gql`
+    fragment FeaturedParts on Featured {
+  __typename
+  post {
+    ... on Post {
+      __typename
+      title
+      abstract
+      banner
+      date
+      body
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
 }
     `;
 export const PostDocument = gql`
@@ -377,6 +493,61 @@ export const PostConnectionDocument = gql`
   }
 }
     ${PostPartsFragmentDoc}`;
+export const FeaturedDocument = gql`
+    query featured($relativePath: String!) {
+  featured(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FeaturedParts
+  }
+}
+    ${FeaturedPartsFragmentDoc}`;
+export const FeaturedConnectionDocument = gql`
+    query featuredConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FeaturedFilter) {
+  featuredConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FeaturedParts
+      }
+    }
+  }
+}
+    ${FeaturedPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -385,6 +556,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     postConnection(variables?: PostConnectionQueryVariables, options?: C): Promise<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}> {
         return requester<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}, PostConnectionQueryVariables>(PostConnectionDocument, variables, options);
+      },
+    featured(variables: FeaturedQueryVariables, options?: C): Promise<{data: FeaturedQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeaturedQueryVariables, query: string}> {
+        return requester<{data: FeaturedQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeaturedQueryVariables, query: string}, FeaturedQueryVariables>(FeaturedDocument, variables, options);
+      },
+    featuredConnection(variables?: FeaturedConnectionQueryVariables, options?: C): Promise<{data: FeaturedConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeaturedConnectionQueryVariables, query: string}> {
+        return requester<{data: FeaturedConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeaturedConnectionQueryVariables, query: string}, FeaturedConnectionQueryVariables>(FeaturedConnectionDocument, variables, options);
       }
     };
   }

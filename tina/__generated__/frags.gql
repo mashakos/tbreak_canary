@@ -6,3 +6,28 @@ fragment PostParts on Post {
   date
   body
 }
+
+fragment FeaturedParts on Featured {
+  __typename
+  post {
+    ... on Post {
+      __typename
+      title
+      abstract
+      banner
+      date
+      body
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
+}

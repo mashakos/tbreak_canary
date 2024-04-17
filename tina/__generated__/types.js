@@ -15,6 +15,32 @@ export const PostPartsFragmentDoc = gql`
   body
 }
     `;
+export const FeaturedPartsFragmentDoc = gql`
+    fragment FeaturedParts on Featured {
+  __typename
+  post {
+    ... on Post {
+      __typename
+      title
+      abstract
+      banner
+      date
+      body
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
+}
+    `;
 export const PostDocument = gql`
     query post($relativePath: String!) {
   post(relativePath: $relativePath) {
@@ -70,6 +96,61 @@ export const PostConnectionDocument = gql`
   }
 }
     ${PostPartsFragmentDoc}`;
+export const FeaturedDocument = gql`
+    query featured($relativePath: String!) {
+  featured(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FeaturedParts
+  }
+}
+    ${FeaturedPartsFragmentDoc}`;
+export const FeaturedConnectionDocument = gql`
+    query featuredConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FeaturedFilter) {
+  featuredConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FeaturedParts
+      }
+    }
+  }
+}
+    ${FeaturedPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
     post(variables, options) {
@@ -77,6 +158,12 @@ export function getSdk(requester) {
     },
     postConnection(variables, options) {
       return requester(PostConnectionDocument, variables, options);
+    },
+    featured(variables, options) {
+      return requester(FeaturedDocument, variables, options);
+    },
+    featuredConnection(variables, options) {
+      return requester(FeaturedConnectionDocument, variables, options);
     }
   };
 }

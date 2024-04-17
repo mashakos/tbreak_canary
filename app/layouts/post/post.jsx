@@ -17,7 +17,7 @@ import { tinaField, useTina } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { postMarkdown } from '~/layouts/post/post-markdown.jsx';
 
-export const Post = ({ timecode }) => {
+export const Post = ({ children, timecode }) => {
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
   const [dateTime, setDateTime] = useState(null);
@@ -121,6 +121,7 @@ export const Post = ({ timecode }) => {
         >
           {/*json post object for testing*/}
           {/*{JSON.stringify(data.post, null, 2)}*/}
+          {/*{console.log(JSON.stringify(data.post, null, 2))}*/}
           <TinaMarkdown content={data.post.body} components={postMarkdown} />
         </Text>
       </Section>

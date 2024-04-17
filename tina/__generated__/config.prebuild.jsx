@@ -57,6 +57,33 @@ var post_default = {
   ]
 };
 
+// tina/collections/featured.js
+var featured_default = {
+  name: "featured",
+  label: "Featured Posts",
+  path: "app/routes/featured",
+  format: "md",
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false
+    },
+    global: true
+    // itemProps: (item) => {
+    //   return { label: item.collections.label}
+    // },
+  },
+  fields: [
+    {
+      type: "reference",
+      name: "post",
+      label: "Featured Post",
+      collections: ["post"],
+      required: true
+    }
+  ]
+};
+
 // tina/config.js
 var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "master";
 var config_default = defineConfig({
@@ -77,7 +104,7 @@ var config_default = defineConfig({
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
-    collections: [post_default]
+    collections: [post_default, featured_default]
   }
 });
 export {

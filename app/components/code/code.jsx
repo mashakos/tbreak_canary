@@ -11,7 +11,8 @@ export const Code = props => {
   const { theme } = useTheme();
   const elementRef = useRef();
   const copyTimeout = useRef();
-  const lang = props.className?.split('-')[1];
+  //const lang = props.className?.split('-')[1];
+  const lang = props.lang;
 
   const handleCopy = () => {
     clearTimeout(copyTimeout);
@@ -31,10 +32,15 @@ export const Code = props => {
           {lang}
         </Text>
       )}
-      <pre ref={elementRef} {...props} />
+      <pre ref={elementRef} {...props}>
+        <code>
+          {props.value}
+        </code>
+      </pre>
       <div className={styles.actions}>
         <Button iconOnly onClick={handleCopy} aria-label="Copy">
           <span className={styles.copyIcon}>
+            {/*{console.log(props.value)}*/}
             <Transition in={!copied}>
               {({ visible, nodeRef }) => (
                 <Icon ref={nodeRef} icon="copy" data-visible={visible} />

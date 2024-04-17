@@ -9,19 +9,24 @@ import client from 'tina/__generated__/client.js';
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);
-  const module = await import(`../articles.${slug}.mdx`);
-  const text = await import(`../articles.${slug}.mdx?raw`);
-  const readTime = readingTime(text.default);
-  const ogImage = `${config.url}/static/${slug}-og.jpg`;
 
   // Tina query, read using useLoaderData in app/layouts/post/post.jsx template
   const { data, query, variables } = await client.queries.post({
     relativePath: "articles." + slug + ".mdx",
   });
 
+  //const module = await import(`../articles.${slug}.mdx`);
+  const title = data.post.title;
+  const abstract = data.post.abstract;
+  const frontmatter = {title, abstract};
+  const text = await import(`../articles.${slug}.mdx?raw`);
+  const readTime = readingTime(text.default);
+  const ogImage = `${config.url}/static/${slug}-og.jpg`;
+
+
   return json({
     ogImage,
-    frontmatter: module.frontmatter,
+    frontmatter: frontmatter,
     timecode: formatTimecode(readTime),
     props: {
       data,

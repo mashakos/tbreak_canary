@@ -55,10 +55,13 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   post(relativePath: String): Post!
   postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
+  featured(relativePath: String): Featured!
+  featuredConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FeaturedFilter): FeaturedConnection!
 }
 
 input DocumentFilter {
   post: PostFilter
+  featured: FeaturedFilter
 }
 
 type DocumentConnectionEdges {
@@ -84,7 +87,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Post | Folder
+union DocumentNode = Post | Featured | Folder
 
 type Post implements Node & Document {
   title: String!
@@ -144,6 +147,34 @@ type PostConnection implements Connection {
   edges: [PostConnectionEdges]
 }
 
+union FeaturedPost = Post
+
+type Featured implements Node & Document {
+  post: FeaturedPost!
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FeaturedPostFilter {
+  post: PostFilter
+}
+
+input FeaturedFilter {
+  post: FeaturedPostFilter
+}
+
+type FeaturedConnectionEdges {
+  cursor: String!
+  node: Featured
+}
+
+type FeaturedConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FeaturedConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -151,15 +182,19 @@ type Mutation {
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   updatePost(relativePath: String!, params: PostMutation!): Post!
   createPost(relativePath: String!, params: PostMutation!): Post!
+  updateFeatured(relativePath: String!, params: FeaturedMutation!): Featured!
+  createFeatured(relativePath: String!, params: FeaturedMutation!): Featured!
 }
 
 input DocumentUpdateMutation {
   post: PostMutation
+  featured: FeaturedMutation
   relativePath: String
 }
 
 input DocumentMutation {
   post: PostMutation
+  featured: FeaturedMutation
 }
 
 input PostMutation {
@@ -168,6 +203,10 @@ input PostMutation {
   banner: String
   date: String
   body: JSON
+}
+
+input FeaturedMutation {
+  post: String
 }
 
 schema {

@@ -74,10 +74,10 @@ const PostLi = ({ children, ...props }) => {
   return <ListItem {...props}>{children}</ListItem>;
 };
 
-const PostCode = ({ children, ...rest }) => (
-  <code className={styles.code} {...rest}>
-    {children}
-  </code>
+const PostCode = props => (
+  <div className={styles.pre}>
+    <Code {...props} />
+  </div>
 );
 
 const PostPre = props => {
@@ -139,9 +139,9 @@ export const postMarkdown = {
   a: PostLink,
   ul: PostUl,
   ol: PostOl,
-  li: PostLi,
+  lic: PostLi,
   pre: PostPre,
-  code: PostCode,
+  code_block: PostCode,
   blockquote: PostBlockquote,
   hr: PostHr,
   img: PostImage,

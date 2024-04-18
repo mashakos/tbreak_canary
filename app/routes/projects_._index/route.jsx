@@ -1,12 +1,15 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
+import mercbenzTexture2Large from '~/assets/mercbenz-app-large.jpg';
+import mercbenzTexture2Placeholder from '~/assets/mercbenz-app-placeholder.jpg';
+import mercbenzTexture2 from '~/assets/mercbenz-app.jpg';
+import mercbenzTextureLarge from '~/assets/mercbenz-app-back.jpg';
+import mercbenzTexturePlaceholder from '~/assets/mercbenz-app-placeholder.jpg';
+import mercbenzTexture from '~/assets/mercbenz-app-back.jpg';
+import masdarTextureLarge from '~/assets/masdar-app-large.jpg';
+import masdarTexturePlaceholder from '~/assets/masdar-app-placeholder.jpg';
+import masdarTexture from '~/assets/masdar-app.jpg';
+import reebokTextureLarge from '~/assets/reebok-app-large.jpg';
+import reebokTexturePlaceholder from '~/assets/reebok-app-placeholder.jpg';
+import reebokTexture from '~/assets/reebok-app.jpg';
 import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
@@ -87,17 +90,17 @@ export const Projects = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
+        title="Reebok #GymIsEverywhere Microsite"
+        description="How do you make fitness advocates feel more human in a digital world? Reebok looked to engage with its audience, breaking through the clutter with a meaningful brand purpose and mission."
         buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        buttonLink="/projects/rbk-giew"
         model={{
           type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'Annotating a biomedical image in the Masdar app',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              srcSet: `${reebokTexture} 800w, ${reebokTextureLarge} 1920w`,
+              placeholder: reebokTexturePlaceholder,
             },
           ],
         }}
@@ -108,21 +111,21 @@ export const Projects = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
-        buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        title="Mercedes-Benz Messenger Bot"
+        description="To enhance brand experience with a younger audience, Mercedes-Benz needed an innovative solution to handle custom queries and requests in real-time."
+        buttonText="View project"
+        buttonLink="/projects/merc-ai-msg"
         model={{
           type: 'phone',
           alt: 'App login screen',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: `${mercbenzTexture} 375w, ${mercbenzTextureLarge} 750w`,
+              placeholder: mercbenzTexturePlaceholder,
             },
             {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: `${mercbenzTexture2} 375w, ${mercbenzTexture2Large} 750w`,
+              placeholder: mercbenzTexture2Placeholder,
             },
           ],
         }}
@@ -132,17 +135,17 @@ export const Projects = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="Masdar Corporate Website"
+        description="Developing a fully responsive, cross-browser, mobile friendly website."
         buttonText="View project"
-        buttonLink="/projects/slice"
+        buttonLink="/projects/masdar"
         model={{
           type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Masdar Corporate Website',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              srcSet: `${masdarTexture} 1280w, ${masdarTextureLarge} 2560w`,
+              placeholder: masdarTexturePlaceholder,
             },
           ],
         }}

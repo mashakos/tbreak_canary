@@ -49,7 +49,7 @@ export const meta = () => {
   return baseMeta({ title, description, prefix: 'Projects' });
 };
 
-export const Slice = () => {
+export const Masdar = () => {
   return (
     <Fragment>
       <ProjectContainer className={styles.slice}>
@@ -74,7 +74,7 @@ export const Slice = () => {
               width={800}
               height={500}
               placeholder={sliceAppPlaceholder}
-              alt="The Slice web application showing a selected user annotation."
+              alt="The Masdar web application showing a selected user annotation."
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
             />
           </ProjectSectionContent>
@@ -85,7 +85,7 @@ export const Slice = () => {
               <ProjectSectionHeading>Bringing it together</ProjectSectionHeading>
               <ProjectSectionText>
                 Teachers needed a better way to create collaborative group activities by
-                annotating slides on Slice. Before starting this project, a layer could
+                annotating slides on Masdar. Before starting this project, a layer could
                 only be annotated by a single user, making it difficult for learners to
                 work together.
               </ProjectSectionText>

@@ -86,6 +86,18 @@ export const MercAiMsg = () => {
         {/*</ProjectSection>*/}
         <ProjectSection>
           <ProjectSectionColumns>
+            <ProjectSectionContent>
+              <ProjectTextRow>
+                <ProjectSectionHeading>
+                </ProjectSectionHeading>
+                <ProjectSectionText>
+                </ProjectSectionText>
+              </ProjectTextRow>
+            </ProjectSectionContent>
+          </ProjectSectionColumns>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns>
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}

@@ -22,7 +22,7 @@ export const meta = () => {
   return baseMeta({
     title: 'Contact',
     description:
-      'Send me a message if you’re interested in discussing a project or if you just want to say hi',
+      'The official website of ${config.name} ${config.role}. Let us know what you think!',
   });
 };
 

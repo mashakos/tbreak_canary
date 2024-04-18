@@ -41,7 +41,7 @@ export const links = () => {
 export const meta = () => {
   return baseMeta({
     title: 'Design + Develop',
-    description: `${config.name}. We weave digital dreams into reality.`,
+    description: `The official website of ${config.name}  ${config.role}. We weave digital dreams into reality.`,
   });
 };
 

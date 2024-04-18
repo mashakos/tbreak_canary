@@ -8,7 +8,7 @@
   min-height: 100%;
 
   @media (--singleColumnWidth), (--mediaMobileLS) {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 

@@ -2,6 +2,7 @@ import { Code } from '~/components/code';
 import { Heading } from '~/components/heading';
 import { Icon } from '~/components/icon';
 import { Link } from '~/components/link';
+import { TinaLink } from '~/components/link/tinalink.jsx';
 import { List, ListItem } from '~/components/list';
 import { Text } from '~/components/text';
 import { Children } from 'react';
@@ -61,6 +62,8 @@ const PostParagraph = ({ children, ...rest }) => {
 };
 
 const PostLink = ({ ...props }) => <Link {...props} />;
+
+const PostTinaLink = ({ ...props }) => <TinaLink {...props} />;
 
 const PostUl = props => {
   return <List className={styles.list} {...props} />;
@@ -136,7 +139,7 @@ export const postMarkdown = {
   h3: PostH3,
   h4: PostH4,
   p: PostParagraph,
-  a: PostLink,
+  a: PostTinaLink,
   ul: PostUl,
   ol: PostOl,
   lic: PostLi,

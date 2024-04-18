@@ -1,6 +1,6 @@
 @custom-media --singleColumnWidth (max-width: 1190px);
 
-.articles {
+.projects {
   display: grid;
   align-items: start;
   justify-items: center;

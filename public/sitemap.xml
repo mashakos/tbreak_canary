@@ -12,27 +12,31 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/uses/</loc>
+    <loc>https://delosian.pro/projects/rbk-giew/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/projects/slice/</loc>
+    <loc>https://delosian.pro/projects/merc-ai-msg/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/projects/smart-sparrow/</loc>
+    <loc>https://delosian.pro/projects/masdar/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/projects/volkihar-knight/</loc>
+    <loc>https://delosian.pro/articles/hello-tina</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/articles/hello-world</loc>
+    <loc>https://delosian.pro/articles/modernising-a-sudanese-institution</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/articles/modern-styling-in-react</loc>
+    <loc>https://delosian.pro/articles/the-evolution-of-css</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://delosian.pro/articles/cicd-the-new-normal</loc>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>

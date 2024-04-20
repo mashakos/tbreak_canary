@@ -1,9 +1,9 @@
 // import genericAnnotationLarge from '~/assets/generic-annotation-large.png';
 // import genericAnnotationPlaceholder from '~/assets/generic-annotation-placeholder.png';
 // import genericAnnotation from '~/assets/generic-annotation.png';
-import masdarAppLarge from '~/assets/masdar-background-large.jpg';
+import masdarAppLarge from '~/assets/masdarlanding.mp4';
 import masdarAppPlaceholder from '~/assets/masdar-background-placeholder.jpg';
-import masdarApp from '~/assets/masdar-background.jpg';
+import masdarApp from '~/assets/masdarlanding.mp4';
 import masdarAppCodingLarge from '~/assets/masdar-coding-large.jpg';
 import masdarAppCodingPlaceholder from '~/assets/masdar-coding-placeholder.jpg';
 import masdarAppCoding from '~/assets/masdar-coding.jpg';

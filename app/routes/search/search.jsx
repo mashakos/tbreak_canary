@@ -24,7 +24,7 @@ export const meta = () => {
   return baseMeta({
     title: 'Search',
     description:
-      'The official website of ${config.name} ${config.role}. Let us know what you think!',
+      'Delosian Digital Search Page',
   });
 };
 

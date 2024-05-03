@@ -2,6 +2,10 @@ import config from '~/config.json';
 
 export const navLinks = [
   {
+    label: 'Search',
+    pathname: '/search',
+  },
+  {
     label: 'Projects',
     pathname: '/projects',
   },

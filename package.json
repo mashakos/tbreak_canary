@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.515.0",
+    "@babel/runtime": "^7.24.5",
     "@mdx-js/react": "^3.0.1",
     "@remix-run/cloudflare": "^2.7.1",
     "@remix-run/cloudflare-pages": "^2.7.1",
@@ -28,11 +29,16 @@
     "patch-package": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-google-recaptcha-v3": "^1.10.1",
+    "react-instantsearch": "^7.7.3",
     "rehype-img-size": "^1.0.1",
     "rehype-slug": "^6.0.0",
     "three": "^0.161.0",
     "three-stdlib": "^2.29.4",
-    "tinacms": "^1.6.1"
+    "tinacms": "^1.6.1",
+    "typesense": "^1.8.2",
+    "typesense-instantsearch-adapter": "^2.8.0"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^2.1.1",

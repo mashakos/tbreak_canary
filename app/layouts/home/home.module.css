@@ -5,6 +5,7 @@
     initial-value: transparent;
   }
 
+  /*noinspection ALL*/
   @property --background2 {
     syntax: '<color>';
     inherits: true;

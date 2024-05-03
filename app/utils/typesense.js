@@ -9,9 +9,9 @@ export const typesenseInstantsearchAdapter = () =>
       apiKey: process.env['PUBLIC_TYPESENSE_SEARCH_ONLY_API_KEY'],
       nodes: [
         {
-          host: process.env['TYPESENSE-HOST'] || 'localhost',
-          port: parseInt(process.env['TYPESENSE-PORT'] || '8108'),
-          protocol: process.env['PUBLIC_TYPESENSE_PROTOCOL'] || 'http',
+          host: process.env.TYPESENSE_HOST || 'localhost',
+          port: parseInt(process.env.TYPESENSE_PORT || '8108'),
+          protocol: process.env.PUBLIC_TYPESENSE_PROTOCOL || 'http',
         },
       ],
     },

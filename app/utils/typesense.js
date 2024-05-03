@@ -6,7 +6,7 @@ export const typesenseInstantsearchAdapter = () =>
   // @ts-expect-error: when import gives {__esModule: true, default: ƒ}, has something todo with TypesenseInstantsearchAdapter's UMD module target
   new TypesenseInstantsearchAdapter({
     server: {
-      apiKey: process.env['PUBLIC_TYPESENSE_SEARCH_ONLY_API_KEY'],
+      apiKey: process.env.PUBLIC_TYPESENSE_SEARCH_ONLY_API_KEY,
       nodes: [
         {
           host: process.env.TYPESENSE_HOST || 'localhost',

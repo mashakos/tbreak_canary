@@ -22,7 +22,7 @@ export const meta = () => {
   return baseMeta({
     title: 'Contact',
     description:
-      'The official website of ${config.name} ${config.role}. Let us know what you think!',
+      'Delosian Digital Contact Page',
   });
 };
 

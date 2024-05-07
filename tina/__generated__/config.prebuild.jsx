@@ -85,7 +85,7 @@ var featured_default = {
 };
 
 // tina/config.js
-var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "master";
+var branch = process.env.TINA_GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "master";
 var config_default = defineConfig({
   branch,
   // Get this from tina.io

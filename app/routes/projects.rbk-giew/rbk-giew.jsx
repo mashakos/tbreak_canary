@@ -1,26 +1,9 @@
-// import reebokAnnotationLarge from '~/assets/reebok-annotation-large.png';
-// import reebokAnnotationPlaceholder from '~/assets/reebok-annotation-placeholder.png';
-// import reebokAnnotation from '~/assets/reebok-annotation.png';
-import reebokAppLarge from '~/assets/reebok-app-large.jpg';
-import reebokAppPlaceholder from '~/assets/reebok-app-placeholder.jpg';
-import reebokApp from '~/assets/reebok-app.jpg';
 import reebokBackgroundBarLarge from '~/assets/reebok-background-bar-large.jpg';
 import reebokBackgroundBarPlaceholder from '~/assets/reebok-background-bar-placeholder.jpg';
 import reebokBackgroundBar from '~/assets/reebok-background-bar.jpg';
 import reebokBackgroundLarge from '~/assets/reebok-background-large.jpg';
 import reebokBackgroundPlaceholder from '~/assets/reebok-background-placeholder.jpg';
 import reebokBackground from '~/assets/reebok-background.jpg';
-// import reebokIrlPlaceholder from '~/assets/reebok-irl-placeholder.jpg';
-// import reebokIrl from '~/assets/reebok-irl.jpg';
-// import reebokSidebarAnnotationsLarge from '~/assets/reebok-sidebar-annotations-large.png';
-// import reebokSidebarAnnotationsPlaceholder from '~/assets/reebok-sidebar-annotations-placeholder.png';
-// import reebokSidebarAnnotations from '~/assets/reebok-sidebar-annotations.png';
-// import reebokSidebarLayersLarge from '~/assets/reebok-sidebar-layers-large.png';
-// import reebokSidebarLayersPlaceholder from '~/assets/reebok-sidebar-layers-placeholder.png';
-// import reebokSidebarLayers from '~/assets/reebok-sidebar-layers.png';
-// import reebokSlidesLarge from '~/assets/reebok-slides-large.jpg';
-// import reebokSlidesPlaceholder from '~/assets/reebok-slides-placeholder.jpg';
-// import reebokSlides from '~/assets/reebok-slides.jpg';
 import { Footer } from '~/components/footer';
 import { Image } from '~/components/image';
 import {
@@ -86,10 +69,10 @@ export const RbkGiew = () => {
         <ProjectSection padding="top">
           <ProjectSectionContent>
             <ProjectImage
-              srcSet={`${reebokApp} 800w, ${reebokAppLarge} 1920w`}
+              srcSet={`/static/project-assets/${texture} 800w, /static/project-assets/${textureLarge} 1920w`}
               width={800}
               height={500}
-              placeholder={reebokAppPlaceholder}
+              placeholder={`/static/project-assets/${texturePlaceholder}`}
               alt="The Masdar web application showing a selected user annotation."
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
             />

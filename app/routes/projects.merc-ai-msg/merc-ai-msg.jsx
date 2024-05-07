@@ -1,31 +1,9 @@
-// import genericAnnotationLarge from '~/assets/generic-annotation-large.png';
-// import genericAnnotationPlaceholder from '~/assets/generic-annotation-placeholder.png';
-// import genericAnnotation from '~/assets/generic-annotation.png';
-import mercbenzAppLarge from '~/assets/mercbenz-app-large.jpg';
-import mercbenzAppPlaceholder from '~/assets/mercbenz-app-placeholder.jpg';
-import mercbenzApp from '~/assets/mercbenz-app.jpg';
-import mercbenzAppBackLarge from '~/assets/mercbenz-app-back.jpg';
-import mercbenzAppBackPlaceholder from '~/assets/mercbenz-app-placeholder.jpg';
-import mercbenzAppBack from '~/assets/mercbenz-app-back.jpg';
 import mercbenzBarBilingual from '~/assets/mercbenz-app-bilingual.jpg';
 import mercbenzBarBilingualLarge from '~/assets/mercbenz-app-bilingual.jpg';
-import genericBackgroundBarLarge from '~/assets/generic-background-bar-large.jpg';
 import genericBackgroundBarPlaceholder from '~/assets/generic-background-bar-placeholder.jpg';
-import genericBackgroundBar from '~/assets/generic-background-bar.jpg';
 import genericBackgroundLarge from '~/assets/generic-background-large.jpg';
 import genericBackgroundPlaceholder from '~/assets/generic-background-placeholder.jpg';
 import genericBackground from '~/assets/generic-background.jpg';
-// import genericIrlPlaceholder from '~/assets/generic-irl-placeholder.jpg';
-// import genericIrl from '~/assets/generic-irl.jpg';
-// import genericSidebarAnnotationsLarge from '~/assets/generic-sidebar-annotations-large.png';
-// import genericSidebarAnnotationsPlaceholder from '~/assets/generic-sidebar-annotations-placeholder.png';
-// import genericSidebarAnnotations from '~/assets/generic-sidebar-annotations.png';
-// import genericSidebarLayersLarge from '~/assets/generic-sidebar-layers-large.png';
-// import genericSidebarLayersPlaceholder from '~/assets/generic-sidebar-layers-placeholder.png';
-// import genericSidebarLayers from '~/assets/generic-sidebar-layers.png';
-// import genericSlidesLarge from '~/assets/generic-slides-large.jpg';
-// import genericSlidesPlaceholder from '~/assets/generic-slides-placeholder.jpg';
-// import genericSlides from '~/assets/generic-slides.jpg';
 import { Footer } from '~/components/footer';
 import { Image } from '~/components/image';
 import {
@@ -118,12 +96,12 @@ export const MercAiMsg = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={
-                    `${mercbenzApp} 260w, ${mercbenzAppLarge} 520w`
+                    `/static/project-assets/${texture} 260w, /static/project-assets/${textureLarge} 520w`
                 }
                 width={375}
                 height={814}
                 placeholder={
-                    mercbenzAppPlaceholder
+                  `/static/project-assets/${texturePlaceholder}`
                 }
                 alt="Configuration options for a component."
                 sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
@@ -131,12 +109,12 @@ export const MercAiMsg = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={
-                    `${mercbenzAppBack} 260w, ${mercbenzAppBackLarge} 520w`
+                    `/static/project-assets/${texture2} 260w, /static/project-assets/${texture2Large} 520w`
                 }
                 width={375}
                 height={814}
                 placeholder={
-                    mercbenzAppBackPlaceholder
+                    `/static/project-assets/${texture2Placeholder}`
                 }
                 alt="Configuration options for text."
                 sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
@@ -210,10 +188,10 @@ export const MercAiMsg = () => {
             <div className={styles.gridImage}>
               <div className={styles.gridBackground}>
                 <Image
-                  srcSet={`${mercbenzApp} 440w, ${mercbenzAppLarge} 880w`}
+                  srcSet={`/static/project-assets/${texture} 440w, /static/project-assets/${textureLarge} 880w`}
                   width={375}
                   height={814}
-                  placeholder={mercbenzAppPlaceholder}
+                  placeholder={`/static/project-assets/${texturePlaceholder}`}
                   alt=""
                   role="presentation"
                   sizes={`(max-width: ${media.mobile}px) 312px, (max-width: ${media.tablet}px) 408px, 514px`}
@@ -243,10 +221,10 @@ export const MercAiMsg = () => {
             <div className={styles.gridImage}>
               <div className={styles.gridBackground}>
                 <Image
-                  srcSet={`${mercbenzAppBack} 440w, ${mercbenzAppBackLarge} 880w`}
+                  srcSet={`/static/project-assets/${texture2} 440w, /static/project-assets/${texture2Large} 880w`}
                   width={375}
                   height={814}
-                  placeholder={mercbenzAppBackPlaceholder}
+                  placeholder={`/static/project-assets/${texture2Placeholder}`}
                   alt=""
                   role="presentation"
                   sizes={`(max-width: ${media.mobile}px) 312px, (max-width: ${media.tablet}px) 408px, 514px`}

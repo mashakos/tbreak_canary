@@ -142,7 +142,7 @@ export async function loader() {
 
   // end of typesense test
 
-  return json({ text : 'Projects Indexed.' });
+  return json({ text : 'Posts, Projects Indexed.' });
 }
 
 export function meta() {

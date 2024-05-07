@@ -49,7 +49,7 @@ export async function indexProjects() {
   const projects = await Promise.all(
     Object.entries(modules).map(async ([file, project]) => {
       let id = file.replace('../', 'routes/').replace(/\/route.js$/, '');
-      let slug = build.routes[id].path;
+      let slug = "/" + build.routes[id].path;
       let title = "";
       let description = "";
       let bodytext = "";

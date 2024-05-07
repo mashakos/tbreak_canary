@@ -105,7 +105,7 @@ function CustomHits(props) {
             </Text>
             <div className={styles.postFooter}>
               <Button secondary iconHoverShift icon="chevron-right" as="div" type="button">
-                {hit.slug.indexOf(projectUrlFragment) > 0 ? `View Project` : `Read article`}
+                {hit.slug.indexOf(projectUrlFragment) >= 0 ? `View Project` : `Read article`}
               </Button>
             </div>
           </div>

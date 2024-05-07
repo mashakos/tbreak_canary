@@ -30,7 +30,7 @@ export async function getProjects() {
   const projects = await Promise.all(
     Object.entries(modules).map(async ([file, project]) => {
       let id = file.replace('../', 'routes/').replace(/\/route.js$/, '');
-      let slug = build.routes[id].path.replace("projects/", '');
+      let slug = "/" + build.routes[id].path;//.replace("projects/", '');
       let bodyarray = [];
       let title = "";
       let description = "";
@@ -79,6 +79,7 @@ export async function getProjects() {
       }
       //const bodyStrContent = bodyarray.join("\n");
       //console.log(bodyStrContent);
+
 
       if (slug === undefined) throw new Error(`No route for ${id}`);
 

@@ -20,7 +20,7 @@ export const typesenseInstantsearchAdapter = () =>
         query_by: 'title, abstract, body',
       },
       project: {
-        query_by: 'title, description, body',
+        query_by: 'title, description, body, roles',
       },
     },
 

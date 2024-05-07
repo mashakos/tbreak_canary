@@ -49,6 +49,14 @@ import { List, ListItem } from '~/components/list/index.js';
 const title = 'Mercedes-Benz Messenger Bot';
 const description =
   'An Ai chat bot that delivers a fun test-drive booking experience for fans of Mercedes-Benz and Mercedes-Benz Middle-East. Built on the meya.ai machine learning platform.';
+const bodytext = 'An Ai chat bot that delivers a fun test-drive booking experience for fans of Mercedes-Benz and Mercedes-Benz Middle-East. Built on the meya.ai machine learning platform. The Mercedes-Benz Bot: To enhance brand experience with a younger audience, Mercedes-Benz needed an innovative solution to handle custom queries and requests in real-time. The Solution: In August 2016, we launched the Mercedes-Benz Cars Middle East chatbot, a powerful new way to enhance brand experience and interact with regional consumers at scale. The Bilingual Bot: Helped customers explore our range of cars and book a test drive, all through chat. The All-knowing Bot: Even made personalized SUV model recommendations based on the users’ driving habits. The Smart Bot: Sent encrypted booking data directly to relevant general distributors across the region. Project outcomes: Within the first few months, the bot received: - Over 17,000 unique conversations - 6200% Conversion Rate';
+const abstract = 'To enhance brand experience with a younger audience, Mercedes-Benz needed an innovative solution to handle custom queries and requests in real-time.';
+const textureLarge = 'mercbenz-app-back.jpg';
+const texturePlaceholder = 'mercbenz-app-placeholder.jpg';
+const texture = 'mercbenz-app-back.jpg';
+const texture2 = 'mercbenz-app.jpg';
+const texture2Large = 'mercbenz-app-large.jpg';
+const texture2Placeholder = 'mercbenz-app-placeholder.jpg';
 const roles = ['UX Design', 'Interface Design', 'Bot Flow Development', 'Full Stack Development'];
 
 export const meta = () => {
@@ -71,6 +79,14 @@ export const MercAiMsg = () => {
           title={title}
           description={description}
           roles={roles}
+          bodytext={bodytext}
+          abstract={abstract}
+          texture={texture}
+          textureLarge={textureLarge}
+          texturePlaceholder={texturePlaceholder}
+          texture2={texture2}
+          texture2Large={texture2Large}
+          texture2Placeholder={texture2Placeholder}
         />
         {/*<ProjectSection padding="top">*/}
         {/*  <ProjectSectionContent>*/}

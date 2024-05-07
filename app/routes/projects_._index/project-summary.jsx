@@ -43,6 +43,7 @@ export function ProjectSummary({
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
 
+
   function handleModelLoad() {
     setModelLoaded(true);
   }

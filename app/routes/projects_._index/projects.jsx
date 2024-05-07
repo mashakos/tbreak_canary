@@ -8,181 +8,157 @@ import { Section } from '~/components/section';
 import { Text } from '~/components/text';
 import { useReducedMotion } from 'framer-motion';
 import { useWindowSize } from '~/hooks';
-import { Link as RouterLink, useLoaderData } from '@remix-run/react';
-import { useState, useEffect } from 'react';
+import { Link as RouterLink, useFetcher, useLoaderData, useMatches, useRouteLoaderData } from '@remix-run/react';
+import { createRef, useEffect, useRef, useState } from 'react';
 import { formatDate } from '~/utils/date';
 import { classes, cssProps } from '~/utils/style';
 import styles from './projects.module.css';
 
-function ProjectsEntry({ slug, frontmatter, timecode, index }) {
-  const [hovered, setHovered] = useState(false);
-  const [dateTime, setDateTime] = useState(null);
-  const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner } = frontmatter;
+import {Masdar} from '~/routes/projects.masdar/masdar.jsx';
+import { ProjectSummary } from './project-summary';
+import reebokTexture from '~/assets/reebok-app.jpg';
+import reebokTextureLarge from '~/assets/reebok-app-large.jpg';
+import reebokTexturePlaceholder from '~/assets/reebok-app-placeholder.jpg';
+import mercbenzTexture2 from '~/assets/mercbenz-app.jpg';
 
-  useEffect(() => {
-    setDateTime(formatDate(date));
-  }, [date, dateTime]);
+export const links = () => {
+  return [
+    {
+      rel: 'prefetch',
+      href: '/draco/draco_wasm_wrapper.js',
+      as: 'script',
+      type: 'text/javascript',
+      importance: 'low',
+    },
+    {
+      rel: 'prefetch',
+      href: '/draco/draco_decoder.wasm',
+      as: 'fetch',
+      type: 'application/wasm',
+      importance: 'low',
+    },
+  ];
+};
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-  };
-
-  return (
-    <article
-      className={styles.post}
-      data-featured={!!featured}
-      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-    >
-      {featured && (
-        <Text className={styles.postLabel} size="s">
-          Featured
-        </Text>
-      )}
-      {featured && !!banner && (
-        <div className={styles.postImage}>
-          <Image
-            noPauseButton
-            play={!reduceMotion ? hovered : undefined}
-            src={banner}
-            placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
-            alt=""
-            role="presentation"
-          />
-        </div>
-      )}
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={`/projects/${slug}`}
-        className={styles.postLink}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className={styles.postDetails}>
-          <div aria-hidden className={styles.postDate}>
-            <Divider notchWidth="64px" notchHeight="8px" />
-            {dateTime}
-          </div>
-          <Heading as="h2" level={featured ? 2 : 4}>
-            {title}
-          </Heading>
-          <Text size={featured ? 'l' : 's'} as="p">
-            {abstract}
-          </Text>
-          <div className={styles.postFooter}>
-            <Button secondary iconHoverShift icon="chevron-right" as="div">
-              Read article
-            </Button>
-            <Text className={styles.timecode} size="s">
-              {timecode}
-            </Text>
-          </div>
-        </div>
-      </RouterLink>
-      {featured && (
-        <Text aria-hidden className={styles.postTag} size="s">
-          477
-        </Text>
-      )}
-    </article>
-  );
-}
-
-function SkeletonPost({ index }) {
-  return (
-    <article
-      aria-hidden="true"
-      className={classes(styles.post, styles.skeleton)}
-      data-featured="false"
-      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-    >
-      <div className={styles.postLink}>
-        <div className={styles.postDetails}>
-          <div aria-hidden className={styles.postDate}>
-            <Divider notchWidth="64px" notchHeight="8px" />
-            Coming soon...
-          </div>
-          <Heading
-            className={styles.skeletonBone}
-            as="h2"
-            level={4}
-            style={{ height: 24, width: '70%' }}
-          />
-          <Text
-            className={styles.skeletonBone}
-            size="s"
-            as="p"
-            style={{ height: 90, width: '100%' }}
-          />
-          <div className={styles.postFooter}>
-            <Button secondary iconHoverShift icon="chevron-right" as="div">
-              Read more
-            </Button>
-            <Text className={styles.timecode} size="s">
-              00:00:00:00
-            </Text>
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-}
 
 export function Projects() {
-  const { posts, featured } = useLoaderData();
+  const { projects } = useLoaderData();
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
+  const [visibleSections, setVisibleSections] = useState([]);
+  const projectOne = useRef();
+  const projectTwo = useRef();
+  const projectThree = useRef();
+  const projectFour = useRef();
+  const projectFive = useRef();
+  const projectSix = useRef();
+  const projectSeven = useRef();
+  const projectEight = useRef();
+  const projectNine = useRef();
+  const projectTen = useRef();
+  const projectEleven = useRef();
+  const projectTwelve = useRef();
+  const projectThirteen = useRef();
+  const projectFourteen = useRef();
+  const projectFifteen = useRef();
+  let sectionRefs = [projectOne, projectTwo, projectThree];
 
-  const postsHeader = (
-    <header className={styles.header}>
-      <Heading className={styles.heading} level={5} as="h1">
-        <DecoderText text="Latest articles" />
-      </Heading>
-      <Barcode className={styles.barcode} />
-    </header>
+
+  // posts.map((post, index) => {
+  //   sectionRefs.push(useRef());
+  // });
+
+  const saveRef = (key) => {
+    sectionRefs.current = r => ( sectionRefs.current[key] = r );
+    console.log(JSON.stringify(Object.entries(sectionRefs)));
+  };
+
+
+  //
+  // sectionRefs.current = posts.map((post, index) => {
+  //   sectionRefs = (element) => (sectionRefs.current[index] = element);
+  // });
+
+
+  useEffect(() => {
+    const sections = sectionRefs;
+
+    const sectionObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const section = entry.target;
+            observer.unobserve(section);
+            if (visibleSections.includes(section)) return;
+            setVisibleSections(prevSections => [...prevSections, section]);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+
+    sections.forEach(section => {
+      sectionObserver.observe(section.current);
+    });
+
+
+    return () => {
+      sectionObserver.disconnect();
+    };
+  }, [visibleSections]);
+
+
+  const postList = projects.map((post, index) => (
+        <>
+            <ProjectSummary
+              id={"project-" + (index + 1)}
+              sectionRef={sectionRefs[index]}
+              visible={visibleSections.includes(sectionRefs[index].current)}
+              index={index+1}
+              title={post.title}
+              description={post.abstract}
+              buttonText="View project"
+              buttonLink={post.slug}
+              model={{
+                type: (post.texture2 !== "") ?  'phone' : 'laptop',
+                alt: 'Annotating a biomedical image in the Masdar app',
+                textures: [
+                  ...(post.texture2 !== "" ? (
+                    [
+                      {
+                        srcSet: `/static/project-assets/${post.texture} 375w, /static/project-assets/${post.textureLarge} 750w`,
+                        placeholder: `/static/project-assets/${post.texturePlaceholder}`,
+                      },
+                      {
+                        srcSet: `/static/project-assets/${post.texture2} 375w, /static/project-assets/${post.texture2Large} 750w`,
+                        placeholder: `/static/project-assets/${post.texture2Placeholder}`,
+                      },
+                    ]
+                  ) : [
+                    {
+                      srcSet: `/static/project-assets/${post.texture} 800w, /static/project-assets/${post.textureLarge} 1920w`,
+                      placeholder: `/static/project-assets/${post.texturePlaceholder}`,
+                    },
+                  ])
+                ],
+              }}
+            />
+        </>
+      )
   );
 
-  const postList = (
-    <div className={styles.list}>
-      {!isSingleColumn && postsHeader}
-      {posts.map(({ slug, ...post }, index) => (
-        <ProjectsEntry key={slug} slug={slug} index={index} {...post} />
-      ))}
-      {Array(2)
-        .fill()
-        .map((skeleton, index) => (
-          <SkeletonPost key={index} index={index} />
-        ))}
-    </div>
-  );
 
-  const featuredPost = <ProjectsEntry {...featured} />;
+
+
+
+
 
   return (
-    <article className={styles.articles}>
-      <Section className={styles.content}>
-        {!isSingleColumn && (
-          <div className={styles.grid}>
-            {postList}
-            {featuredPost}
-          </div>
-        )}
-        {isSingleColumn && (
-          <div className={styles.grid}>
-            {postsHeader}
-            {featuredPost}
-            {postList}
-          </div>
-        )}
-      </Section>
+    <div className={styles.projects}>
+        {postList}
       <Footer />
-    </article>
+    </div>
   );
 }
 

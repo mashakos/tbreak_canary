@@ -50,6 +50,14 @@ import { List, ListItem } from '~/components/list/index.js';
 const title = 'Masdar Corporate Website';
 const description =
   'Launched by the Abu Dhabi leadership in 2006 with a mandate to advance renewable energy through education, R&D, investment and commercialization, Masdar plays a key role in securing the emirate\'s continued leadership in the evolving global energy market.';
+const bodytext = 'Launched by the Abu Dhabi leadership in 2006 with a mandate to advance renewable energy through education, R&D, investment and commercialization, Masdar plays a key role in securing the emirate\'s continued leadership in the evolving global energy market. Encouraging collaboration: Gaining the trust of the client’s creative team in order to be involved in the design phase, improving the UX for the responsive design solution. The problem: The client required a website that is both modern in design and fully compatible with older browsers like Internet Explorer 7. The delivery and deployment window were also extremely tight - within three weeks. Frontend Development: We developed a fully responsive, cross-browser, mobile friendly frontend in less than two weeks using various technologies (bootstrap, jquery, velocity.js, AJAX, HTML5, webM).';
+const abstract ='Developing a fully responsive, cross-browser, mobile friendly website.';
+const textureLarge = 'masdar-app-large.jpg';
+const texturePlaceholder = 'masdar-app-placeholder.jpg';
+const texture = 'masdar-app.jpg';
+const texture2 = '';
+const texture2Large = '';
+const texture2Placeholder = '';
 const roles = ['UX Design', 'Interface Design', 'SEO', 'Full Stack Development'];
 
 export const meta = () => {
@@ -72,6 +80,14 @@ export const Masdar = () => {
           title={title}
           description={description}
           roles={roles}
+          bodytext={bodytext}
+          abstract={abstract}
+          texture={texture}
+          textureLarge={textureLarge}
+          texturePlaceholder={texturePlaceholder}
+          texture2={texture2}
+          texture2Large={texture2Large}
+          texture2Placeholder={texture2Placeholder}
         />
         <ProjectSection padding="top">
           <ProjectSectionContent>

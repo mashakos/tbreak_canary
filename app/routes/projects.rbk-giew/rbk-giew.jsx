@@ -44,6 +44,14 @@ import { List, ListItem } from '~/components/list/index.js';
 const title = 'Reebok #GymIsEverywhere Microsite';
 const description =
   'We launched a high impact digital campaign with a customized microsite, inviting people to share their fitness stories from around their cities with #GymIsEverywhere, using hero influencers films to launch the campaign and get people moving.';
+const bodytext = 'We launched a high impact digital campaign with a customized microsite, inviting people to share their fitness stories from around their cities with #GymIsEverywhere, using hero influencers films to launch the campaign and get people moving. The Gym is Everywhere: How do you make fitness advocates feel more human in a digital world? Reebok looked to engage with its audience, breaking through the clutter with a meaningful brand purpose and mission. We increased brand awareness in the region by creating buzz around our core message that: The Gym is Everywhere. The Solution: We launched a high impact digital campaign with a customized microsite, inviting people to share their fitness stories from around their cities with #GymIsEverywhere, using hero influencers films to launch the campaign and get people moving. Meaningful engagement: The microsite was launched with hero videos released for Beirut, Cairo and the GCC with well-known influencers taking the city on as their personal gym asking ‘Where is Your Gym?’ inspiring people to share their response with the hashtag. Under the slogan #GymIsEverywhere, the campaign pays tribute to the unique history and stories in the cities that surround us, and the driven FitGen™ in them who see its unmatched possibility to challenge and innovate. All user generated content was amalgamated on the microsite with a location map of posts to highlight fitness hotspots within the city. All users had to do was snap a pic, tag their workout location and share it on Instagram, they could then download a 10% discount voucher from the microsite. Project outcomes: This campaign issued a wake-up call for city residents inviting them to open their doors and get out into the street for a new level of working out. - 1.6M Social Engagement - 21% Engagement Rate - 2.5M Video Views - 144K Traffic to Website - 100M Impressions 3 weeks - 60% Mentions from Key audience groups';
+const abstract ='How do you make fitness advocates feel more human in a digital world? Reebok looked to engage with its audience, breaking through the clutter with a meaningful brand purpose and mission.';
+const textureLarge = 'reebok-app-large.jpg';
+const texturePlaceholder = 'reebok-app-placeholder.jpg';
+const texture = 'reebok-app.jpg';
+const texture2 = '';
+const texture2Large = '';
+const texture2Placeholder = '';
 const roles = ['UX Design', 'Interface Design', 'Analytics', 'SPA Stack'];
 
 export const meta = () => {
@@ -66,6 +74,14 @@ export const RbkGiew = () => {
           title={title}
           description={description}
           roles={roles}
+          bodytext={bodytext}
+          abstract={abstract}
+          texture={texture}
+          textureLarge={textureLarge}
+          texturePlaceholder={texturePlaceholder}
+          texture2={texture2}
+          texture2Large={texture2Large}
+          texture2Placeholder={texture2Placeholder}
         />
         <ProjectSection padding="top">
           <ProjectSectionContent>

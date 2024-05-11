@@ -62,7 +62,7 @@ export function Projects() {
   const projectThirteen = useRef();
   const projectFourteen = useRef();
   const projectFifteen = useRef();
-  let sectionRefs = [projectOne, projectTwo, projectThree];
+  let sectionRefs = [projectOne, projectTwo, projectThree, projectFour, projectFive, projectSix];
 
 
   // posts.map((post, index) => {
@@ -106,7 +106,7 @@ export function Projects() {
     return () => {
       sectionObserver.disconnect();
     };
-  }, [visibleSections]);
+  }, [visibleSections, sectionRefs]);
 
 
   const postList = projects.map((post, index) => (
@@ -122,7 +122,7 @@ export function Projects() {
               buttonLink={post.slug}
               model={{
                 type: (post.texture2 !== "") ?  'phone' : 'laptop',
-                alt: 'Annotating a biomedical image in the Masdar app',
+                alt: 'Annotating a biomedical image in the Enec app',
                 textures: [
                   ...(post.texture2 !== "" ? (
                     [

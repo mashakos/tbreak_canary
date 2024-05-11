@@ -67,7 +67,7 @@ export const meta = () => {
 export const Masdar = () => {
   return (
     <Fragment>
-      <ProjectContainer className={styles.slice}>
+      <ProjectContainer className={styles.masdar}>
         <ProjectBackground
           src={genericBackground}
           srcSet={`${genericBackground} 1280w, ${genericBackgroundLarge} 2560w`}
@@ -96,7 +96,7 @@ export const Masdar = () => {
               width={375}
               height={814}
               placeholder={masdarAppPlaceholder}
-              alt="The Masdar web application showing a selected user annotation."
+              alt="The Masdar web application."
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
             />
           </ProjectSectionContent>
@@ -121,7 +121,7 @@ export const Masdar = () => {
               placeholder={
                 masdarAppUItrustPlaceholder
               }
-              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              alt="Grid layout."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
           </ProjectSectionContent>

@@ -44,7 +44,7 @@ export const meta = () => {
 export const MercAiMsg = () => {
   return (
     <Fragment>
-      <ProjectContainer className={styles.slice}>
+      <ProjectContainer className={styles.mercaimsg}>
         <ProjectBackground
           src={genericBackground}
           srcSet={`${genericBackground} 1280w, ${genericBackgroundLarge} 2560w`}
@@ -73,7 +73,7 @@ export const MercAiMsg = () => {
         {/*      width={375}*/}
         {/*      height={814}*/}
         {/*      placeholder={mercbenzAppPlaceholder}*/}
-        {/*      alt="The Masdar web application showing a selected user annotation."*/}
+        {/*      alt="The Enec web application showing a selected user annotation."*/}
         {/*      sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}*/}
         {/*    />*/}
         {/*  </ProjectSectionContent>*/}

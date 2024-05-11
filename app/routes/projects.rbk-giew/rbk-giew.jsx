@@ -44,7 +44,7 @@ export const meta = () => {
 export const RbkGiew = () => {
   return (
     <Fragment>
-      <ProjectContainer className={styles.slice}>
+      <ProjectContainer className={styles.rbkgiew}>
         <ProjectBackground
           src={reebokBackground}
           srcSet={`${reebokBackground} 1280w, ${reebokBackgroundLarge} 2560w`}
@@ -73,7 +73,7 @@ export const RbkGiew = () => {
               width={800}
               height={500}
               placeholder={`/static/project-assets/${texturePlaceholder}`}
-              alt="The Masdar web application showing a selected user annotation."
+              alt="The Reebok web application."
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
             />
           </ProjectSectionContent>

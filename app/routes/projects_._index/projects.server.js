@@ -27,8 +27,9 @@ export async function getProjects() {
   // const bodyStrContent = bodyarray.join("\n");
 
 
+  // sort ascending
   const projects = await Promise.all(
-    Object.entries(modules).map(async ([file, project]) => {
+    Object.entries(modules).sort((a, b) => a.file > b.file ? 1 : -1).map(async ([file, project]) => {
       let id = file.replace('../', 'routes/').replace(/\/route.js$/, '');
       let slug = "/" + build.routes[id].path;//.replace("projects/", '');
       let bodyarray = [];

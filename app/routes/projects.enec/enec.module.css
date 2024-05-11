@@ -125,12 +125,12 @@
 }
 
 .countTimer {
-min-width: 275px;
-height: 103px;
-text-align: center;
-@media (--mediaUseMotion) {
+  min-width: 275px;
+  height: 103px;
+  text-align: center;
   opacity: 0;
-  animation: countTimerFadeSlide 1.4s var(--bezierFastoutSlowin) var(--initDelay)
-  forwards;
-}
+
+  @media (--mediaUseMotion) {
+    animation: countTimerFadeSlide 1.4s var(--bezierFastoutSlowin) var(--initDelay) forwards;
+  }
 }

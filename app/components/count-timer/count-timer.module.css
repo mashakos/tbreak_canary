@@ -17,26 +17,3 @@
     opacity: 1;
   }
 }
-
-@keyframes countTimerFadeSlide {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, var(--space3XL), 0);
-  }
-
-  100% {
-    opacity: 0.38;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.countTimer {
-  min-width: 275px;
-  height: 103px;
-  text-align: center;
-@media (--mediaUseMotion) {
-  opacity: 0;
-  animation: countTimerFadeSlide 1.4s var(--bezierFastoutSlowin) var(--initDelay)
-  forwards;
-}
-}

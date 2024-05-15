@@ -11,6 +11,7 @@ export const PostPartsFragmentDoc = gql`
   title
   abstract
   banner
+  banner_placeholder
   date
   body
 }
@@ -24,6 +25,7 @@ export const FeaturedPartsFragmentDoc = gql`
       title
       abstract
       banner
+      banner_placeholder
       date
       body
     }

@@ -93,6 +93,7 @@ type Post implements Node & Document {
   title: String!
   abstract: String!
   banner: String
+  banner_placeholder: String
   date: String!
   body: JSON
   id: ID!
@@ -132,6 +133,7 @@ input PostFilter {
   title: StringFilter
   abstract: StringFilter
   banner: ImageFilter
+  banner_placeholder: ImageFilter
   date: DatetimeFilter
   body: RichTextFilter
 }
@@ -201,6 +203,7 @@ input PostMutation {
   title: String
   abstract: String
   banner: String
+  banner_placeholder: String
   date: String
   body: JSON
 }

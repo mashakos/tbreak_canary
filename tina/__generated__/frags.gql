@@ -3,6 +3,7 @@ fragment PostParts on Post {
   title
   abstract
   banner
+  banner_placeholder
   date
   body
 }
@@ -15,6 +16,7 @@ fragment FeaturedParts on Featured {
       title
       abstract
       banner
+      banner_placeholder
       date
       body
     }

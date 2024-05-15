@@ -63,6 +63,7 @@ export const Sudanile = () => {
         <ProjectHeader
           title={title}
           description={description}
+          url={"https://www.sudanile.com"}
           roles={roles}
           bodytext={bodytext}
           abstract={abstract}

@@ -39,7 +39,7 @@ import reebokBackgroundBarPlaceholder from '~/assets/reebok-background-bar-place
 const title = 'The Ahmed Shibrain Collection';
 const description =
   'Ahmed Shibrain was a Sudanese Modernist painter and Dean of the College of Fine and Applied Art in Khartoum. Shibrain is considered one of the leading representatives of the art movement called School of Khartoum that combined Islamic, African and Western artistic traditions.';
-const bodytext = 'Ahmed Shibrain was a Sudanese Modernist painter and Dean of the College of Fine and Applied Art in Khartoum. Shibrain is considered one of the leading representatives of the art movement called School of Khartoum that combined Islamic, African and Western artistic traditions. Shibrain\'s large-format calligraphy, in which the words of Islamic texts are interpreted as independent ornaments and images, attracted international attention.  Among other collections, his works are represented in the collections of the Barjeel Art Foundation in the United Arab Emirates and of the National Archives (formerly Harmon Foundation) in Washington, D.C. For the Ahmed Shibrain Collected Works website, we implemented a subdued design that showcased the work before anything else.';
+const bodytext = 'Ahmed Shibrain was a Sudanese Modernist painter and Dean of the College of Fine and Applied Art in Khartoum. Shibrain is considered one of the leading representatives of the art movement called School of Khartoum that combined Islamic, African and Western artistic traditions. Shibrain\'s large-format calligraphy, in which the words of Islamic texts are interpreted as independent ornaments and images, attracted international attention. Among other collections, his works are represented in the collections of the Barjeel Art Foundation in the United Arab Emirates and of the National Archives (formerly Harmon Foundation) in Washington, D.C. Shibrain draws on his country’s rich African, Nubian, Arab and Meriotic heritage by combining different motifs from their various artistic disciplines, including folk art and calligraphy, with local primary materials such as mahogany. For the Ahmed Shibrain Collected Works website, we implemented a subdued design that showcased the work before anything else.';
 const abstract ='Website for the collected works of the late modernist painter Ahmed Shibrain.';
 const textureLarge = 'shibraingallery-large.jpg';
 const texturePlaceholder = 'shibraingallery-placeholder.jpg';
@@ -100,16 +100,22 @@ export const Shibraingallery = () => {
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
           </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionContent className={styles.columns}>
-            <div className={styles.sidebarImagesText}>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <ProjectSectionContent className={styles.grid}>
+            <div className={styles.gridText}>
               <ProjectSectionHeading>Body of Work</ProjectSectionHeading>
               <ProjectSectionText>
                 Among other collections, his works are represented in the collections of the Barjeel Art Foundation in the United Arab Emirates and of the National Archives (formerly Harmon Foundation) in Washington, D.C.
               </ProjectSectionText>
             </div>
-            <div className={styles.sidebarImage}>
+            <div className={styles.gridImage}>
               <div className={styles.gridBackground}>
                 <Image
                   srcSet={`${ShibrainWorkOne} 183w, ${ShibrainWorkOneLarge} 300w`}
@@ -123,8 +129,14 @@ export const Shibraingallery = () => {
               </div>
             </div>
           </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <ProjectSectionContent>
             <ProjectTextRow>
               <ProjectSectionHeading>A Rich Heritage</ProjectSectionHeading>
@@ -146,8 +158,14 @@ export const Shibraingallery = () => {
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
           </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <ProjectSectionContent>
             <ProjectTextRow>
               <ProjectSectionHeading>The Website</ProjectSectionHeading>

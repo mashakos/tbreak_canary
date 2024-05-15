@@ -43,8 +43,8 @@ export function CountAnimBlock({
       }),
     [countValue]
   );
-  const Headinglevel = 3;
-  const clampedLevel = Math.min(Math.max(Headinglevel, 0), 5);
+  const headingLevel = 3;
+  const clampedLevel = Math.min(Math.max(headingLevel, 0), 5);
   const Component = `h${Math.max(clampedLevel, 1)}`;
 
   return (

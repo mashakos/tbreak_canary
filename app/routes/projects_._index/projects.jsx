@@ -62,7 +62,7 @@ export function Projects() {
   const projectThirteen = useRef();
   const projectFourteen = useRef();
   const projectFifteen = useRef();
-  let sectionRefs = [projectOne, projectTwo, projectThree, projectFour, projectFive, projectSix];
+  let sectionRefs = [projectOne, projectTwo, projectThree, projectFour, projectFive, projectSix, projectSeven];
 
 
   // posts.map((post, index) => {

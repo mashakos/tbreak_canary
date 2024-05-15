@@ -1,0 +1,165 @@
+@layer components {
+  .text {
+    &::after {
+      content: '_';
+      visibility: hidden;
+    }
+  }
+
+  .glyph {
+    opacity: 0.8;
+    font-weight: var(--fontWeightRegular);
+    font-family: var(--japaneseFontStack);
+    line-height: 0;
+  }
+
+  .value {
+    opacity: 1;
+  }
+}
+
+.textRow {
+  align-self: center;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+@media (--mediaMobile) {
+  text-align: center;
+  align-items: flex-start;
+}
+
+&[data-width='s'] {
+   max-width: var(--maxWidthS);
+ }
+
+&[data-width='m'] {
+   max-width: var(--maxWidthM);
+ }
+
+&[data-width='l'] {
+   max-width: var(--maxWidthL);
+ }
+
+&[data-no-margin='true'] {
+   margin-bottom: 0;
+ }
+
+&[data-stretch='true'] {
+   width: 100%;
+ }
+
+&[data-center='true'] {
+   align-items: center;
+   text-align: center;
+ }
+
+&[data-justify='start'] {
+   justify-self: flex-start;
+ }
+
+&[data-justify='center'] {
+   justify-self: center;
+ }
+
+&[data-justify='end'] {
+   justify-self: flex-end;
+
+@media (--mediaMobile) {
+  align-items: center;
+  text-align: center;
+}
+}
+}
+
+.heading {
+    line-height: var(--lineHeightTitle);
+    color: var(--textTitle);
+
+&[data-level='0'] {
+     letter-spacing: -0.05em;
+     font-size: var(--fontSizeH0);
+ }
+
+&[data-level='1'] {
+     letter-spacing: -0.05em;
+     font-size: var(--fontSizeH1);
+ }
+
+&[data-level='2'] {
+     font-size: var(--fontSizeH2);
+     letter-spacing: -0.04em;
+ }
+
+&[data-level='3'] {
+     font-size: var(--fontSizeH3);
+     letter-spacing: -0.02em;
+ }
+
+&[data-level='4'] {
+     font-size: var(--fontSizeH4);
+     letter-spacing: -0.01em;
+ }
+
+&[data-level='5'] {
+     font-size: var(--fontSizeH5);
+ }
+
+&[data-align='auto'] {
+     text-align: inherit;
+ }
+
+&[data-align='start'] {
+     text-align: start;
+ }
+
+&[data-align='center'] {
+     text-align: center;
+ }
+
+&[data-weight='regular'] {
+     font-weight: var(--fontWeightRegular);
+ }
+
+&[data-weight='medium'] {
+     font-weight: var(--fontWeightMedium);
+ }
+
+&[data-weight='bold'] {
+     font-weight: var(--fontWeightBold);
+ }
+}
+
+@keyframes countTimerFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, var(--space3XL), 0);
+  }
+
+  100% {
+    opacity: 0.38;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.countTimer {
+  display: grid;
+  min-width: 275px;
+  height: 103px;
+  text-align: center;
+  opacity: 0;
+
+@media (--mediaUseMotion) {
+  animation: countTimerFadeSlide 1.4s var(--bezierFastoutSlowin) var(--initDelay) forwards;
+}
+}
+
+.countHidden {
+    display: grid;
+    min-width: 275px;
+    height: 103px;
+    text-align: center;
+    opacity: 0;
+}

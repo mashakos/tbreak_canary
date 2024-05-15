@@ -4,9 +4,6 @@ import enecStatsPlaceholder from '~/assets/enec-stats-placeholder.jpg';
 import enecInner from '~/assets/enec-inner.jpg';
 import enecInnerLarge from '~/assets/enec-inner-large.jpg';
 import enecInnerPlaceholder from '~/assets/enec-inner-placeholder.jpg';
-import genericBackgroundLarge from '~/assets/generic-background-large.jpg';
-import genericBackgroundPlaceholder from '~/assets/generic-background-placeholder.jpg';
-import genericBackground from '~/assets/generic-background.jpg';
 import { Footer } from '~/components/footer';
 import { Image } from '~/components/image';
 import {
@@ -21,9 +18,9 @@ import {
   ProjectSectionText,
   ProjectTextRow,
 } from '~/layouts/project';
-import { CountTimer } from '~/components/count-timer';
-import { Fragment, useState, useEffect, useRef } from 'react';
-import { media, classes, cssProps, msToNum, numToMs } from '~/utils/style';
+import {CountAnimBlock } from '~/components/count-anim-block';
+import { Fragment } from 'react';
+import { media, cssProps, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import styles from './enec.module.css';
 
@@ -46,37 +43,6 @@ export const meta = () => {
 };
 
 export const Enec = () => {
-  // const countTimer1Ref = useRef(null);
-  // const countTimer2Ref = useRef(null);
-  // let countTimerRefs = [countTimer1Ref, countTimer2Ref];
-  // const [ visibleProjectSections, setVisibleProjectSections ] = useState([]);
-
-  // useEffect(() => {
-  //   const timerSections = countTimerRefs;
-  //
-  //   const projectObserver = new IntersectionObserver(
-  //     (entries, observer) => {
-  //       entries.forEach(entry => {
-  //         if (entry.isIntersecting) {
-  //           const section = entry.target;
-  //           observer.unobserve(section);
-  //           if (visibleProjectSections.includes(section)) return;
-  //           setVisibleProjectSections(prevSections => [...prevSections, section]);
-  //         }
-  //       });
-  //     },
-  //     { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-  //   );
-  //
-  //   timerSections.forEach(timerSection => {
-  //     projectObserver.observe(timerSection.current);
-  //   });
-  //
-  //   return () => {
-  //     projectObserver.disconnect();
-  //   };
-  // }, [visibleProjectSections, countTimerRefs]);
-
   return (
     <Fragment>
       <ProjectContainer className={styles.enec}>
@@ -132,39 +98,19 @@ export const Enec = () => {
                     // ref={countTimer1Ref}
                     style={cssProps({ initDelay: numToMs(initDelay) })}
                   >
-                    <div
-                      // className={visibleProjectSections.includes(countTimerRefs[0].current) ? styles.countTimer : ""}
-                      className={styles.countTimer}
-                    >
-                      <ProjectSectionHeading>
-                        <CountTimer
-                          value="658367952"
-                          direction="up"
-                        />
-                      </ProjectSectionHeading>
-                      <ProjectTextRow center>
-                        GWh of clean electricity
-                      </ProjectTextRow>
-                    </div>
+                    <CountAnimBlock
+                      from={0} to={658367952}
+                      desc={`GWh of clean electricity`}
+                    />
                   </div>
                   <div
                     // ref={countTimer2Ref}
                     style={cssProps({ initDelay: numToMs(initDelay+200) })}
                   >
-                    <div
-                      // className={visibleProjectSections.includes(countTimerRefs[1].current) ? styles.countTimer : ""}
-                      className={styles.countTimer}
-                    >
-                      <ProjectSectionHeading>
-                        <CountTimer
-                          value="230243914"
-                          direction="up"
-                        />
-                      </ProjectSectionHeading>
-                      <ProjectTextRow center>
-                        Kilotonnes of CO2 prevented
-                      </ProjectTextRow>
-                    </div>
+                    <CountAnimBlock
+                      from={0} to={230243914}
+                      desc={`Kilotonnes of CO2 prevented`}
+                    />
                   </div>
                 </ProjectSectionColumns>
               </ProjectTextRow>

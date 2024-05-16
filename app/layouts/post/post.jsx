@@ -67,7 +67,7 @@ export const Post = ({ children, timecode }) => {
       );
     },
     // postMarkdown component styles MD tags as html elements
-    postMarkdown,
+    ...postMarkdown,
   };
 
   return (

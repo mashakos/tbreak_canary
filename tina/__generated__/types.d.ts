@@ -217,10 +217,12 @@ export type DatetimeFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type RichTextFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
+export type PostBodyYoutubeEmbedFilter = {
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PostBodyFilter = {
+  YoutubeEmbed?: InputMaybe<PostBodyYoutubeEmbedFilter>;
 };
 
 export type PostFilter = {
@@ -229,7 +231,7 @@ export type PostFilter = {
   banner?: InputMaybe<ImageFilter>;
   banner_placeholder?: InputMaybe<ImageFilter>;
   date?: InputMaybe<DatetimeFilter>;
-  body?: InputMaybe<RichTextFilter>;
+  body?: InputMaybe<PostBodyFilter>;
 };
 
 export type PostConnectionEdges = {

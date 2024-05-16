@@ -57,7 +57,20 @@ var post_default = {
       type: "rich-text",
       name: "body",
       label: "Body",
-      isBody: true
+      isBody: true,
+      templates: [
+        {
+          name: "YoutubeEmbed",
+          label: "Embed Youtube",
+          fields: [
+            {
+              name: "url",
+              label: "Link URL",
+              type: "string"
+            }
+          ]
+        }
+      ]
     }
   ]
 };

@@ -11,6 +11,7 @@ import { useRef, useState, useEffect } from 'react';
 import { clamp } from '~/utils/clamp';
 import { formatDate } from '~/utils/date';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
+import { ytParser } from '~/utils/ytparser.js';
 import styles from './post.module.css';
 import { Link as RouterLink, useLoaderData } from '@remix-run/react';
 import { tinaField, useTina } from 'tinacms/dist/react';
@@ -41,6 +42,33 @@ export const Post = ({ children, timecode }) => {
   };
 
   const placeholder = data.post.banner_placeholder;
+
+  const tinaComponents = {
+    // The "YoutubeEmbed" component renders YouTube urls.
+    YoutubeEmbed: (props) => {
+      let ytURL = props.url ? `https://www.youtube.com/embed/${ytParser(props.url)}` : "";
+      return (
+        <>
+          <iframe
+            width="740"
+            height="416"
+            src={ytURL}
+            className={styles.ytEmbed}
+            title="YouTube video player"
+            allow="accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share" allowFullScreen>
+          </iframe>
+        </>
+      );
+    },
+    // postMarkdown component styles MD tags as html elements
+    postMarkdown,
+  };
 
   return (
     <article className={styles.post}>
@@ -122,7 +150,7 @@ export const Post = ({ children, timecode }) => {
           {/*json post object for testing*/}
           {/*{JSON.stringify(data.post, null, 2)}*/}
           {/*{console.log(JSON.stringify(data.post, null, 2))}*/}
-          <TinaMarkdown content={data.post.body} components={postMarkdown} />
+          <TinaMarkdown content={data.post.body} components={tinaComponents} />
         </Text>
       </Section>
       <Footer />

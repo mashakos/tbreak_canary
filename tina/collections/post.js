@@ -1,3 +1,4 @@
+
 /**
  * @type {import('tinacms').Collection}
  */
@@ -61,6 +62,19 @@ export default {
       name: "body",
       label: "Body",
       isBody: true,
+      templates: [
+        {
+          name: "YoutubeEmbed",
+          label: "Embed Youtube",
+          fields: [
+            {
+              name: "url",
+              label: "Link URL",
+              type: "string",
+            },
+          ],
+        },
+      ],
     },
   ],
 };

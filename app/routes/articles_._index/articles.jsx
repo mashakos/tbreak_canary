@@ -14,14 +14,11 @@ import { formatDate } from '~/utils/date';
 import { classes, cssProps } from '~/utils/style';
 import styles from './articles.module.css';
 
-
 function ArticlesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  console.log(JSON.stringify(frontmatter.banner_placeholder));
-
-  const { title, abstract, date, featured, banner, banner_placeholder } = frontmatter;
+  const { title, abstract, date, featured, banner } = frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -52,7 +49,7 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
             noPauseButton
             play={!reduceMotion ? hovered : undefined}
             src={banner}
-            placeholder={banner_placeholder}
+            placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
             alt=""
             role="presentation"
           />

@@ -205,22 +205,4 @@
     padding: var(--spaceXS) var(--spaceM);
     user-select: none;
   }
-
-.atomOnePurge {
-  code {
-    text-align: none !important;
-    white-space: none !important;
-    word-spacing: none !important;
-    word-break: none !important;
-    overflow-wrap: none !important;
-    color: none !important;
-    background: none !important;
-    font-family: var(--monoFontStack) !important;
-    font-size: var(--fontSizeBodyS) !important;
-    line-height: var(--lineHeightBody) !important;
-    tab-size: none !important;
-    hyphens: none !important;
-  }
-
-}
 }

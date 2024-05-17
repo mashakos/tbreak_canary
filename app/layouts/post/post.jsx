@@ -78,16 +78,14 @@ export const Post = ({ children, timecode }) => {
             <div className={styles.bannerImage}>
               <Image role="presentation" src={data.post.banner} placeholder={placeholder} alt="" />
             </div>
-            {placeholder && (
-              <div className={styles.bannerImageBlur}>
-                <Image
-                  role="presentation"
-                  src={placeholder}
-                  placeholder={placeholder}
-                  alt=""
-                />
-              </div>
-            )}
+            <div className={styles.bannerImageBlur}>
+              <Image
+                role="presentation"
+                src={placeholder}
+                placeholder={placeholder}
+                alt=""
+              />
+            </div>
           </div>
         )}
         <header className={styles.header}>

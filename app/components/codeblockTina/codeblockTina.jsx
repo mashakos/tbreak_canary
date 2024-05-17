@@ -27,38 +27,6 @@ export const CodeblockTina = props => {
     }, 2000);
   };
 
-  // return (
-  //   <div className={styles.code} data-theme={theme}>
-  //     {!!lang && (
-  //       <Text secondary size="s" className={styles.lang}>
-  //         {lang}
-  //       </Text>
-  //     )}
-  //     <pre ref={elementRef} >
-  //       <code className={`language-${lang}`}>
-  //         {bodyChildren}
-  //         {console.log(bodyChildren)}
-  //       </code>
-  //     </pre>
-  //     <div className={styles.actions}>
-  //       <Button iconOnly onClick={handleCopy} aria-label="Copy">
-  //         <span className={styles.copyIcon}>
-  //           {/*{console.log(props.value)}*/}
-  //           <Transition in={!copied}>
-  //             {({ visible, nodeRef }) => (
-  //               <Icon ref={nodeRef} icon="copy" data-visible={visible} />
-  //             )}
-  //           </Transition>
-  //           <Transition in={copied}>
-  //             {({ visible, nodeRef }) => (
-  //               <Icon ref={nodeRef} icon="check" data-visible={visible} />
-  //             )}
-  //           </Transition>
-  //         </span>
-  //       </Button>
-  //     </div>
-  //   </div>
-  // );
   return (
     <div className={styles.code} data-theme={theme}>
        {!!lang && (
@@ -67,7 +35,7 @@ export const CodeblockTina = props => {
          </Text>
        )}
       <Highlight
-        theme={themes.shadesOfPurple}
+        theme={themes.oneDark}
         code={props.value}
         language={props.lang}
       >

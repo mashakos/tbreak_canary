@@ -141,18 +141,24 @@ export const Post = ({ children, timecode }) => {
           </div>
         </header>
       </Section>
+      {/*<Section className={styles.wrapper} id="postContent" tabIndex={-1}>*/}
+      {/*  <Text as="div"*/}
+      {/*        size="l"*/}
+      {/*        className={styles.content}*/}
+      {/*        data-tina-field={tinaField(data.post, "body")}*/}
+      {/*  >*/}
+      {/*    /!*json post object for testing*!/*/}
+      {/*    /!*{JSON.stringify(data.post, null, 2)}*!/*/}
+      {/*    /!*{console.log(JSON.stringify(data.post, null, 2))}*!/*/}
+      {/*    <TinaMarkdown content={data.post.body} components={tinaComponents} />*/}
+      {/*  </Text>*/}
+      {/*</Section>*/}
       <Section className={styles.wrapper} id="postContent" tabIndex={-1}>
-        <Text as="div"
-              size="l"
-              className={styles.content}
-              data-tina-field={tinaField(data.post, "body")}
-        >
-          {/*json post object for testing*/}
-          {/*{JSON.stringify(data.post, null, 2)}*/}
-          {/*{console.log(JSON.stringify(data.post, null, 2))}*/}
-          <TinaMarkdown content={data.post.body} components={tinaComponents} />
+        <Text as="div" size="l" className={styles.content}>
+          {children}
         </Text>
       </Section>
+
       <Footer />
     </article>
   );

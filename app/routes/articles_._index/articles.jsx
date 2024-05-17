@@ -154,11 +154,11 @@ export function Articles() {
       {posts.map(({ slug, ...post }, index) => (
         <ArticlesPost key={slug} slug={slug} index={index} {...post} />
       ))}
-      {Array(2)
-        .fill()
-        .map((skeleton, index) => (
-          <SkeletonPost key={index} index={index} />
-        ))}
+      {/*{Array(2)*/}
+      {/*  .fill()*/}
+      {/*  .map((skeleton, index) => (*/}
+      {/*    <SkeletonPost key={index} index={index} />*/}
+      {/*  ))}*/}
     </div>
   );
 

@@ -16,7 +16,7 @@ var post_default = {
       readonly: true,
       // Example of using a custom slugify function
       slugify: (values) => {
-        return `articles.${values?.title?.toLowerCase().replace(/ /g, "-")}`;
+        return `articles.${values?.title?.toLowerCase().replace(/[|&;:$%@"<>()+,]/g, "").replace(/ /g, "-")}`;
       }
     }
   },

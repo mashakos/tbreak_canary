@@ -20,7 +20,8 @@ export default {
         // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
         return `articles.${values?.title
           ?.toLowerCase()
-          .replace(/ /g, '-')}`
+          .replace(/[|&;:$%@"<>()+,]/g, "")
+          .replace(/ /g, '-')}`;
       },
     },
   },

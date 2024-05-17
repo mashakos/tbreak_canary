@@ -4,6 +4,8 @@ import { Text } from '~/components/text';
 import { useTheme } from '~/components/theme-provider';
 import { Transition } from '~/components/transition';
 import { useRef, useState } from 'react';
+import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
+import atomOneDark from "react-syntax-highlighter/dist/cjs/styles/prism/material-dark";
 import styles from './code.module.css';
 
 export const Code = props => {
@@ -14,6 +16,9 @@ export const Code = props => {
   //const lang = props.className?.split('-')[1];
   const lang = props.lang;
 
+  const PreWithRef = (preProps) => (
+    <pre {...preProps} ref={elementRef} />
+  );
   const handleCopy = () => {
     clearTimeout(copyTimeout);
     navigator.clipboard.writeText(elementRef.current.textContent);
@@ -32,11 +37,25 @@ export const Code = props => {
           {lang}
         </Text>
       )}
-      <pre ref={elementRef} {...props}>
-        <code>
-          {props.value}
-        </code>
-      </pre>
+      <SyntaxHighlighter
+        PreTag={PreWithRef}
+        code={props.value || ""}
+        language={lang ||"jsx"}
+        style={atomOneDark}
+        className={styles.atomOnePurge}
+        customStyle={{
+          display: undefined,
+          overflowX: undefined,
+          padding: undefined,
+          color: undefined,
+          background: undefined
+        }}
+      />
+      {/*<pre ref={elementRef} {...props}>*/}
+      {/*  <code>*/}
+      {/*    {props.value}*/}
+      {/*  </code>*/}
+      {/*</pre>*/}
       <div className={styles.actions}>
         <Button iconOnly onClick={handleCopy} aria-label="Copy">
           <span className={styles.copyIcon}>

@@ -32,7 +32,7 @@ export default defineConfig({
   },
   plugins: [
     mdx({
-      rehypePlugins: [[rehypeImgSize, { dir: 'public' }], rehypeSlug, rehypePrism],
+      rehypePlugins: [[rehypeImgSize, { dir: 'public' }], rehypeSlug],
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       providerImportSource: '@mdx-js/react',
     }),

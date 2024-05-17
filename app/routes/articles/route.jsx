@@ -6,8 +6,6 @@ import { baseMeta } from '~/utils/meta';
 import config from '~/config.json';
 import { formatTimecode, readingTime } from '~/utils/timecode';
 import client from 'tina/__generated__/client.js';
-import { ytParser } from '~/utils/ytparser.js';
-import styles from '~/layouts/post/post.module.css';
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);
@@ -43,38 +41,11 @@ export function meta({ data }) {
   return baseMeta({ title, description: abstract, prefix: '', ogImage: data.ogImage });
 }
 
-const tinaComponents = {
-  // The "YoutubeEmbed" component renders YouTube urls.
-  YoutubeEmbed: (props) => {
-    let ytURL = props.url ? `https://www.youtube.com/embed/${ytParser(props.url)}` : "";
-    return (
-      <>
-        <iframe
-          width="740"
-          height="416"
-          src={ytURL}
-          className={styles.ytEmbed}
-          title="YouTube video player"
-          allow="accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;
-            picture-in-picture;
-            web-share" allowFullScreen>
-        </iframe>
-      </>
-    );
-  },
-  // postMarkdown component styles MD tags as html elements
-  ...postMarkdown,
-};
-
 export default function Articles() {
   const { timecode } = useLoaderData();
 
   return (
-    <MDXProvider components={tinaComponents}>
+    <MDXProvider components={postMarkdown}>
       <Post timecode={timecode}>
         <Outlet />
       </Post>

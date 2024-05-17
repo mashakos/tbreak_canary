@@ -12,47 +12,26 @@ date: 2024-04-17T22:00:00.000Z
 **Continuous Integration (CI)**: CI is the practice of automating the integration of code changes from multiple contributors into a single software project. It's a primary tenet of a DevOps best practice known as Continuous Integration and Continuous Delivery (CI/CD). The CI process is comprised of automatic tools that assert the new code's correctness before integration. A source code version control system is the crux of the CI process. The version control system is also supplemented with other checks like syntax style review tools, other code analyzers, and code testers.
 
 ```jsx
-
-  const tinaComponents = {
-    // The "YoutubeEmbed" component renders YouTube urls.
-    YoutubeEmbed: (props) => {
-      let ytURL = props.url ? `https://www.youtube.com/embed/${ytParser(props.url)}` : "";
-      return (
-        <>
-          <iframe
-            width="740"
-            height="416"
-            src={ytURL}
-            className={styles.ytEmbed}
-            title="YouTube video player"
-            allow="accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;
-            picture-in-picture;
-            web-share" allowFullScreen>
-          </iframe>
-        </>
-      );
-    },
-    // postMarkdown component styles MD tags as html elements
-    ...postMarkdown,
-  };
-
+function Button({ color, children }) {
+  return (
+    <button className="button" style={{ backgroundColor: color }}>
+      {children}
+    </button>
+  );
+}
 ```
 
 **Continuous Deployment (CD)**: CD picks up where continuous integration ends. CD automates the delivery of applications to selected infrastructure environments. Most teams work with multiple environments other than the production, such as development and testing environments, and CD ensures there is an automated way to push code changes to them.
 
 **Continuous Delivery**: This practice goes one step beyond continuous deployment. With this, every change that passes all stages of your production pipeline is released to your customers. There's no human intervention, and only a failed test will prevent a new change to be deployed to production.
 
-CI/CD is designed to counter the problems of integration hell and deployment hell in software development. These practices are often used in conjunction with other DevOps practices such as Code Review, Unit Testing, Infrastructure as Code, and Monitoring and Logging.
+CI/CD is designed to counter the problems of integration hell and deployment hell in software development. These practices are often used in conjunction with other DevOps practices such as CodeblockTina Review, Unit Testing, Infrastructure as CodeblockTina, and Monitoring and Logging.
 
 Benefits of CI/CD include:
 
 * Reduced Manual Errors: Automating the CI/CD pipeline minimizes the risks associated with human error.
 * Faster Release Rate: Frequent code integration and deployment often lead to more frequent releases.
-* Improved Code Quality: Continuous feedback loops in CI/CD encourage better code quality.
+* Improved CodeblockTina Quality: Continuous feedback loops in CI/CD encourage better code quality.
 * Enhanced Transparency: Team members can see the flow of code through the CI/CD pipeline, enhancing transparency and accountability.
 * Better Maintenance: Regular updates make maintaining the software easier over time.
 

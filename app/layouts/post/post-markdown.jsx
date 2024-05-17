@@ -1,3 +1,4 @@
+import {CodeblockTina} from '~/components/codeblockTina';
 import { Code } from '~/components/code';
 import { Heading } from '~/components/heading';
 import { Icon } from '~/components/icon';
@@ -80,7 +81,7 @@ const PostLi = ({ children, ...props }) => {
 const PostCodeBlock = props => {
   return (
     <div className={styles.pre}>
-      <Code {...props} />
+      <CodeblockTina {...props} />
     </div>
   );
 };
@@ -150,10 +151,9 @@ export const postMarkdown = {
   a: PostTinaLink,
   ul: PostUl,
   ol: PostOl,
-  li: PostLi,
   lic: PostLi,
-  code_block: PostCodeBlock,
   pre: PostPre,
+  code_block: PostCodeBlock,
   code: PostCode,
   blockquote: PostBlockquote,
   hr: PostHr,

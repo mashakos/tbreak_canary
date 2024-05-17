@@ -6,12 +6,13 @@ import { Transition } from '~/components/transition';
 import { useRef, useState } from 'react';
 import styles from './code.module.css';
 
-export const Code = props => {
+export const Code = ({ bodyChildren, language }) => {
   const [copied, setCopied] = useState(false);
   const { theme } = useTheme();
   const elementRef = useRef();
   const copyTimeout = useRef();
-  const lang = props.className?.split('-')[1];
+  //const lang = props.className?.split('-')[1];
+  const lang = language;
 
   const handleCopy = () => {
     clearTimeout(copyTimeout);
@@ -31,10 +32,16 @@ export const Code = props => {
           {lang}
         </Text>
       )}
-      <pre ref={elementRef} {...props} />
+      <pre ref={elementRef} >
+        <code className={`language-${lang}`}>
+          {bodyChildren}
+          {console.log(bodyChildren)}
+        </code>
+      </pre>
       <div className={styles.actions}>
         <Button iconOnly onClick={handleCopy} aria-label="Copy">
           <span className={styles.copyIcon}>
+            {/*{console.log(props.value)}*/}
             <Transition in={!copied}>
               {({ visible, nodeRef }) => (
                 <Icon ref={nodeRef} icon="copy" data-visible={visible} />

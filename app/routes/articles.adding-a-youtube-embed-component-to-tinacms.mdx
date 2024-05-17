@@ -42,7 +42,7 @@ First, we need to update the schema for post types so that we have a definition 
 
 This is our schema currently:
 
-```javascript
+```jsx
 /**
  * @type {import('tinacms').Collection}
  */
@@ -73,7 +73,7 @@ export default {
 
 > ***SANITY CHECK:***  We need to make sure that our schema is MDX for any custom components to work:
 
-```javascript
+```jsx
   label: "Blog Posts",
   name: "post",
   path: "content/post",
@@ -85,7 +85,7 @@ We have two fields, title and body, with body being a rich-text object type (whi
 
 Since youtube embeds are a part of the body content, they are not really a separate object. They are more of a "feature" you can insert into your body text. This feature is called a template in the schema. We add our youtube embed template with the following code, within the body object type:
 
-```javascript
+```jsx
       templates: [
         {
           name: "YoutubeEmbed",
@@ -103,7 +103,7 @@ Since youtube embeds are a part of the body content, they are not really a separ
 
 > ***SANITY CHECK:***  Make sure that your body object looks like this after adding the youtube embed template:
 
-```javascript
+```jsx
     {
       type: "rich-text",
       name: "body",
@@ -138,7 +138,7 @@ To do this, we go back to the project source code and navigate to
 
 > ***SANITY CHECK:***  Make sure the file extension is mdx in line 63:
 
-```javascript
+```jsx
   const { data, query, variables } = await client.queries.post({
     relativePath: ctx.params.slug + ".mdx",
   });
@@ -146,7 +146,7 @@ To do this, we go back to the project source code and navigate to
 
 Starting at line 15 you should see the Layout code fragment:
 
-```javascript
+```jsx
    <Layout>
       <div data-tina-field={tinaField(data.post, "body")}>
         <TinaMarkdown content={data.post.body} />
@@ -163,7 +163,7 @@ We need to pass a component to TinaMarkdown that targets youtube embeds and retu
 
 I like to initialise a parent object that I can add multiple components to. This is helfpul later when you need to create new components to pass to TinaMarkDown. The structure of this parent object roughly:
 
-```javascript
+```Pseudo
 // This is pseudo code! DO NOT copy
   const tinaComponents = {
     // Object1 is a component we are initialising here
@@ -189,7 +189,7 @@ In the above pseudo code, multiple components are passed at once to TinaMarkDown
 Before we continue with the component implementation, we need to handle a real world issue with youtube urls: that they come in many forms. To tackle this, we must first set up a helper function that brings back only the YouTube video id regardless of the url variant.
 First, create a js file in components titled ytparser.js, then add the following code:
 
-```javascript
+```jsx
 export function ytParser(url){
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   var match = url.match(regExp);
@@ -199,13 +199,13 @@ export function ytParser(url){
 
 add the import at the top of `/pages/posts/[slug].js`
 
-```javascript
+```jsx
 import { ytParser } from '../../components/ytparser.js';
 ```
 
 Now that we have a general idea of what we will pass to TinaMarkDown, we can implement our parent object with the youtube embed component within:
 
-```javascript
+```jsx
   const tinaComponents = {
     // The "YoutubeEmbed" component renders YouTube urls.
     YoutubeEmbed: (props) => {
@@ -242,7 +242,7 @@ if we try to add a youtube video however, we will get this error:
 
 To resolve this, we need to pass our parent object to TinaMarkDown:
 
-```javascript
+```jsx
 <TinaMarkdown content={data.post.body} components={tinaComponents}/>
 ```
 

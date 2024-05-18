@@ -12,6 +12,18 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://www.delosian.pro/projects/upc</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.delosian.pro/projects/sudanile</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.delosian.pro/projects/shibraingallery</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://delosian.pro/projects/rbk-giew/</loc>
     <changefreq>monthly</changefreq>
   </url>
@@ -24,19 +36,31 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://www.delosian.pro/projects/enec</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.delosian.pro/projects/adsf</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.delosian.pro/articles/adding-a-youtube-embed-component-to-tinacms</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.delosian.pro/articles/cicd-the-new-normal</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://delosian.pro/articles/hello-tina</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/articles/modernising-a-sudanese-institution</loc>
+    <loc>https://www.delosian.pro/articles/the-evolution-of-css</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://delosian.pro/articles/the-evolution-of-css</loc>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://delosian.pro/articles/cicd-the-new-normal</loc>
+    <loc>https://www.delosian.pro/articles/modernising-a-sudanese-institution</loc>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>

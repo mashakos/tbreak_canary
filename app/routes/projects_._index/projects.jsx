@@ -14,12 +14,12 @@ import { formatDate } from '~/utils/date';
 import { classes, cssProps } from '~/utils/style';
 import styles from './projects.module.css';
 
-import {Masdar} from '~/routes/projects.masdar/masdar.jsx';
+// import {Masdar} from '~/routes/projects.masdar/masdar.jsx';
 import { ProjectSummary } from './project-summary';
-import reebokTexture from '~/assets/reebok-app.jpg';
-import reebokTextureLarge from '~/assets/reebok-app-large.jpg';
-import reebokTexturePlaceholder from '~/assets/reebok-app-placeholder.jpg';
-import mercbenzTexture2 from '~/assets/mercbenz-app.jpg';
+// import reebokTexture from '~/assets/reebok-app.jpg';
+// import reebokTextureLarge from '~/assets/reebok-app-large.jpg';
+// import reebokTexturePlaceholder from '~/assets/reebok-app-placeholder.jpg';
+// import mercbenzTexture2 from '~/assets/mercbenz-app.jpg';
 
 export const links = () => {
   return [

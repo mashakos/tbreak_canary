@@ -1,6 +1,6 @@
-import profileImgLarge from '~/assets/profile-large.jpg';
-import profileImgPlaceholder from '~/assets/profile-placeholder.jpg';
-import profileImg from '~/assets/profile.jpg';
+  import profileImgLarge from '~/assets/slice-background-bar-large.jpg';
+import profileImgPlaceholder from '~/assets/slice-background-bar-placeholder.jpg';
+import profileImg from '~/assets/slice-background-bar.jpg';
 import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
 import { Divider } from '~/components/divider';

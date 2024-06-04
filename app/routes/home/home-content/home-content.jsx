@@ -6,9 +6,9 @@ import imageSprBackgroundVolcanismPlaceholder from '~/assets/spr-background-volc
 import imageSprBackgroundVolcanism from '~/assets/spr-background-volcanism.jpg';
 import legendSpr from '~/assets/legend-bg.jpg';
 import backgroundSpr from '~/assets/main-bg.jpg';
-import videoSprMotionLarge from '~/assets/pepsimixer.mp4';
+import videoSprMotionLarge from '~/assets/tinacmseditor.mp4';
 import videoSprMotionPlaceholder from '~/assets/spr-motion-placeholder.jpg';
-import videoSprMotion from '~/assets/pepsimixer.mp4';
+import videoSprMotion from '~/assets/tinacmseditor.mp4';
 import imageSprSchema1DarkLarge from '~/assets/spr-schema-1-dark-large.png';
 import imageSprSchema1DarkPlaceholder from '~/assets/spr-schema-1-dark-placeholder.png';
 import imageSprSchema1Dark from '~/assets/spr-schema-1-dark.png';

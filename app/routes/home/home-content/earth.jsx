@@ -267,7 +267,7 @@ export const Earth = ({
   useEffect(() => {
     if (!loaded) return;
 
-    const chunk = getChild('Chunk', sceneModel.current);
+    // const chunk = getChild('Chunk', sceneModel.current);
     const atmosphere = getChild('Atmosphere', sceneModel.current);
 
     const handleCameraChange = (axis, value) => {
@@ -306,18 +306,18 @@ export const Earth = ({
       unsubscribeCameraX();
       unsubscribeCameraY();
       unsubscribeCameraZ();
-      unsubscribeChunkX();
-      unsubscribeChunkY();
-      unsubscribeChunkZ();
+      // unsubscribeChunkX();
+      // unsubscribeChunkY();
+      // unsubscribeChunkZ();
       unsubscribeOpacity();
     };
   }, [
     cameraXSpring,
     cameraYSpring,
     cameraZSpring,
-    chunkXSpring,
-    chunkYSpring,
-    chunkZSpring,
+    // chunkXSpring,
+    // chunkYSpring,
+    // chunkZSpring,
     loaded,
     opacitySpring,
   ]);
@@ -494,7 +494,7 @@ export const Earth = ({
 
       sceneModel.current.traverse(child => {
         const { name } = child;
-        const chunk = getChild('Chunk', sceneModel.current);
+        // const chunk = getChild('Chunk', sceneModel.current);
         const isVisible = visibleMeshes?.includes(name);
         const isHidden = hideMeshes?.includes(name);
 
@@ -508,14 +508,14 @@ export const Earth = ({
 
             child.visible = true;
 
-            if (reduceMotion) {
-              child.position.set(...chunkTarget.toArray());
-            } else {
-              chunkXSpring.set(chunkTarget.x);
-              chunkYSpring.set(chunkTarget.y);
-              chunkZSpring.set(chunkTarget.z);
-            }
-          } else if (name === 'EarthFull' && chunk.visible) {
+            // if (reduceMotion) {
+            //   child.position.set(...chunkTarget.toArray());
+            // } else {
+            //   chunkXSpring.set(chunkTarget.x);
+            //   chunkYSpring.set(chunkTarget.y);
+            //   chunkZSpring.set(chunkTarget.z);
+            // }
+          } else if (name === 'EarthFull' ) {
             child.visible = false;
           } else {
             child.visible = true;
@@ -530,10 +530,10 @@ export const Earth = ({
               child.visible = false;
             }
 
-            chunkXSpring.set(chunkTarget.x);
-            chunkYSpring.set(chunkTarget.y);
-            chunkZSpring.set(chunkTarget.z);
-          } else if (name === 'EarthPartial' && chunk.visible) {
+            // chunkXSpring.set(chunkTarget.x);
+            // chunkYSpring.set(chunkTarget.y);
+            // chunkZSpring.set(chunkTarget.z);
+          } else if (name === 'EarthPartial' ) {
             child.visible = true;
           } else {
             child.visible = false;
@@ -630,9 +630,9 @@ export const Earth = ({
     cameraXSpring,
     cameraYSpring,
     cameraZSpring,
-    chunkXSpring,
-    chunkYSpring,
-    chunkZSpring,
+    // chunkXSpring,
+    // chunkYSpring,
+    // chunkZSpring,
     grabbing,
     hideMeshes,
     opacitySpring,

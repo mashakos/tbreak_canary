@@ -516,7 +516,7 @@ export const Earth = ({
             //   chunkZSpring.set(chunkTarget.z);
             // }
           } else if (name === 'EarthFull' ) {
-            child.visible = false;
+            child.visible = true;
           } else {
             child.visible = true;
           }

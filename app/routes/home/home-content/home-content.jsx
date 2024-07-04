@@ -127,108 +127,6 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
             </HomeSectionColumns>
           </HomeSectionContent>
           </HomeSection>
-        <HomeSection>
-          <HomeSectionContent>
-            <div className={styles.logoContainer}>
-              <DelosianLogo
-                role="img"
-                aria-label="The Delosian logo"
-              />
-            </div>
-          <HomeTextRow center noMargin>
-            <HomeSectionText>
-              Just like our namesake, we believe that our agency serves as a space where our talented artists and developers shape great work. We are the fountainhead from which immersive experiences transcend the ordinary.
-            </HomeSectionText>
-          </HomeTextRow>
-          </HomeSectionContent>
-        </HomeSection>
-        <ThemeProvider theme="dark" data-invert>
-          <HomeSection
-            backgroundOverlayOpacity={0.5}
-            backgroundElement={
-              <Image
-                srcSet={`${imageSprBackgroundVolcanism} 1280w, ${imageSprBackgroundVolcanismLarge} 2560w`}
-                width={1280}
-                height={900}
-                placeholder={imageSprBackgroundVolcanismPlaceholder}
-                alt="A dramatic ocean scene with lava forming a new land mass."
-                sizes="100vw"
-              />
-            }
-          >
-            <HomeSectionColumns width="full">
-              <HomeSectionContent width="full">
-                <HomeTextRow width="s">
-                  <HomeSectionHeading>Design Alchemy</HomeSectionHeading>
-                  <HomeSectionText>
-                    Our UI/UX designers blend aesthetics <br/>
-                    with intuition. They sculpt interfaces that breathe life into pixels, transforming data into emotion. Just as Leto shaped Delos, we mold wireframes into captivating journeys.
-                  </HomeSectionText>
-                </HomeTextRow>
-              </HomeSectionContent>
-              <Image
-                raised
-                className={styles.video}
-                srcSet={`${videoSprMotion} 1280w, ${videoSprMotionLarge} 2560w`}
-                width={1280}
-                height={800}
-                placeholder={videoSprMotionPlaceholder}
-                alt="A learning designer building and deploying an interactive lesson on volcanism using the app."
-                sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
-              />
-            </HomeSectionColumns>
-          </HomeSection>
-        </ThemeProvider>
-          <HomeSection>
-            <HomeSectionColumns>
-              <div className={styles.sidebarImages}>
-                <Image
-                  className={styles.sidebarImage}
-                  srcSet={
-                    isDark
-                      ? `${imageSprSchema2Dark} 260w, ${imageSprSchema2DarkLarge} 520w`
-                      : `${imageSprSchema2Light} 260w, ${imageSprSchema2LightLarge} 520w`
-                  }
-                  width={260}
-                  height={660}
-                  placeholder={
-                    isDark
-                      ? imageSprSchema2DarkPlaceholder
-                      : imageSprSchema2LightPlaceholder
-                  }
-                  alt="Configuration options for a component."
-                  sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-                />
-                <Image
-                  className={styles.sidebarImage}
-                  srcSet={
-                    isDark
-                      ? `${imageSprSchema1Dark} 260w, ${imageSprSchema1DarkLarge} 520w`
-                      : `${imageSprSchema1Light} 260w, ${imageSprSchema1LightLarge} 520w`
-                  }
-                  width={260}
-                  height={660}
-                  placeholder={
-                    isDark
-                      ? imageSprSchema1DarkPlaceholder
-                      : imageSprSchema1LightPlaceholder
-                  }
-                  alt="Configuration options for text."
-                  sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-                />
-              </div>
-              <HomeSectionContent>
-                <HomeTextRow>
-                  <HomeSectionHeading>
-                    The Palette of Innovation
-                  </HomeSectionHeading>
-                  <HomeSectionText>
-                    Our color palette extends beyond the RGB spectrum. It includes curiosity, experimentation, and the courage to break boundaries.
-                  </HomeSectionText>
-                </HomeTextRow>
-              </HomeSectionContent>
-            </HomeSectionColumns>
-          </HomeSection>
         <ThemeProvider theme="dark" data-invert>
           <Suspense>
             <Earth
@@ -386,6 +284,108 @@ export const HomeContent = ({ id, sectionRef, ...rest }) => {
             </Earth>
           </Suspense>
         </ThemeProvider>
+        <HomeSection>
+          <HomeSectionContent>
+            <div className={styles.logoContainer}>
+              <DelosianLogo
+                role="img"
+                aria-label="The Delosian logo"
+              />
+            </div>
+          <HomeTextRow center noMargin>
+            <HomeSectionText>
+              Just like our namesake, we believe that our agency serves as a space where our talented artists and developers shape great work. We are the fountainhead from which immersive experiences transcend the ordinary.
+            </HomeSectionText>
+          </HomeTextRow>
+          </HomeSectionContent>
+        </HomeSection>
+        <ThemeProvider theme="dark" data-invert>
+          <HomeSection
+            backgroundOverlayOpacity={0.5}
+            backgroundElement={
+              <Image
+                srcSet={`${imageSprBackgroundVolcanism} 1280w, ${imageSprBackgroundVolcanismLarge} 2560w`}
+                width={1280}
+                height={900}
+                placeholder={imageSprBackgroundVolcanismPlaceholder}
+                alt="A dramatic ocean scene with lava forming a new land mass."
+                sizes="100vw"
+              />
+            }
+          >
+            <HomeSectionColumns width="full">
+              <HomeSectionContent width="full">
+                <HomeTextRow width="s">
+                  <HomeSectionHeading>Design Alchemy</HomeSectionHeading>
+                  <HomeSectionText>
+                    Our UI/UX designers blend aesthetics <br/>
+                    with intuition. They sculpt interfaces that breathe life into pixels, transforming data into emotion. Just as Leto shaped Delos, we mold wireframes into captivating journeys.
+                  </HomeSectionText>
+                </HomeTextRow>
+              </HomeSectionContent>
+              <Image
+                raised
+                className={styles.video}
+                srcSet={`${videoSprMotion} 1280w, ${videoSprMotionLarge} 2560w`}
+                width={1280}
+                height={800}
+                placeholder={videoSprMotionPlaceholder}
+                alt="A learning designer building and deploying an interactive lesson on volcanism using the app."
+                sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
+              />
+            </HomeSectionColumns>
+          </HomeSection>
+        </ThemeProvider>
+          <HomeSection>
+            <HomeSectionColumns>
+              <div className={styles.sidebarImages}>
+                <Image
+                  className={styles.sidebarImage}
+                  srcSet={
+                    isDark
+                      ? `${imageSprSchema2Dark} 260w, ${imageSprSchema2DarkLarge} 520w`
+                      : `${imageSprSchema2Light} 260w, ${imageSprSchema2LightLarge} 520w`
+                  }
+                  width={260}
+                  height={660}
+                  placeholder={
+                    isDark
+                      ? imageSprSchema2DarkPlaceholder
+                      : imageSprSchema2LightPlaceholder
+                  }
+                  alt="Configuration options for a component."
+                  sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+                />
+                <Image
+                  className={styles.sidebarImage}
+                  srcSet={
+                    isDark
+                      ? `${imageSprSchema1Dark} 260w, ${imageSprSchema1DarkLarge} 520w`
+                      : `${imageSprSchema1Light} 260w, ${imageSprSchema1LightLarge} 520w`
+                  }
+                  width={260}
+                  height={660}
+                  placeholder={
+                    isDark
+                      ? imageSprSchema1DarkPlaceholder
+                      : imageSprSchema1LightPlaceholder
+                  }
+                  alt="Configuration options for text."
+                  sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+                />
+              </div>
+              <HomeSectionContent>
+                <HomeTextRow>
+                  <HomeSectionHeading>
+                    The Palette of Innovation
+                  </HomeSectionHeading>
+                  <HomeSectionText>
+                    Our color palette extends beyond the RGB spectrum. It includes curiosity, experimentation, and the courage to break boundaries.
+                  </HomeSectionText>
+                </HomeTextRow>
+              </HomeSectionContent>
+            </HomeSectionColumns>
+          </HomeSection>
       </HomeContainer>
     </>
   );

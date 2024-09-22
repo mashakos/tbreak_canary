@@ -1,4 +1,4 @@
 ---
-post: app/routes/articles.adding-a-youtube-embed-component-to-tinacms.mdx
+post: app/routes/articles.windows-hello-fix.mdx
 ---
 

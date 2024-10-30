@@ -45,6 +45,7 @@ export const Post = ({ children, timecode }) => {
   // const placeholder = data.post.banner_placeholder;
   /*
   * Cloudflare image transform
+  * make sure allow from other domains is checked!
   * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
   */
   const placeholder = `/cdn-cgi/image/width=25,quality=75/${data.post.banner}`;

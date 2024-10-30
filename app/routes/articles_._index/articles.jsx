@@ -51,6 +51,7 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
             src={banner}
             /*
             * Cloudflare image transform
+            * make sure allow from other domains is checked!
             * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
             */
             placeholder = {`/cdn-cgi/image/width=25,quality=75/${banner}`}

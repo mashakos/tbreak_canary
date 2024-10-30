@@ -187,7 +187,6 @@ export type Post = Node & Document & {
   title: Scalars['String']['output'];
   abstract: Scalars['String']['output'];
   banner?: Maybe<Scalars['String']['output']>;
-  banner_placeholder?: Maybe<Scalars['String']['output']>;
   date: Scalars['String']['output'];
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
@@ -229,7 +228,6 @@ export type PostFilter = {
   title?: InputMaybe<StringFilter>;
   abstract?: InputMaybe<StringFilter>;
   banner?: InputMaybe<ImageFilter>;
-  banner_placeholder?: InputMaybe<ImageFilter>;
   date?: InputMaybe<DatetimeFilter>;
   body?: InputMaybe<PostBodyFilter>;
 };
@@ -356,7 +354,6 @@ export type PostMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   abstract?: InputMaybe<Scalars['String']['input']>;
   banner?: InputMaybe<Scalars['String']['input']>;
-  banner_placeholder?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
@@ -365,16 +362,16 @@ export type FeaturedMutation = {
   post?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PostPartsFragment = { __typename: 'Post', title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null };
+export type PostPartsFragment = { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null };
 
-export type FeaturedPartsFragment = { __typename: 'Featured', post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type FeaturedPartsFragment = { __typename: 'Featured', post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', post: { __typename: 'Post', id: string, title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PostQuery = { __typename?: 'Query', post: { __typename: 'Post', id: string, title: string, abstract: string, banner?: string | null, date: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PostConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -386,14 +383,14 @@ export type PostConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename: 'Post', id: string, title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename: 'Post', id: string, title: string, abstract: string, banner?: string | null, date: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type FeaturedQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type FeaturedQuery = { __typename?: 'Query', featured: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } };
+export type FeaturedQuery = { __typename?: 'Query', featured: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } };
 
 export type FeaturedConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -405,7 +402,7 @@ export type FeaturedConnectionQueryVariables = Exact<{
 }>;
 
 
-export type FeaturedConnectionQuery = { __typename?: 'Query', featuredConnection: { __typename?: 'FeaturedConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FeaturedConnectionEdges', cursor: string, node?: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, banner_placeholder?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } | null } | null> | null } };
+export type FeaturedConnectionQuery = { __typename?: 'Query', featuredConnection: { __typename?: 'FeaturedConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FeaturedConnectionEdges', cursor: string, node?: { __typename: 'Featured', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, post: { __typename: 'Post', title: string, abstract: string, banner?: string | null, date: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } } | null } | null> | null } };
 
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
@@ -413,7 +410,6 @@ export const PostPartsFragmentDoc = gql`
   title
   abstract
   banner
-  banner_placeholder
   date
   body
 }
@@ -427,7 +423,6 @@ export const FeaturedPartsFragmentDoc = gql`
       title
       abstract
       banner
-      banner_placeholder
       date
       body
     }
@@ -617,7 +612,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/1.4/content/5f8cd26a-f872-46fc-8de1-3a91c79e028b/github/master",
         queries,
       })
     )

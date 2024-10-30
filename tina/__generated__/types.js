@@ -11,7 +11,6 @@ export const PostPartsFragmentDoc = gql`
   title
   abstract
   banner
-  banner_placeholder
   date
   body
 }
@@ -25,7 +24,6 @@ export const FeaturedPartsFragmentDoc = gql`
       title
       abstract
       banner
-      banner_placeholder
       date
       body
     }
@@ -189,7 +187,7 @@ const generateRequester = (client) => {
 export const ExperimentalGetTinaClient = () => getSdk(
   generateRequester(
     createClient({
-      url: "http://localhost:4001/graphql",
+      url: "https://content.tinajs.io/1.4/content/5f8cd26a-f872-46fc-8de1-3a91c79e028b/github/master",
       queries
     })
   )

@@ -43,11 +43,6 @@ var post_default = {
       label: "Banner"
     },
     {
-      type: "image",
-      name: "banner_placeholder",
-      label: "Banner Placeholder"
-    },
-    {
       type: "datetime",
       name: "date",
       label: "Date",

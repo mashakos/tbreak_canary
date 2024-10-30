@@ -47,7 +47,7 @@ export const Post = ({ children, timecode }) => {
   * Cloudflare image transform
   * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
   */
-  const placeholder = `/cdn-cgi/image/width=25,quality=75,blur=5/${data.post.banner}`;
+  const placeholder = `/cdn-cgi/image/width=25,quality=75/${data.post.banner}`;
 
 
   const tinaComponents = {

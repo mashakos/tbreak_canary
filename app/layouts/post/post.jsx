@@ -42,11 +42,13 @@ export const Post = ({ children, timecode }) => {
     scrollToHash(event.currentTarget.href);
   };
 
+  const placeholder = data.post.banner_placeholder;
   /*
   * Cloudflare image transform
   * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
   */
-  const placeholder = `/cdn-cgi/image/width=25,quality=75,blur=50/${data.post.banner}`; //data.post.banner_placeholder;
+  // const placeholder = `/cdn-cgi/image/width=25,quality=75,blur=50/${data.post.banner}`;
+
 
   const tinaComponents = {
     // The "YoutubeEmbed" component renders YouTube urls.

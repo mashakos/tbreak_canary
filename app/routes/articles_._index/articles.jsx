@@ -53,7 +53,7 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
             * Cloudflare image transform
             * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
             */
-            placeholder = {`/cdn-cgi/image/width=25,quality=75,blur=50/${banner}`}
+            placeholder = {`/cdn-cgi/image/width=25,quality=75,blur=5/${banner}`}
             // placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
             alt=""
             role="presentation"

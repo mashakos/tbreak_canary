@@ -1,0 +1,15 @@
+---
+title: 'TinaCMS: One Year later'
+abstract: >-
+  After one year with TinaCMS both professionally and as a side hobby, I have a
+  few thoughts...
+banner: /static/tina-og.png
+date: 2024-10-30T21:00:00.000Z
+---
+
+Things I have discovered:
+
+| **Issue**                                                                                    | **Resolution**                                                                                  |
+| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| TinaCMS admin panel render error when building/publishing with npm                           | You will need to dedupe react-router-dom in the dependencies: Best method is to use npx patcher |
+| Admin panel fails to render after deleting a page/post/entry when running TinaCMS on Windows | Stop the local dev server, run \`tinacms audit\` in the console, restart dev server             |

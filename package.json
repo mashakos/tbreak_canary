@@ -37,7 +37,7 @@
     "rehype-slug": "^6.0.0",
     "three": "^0.161.0",
     "three-stdlib": "^2.29.4",
-    "tinacms": "^1.6.1",
+    "tinacms": "^2.4.0",
     "typesense": "^1.8.2",
     "typesense-instantsearch-adapter": "^2.8.0"
   },
@@ -54,7 +54,7 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
     "@storybook/test": "^7.6.17",
-    "@tinacms/cli": "^1.5.43",
+    "@tinacms/cli": "^1.6.11",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",

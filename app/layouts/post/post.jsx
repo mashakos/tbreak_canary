@@ -45,14 +45,13 @@ export const Post = ({ children, timecode }) => {
   // const placeholder = data.post.banner_placeholder;
   /*
   * Cloudflare image transform
-  * make sure allow from other domains is checked!
+  * make sure allow from other origins is checked!
   * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
   */
   const placeholder = `/cdn-cgi/image/width=25,quality=75/${data.post.banner}`;
 
-
   const tinaComponents = {
-    // The "YoutubeEmbed" component renders YouTube urls.
+      // The "YoutubeEmbed" component renders YouTube urls.
     YoutubeEmbed: (props) => {
       let ytURL = props.url ? `https://www.youtube.com/embed/${ytParser(props.url)}` : "";
       return (

@@ -3,8 +3,6 @@
  * @type {import('tinacms').Collection}
  */
 
-import { tinaTableTemplate } from 'tinacms';
-
 export default {
   name: "post",
   label: "Posts",

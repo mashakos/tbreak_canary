@@ -1,5 +1,5 @@
 import { defineConfig } from "tinacms";
-import Post from "./collections/post";
+import Post from "./collections/post.jsx";
 import Featured from "./collections/featured";
 
 

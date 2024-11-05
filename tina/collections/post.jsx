@@ -78,24 +78,48 @@ export default {
           };
           await typesenseClient.collections('post').documents().search(searchParameters).then(function (data) {
             // console.log("search data - " + JSON.stringify(data, null, 2));
-            postId = data.hits[0].document.id;
-            console.log(postId);
+            console.log("search data - " + JSON.stringify(data, null, 2));
+            if(data.found !== 0)
+            {
+              postId = data.hits[0].document.id;
+              console.log(postId);
+            }
           });
-          let postDocument = {
-            'id': postId,
-            'title': values.title,
-            'abstract': values.abstract,
-            'banner': values.banner,
-            'date': new Date(values.date).getTime(),
-            'body': bodydata,
-            'slug': postSlug,
-          };
-          await typesenseClient.collections('post').documents().upsert(
-            postDocument,
-            {"filter_by": `slug:=${postSlug}`}
-          ).then(function (data) {
-            console.log(data);
-          });
+
+          if(postId !== 0)
+          {
+            let postDocument = {
+              'id': postId,
+              'title': values.title,
+              'abstract': values.abstract,
+              'banner': values.banner,
+              'date': new Date(values.date).getTime(),
+              'body': bodydata,
+              'slug': postSlug,
+            };
+            await typesenseClient.collections('post').documents().upsert(
+              postDocument,
+              {"filter_by": `slug:=${postSlug}`}
+            ).then(function (data) {
+              console.log(data);
+            });
+          }
+          else
+          {
+            let postDocument = {
+              'title': values.title,
+              'abstract': values.abstract,
+              'banner': values.banner,
+              'date': new Date(values.date).getTime(),
+              'body': bodydata,
+              'slug': postSlug,
+            };
+            await typesenseClient.collections('post').documents().create(
+              postDocument
+            ).then(function (data) {
+              console.log(data);
+            });
+          }
         }
 
       }

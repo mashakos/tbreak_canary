@@ -62,11 +62,11 @@ export default {
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': context.cloudflare.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': context.cloudflare.TYPESENSE_PORT,      // For Typesense Cloud use 443
-            'protocol': context.cloudflare.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+            'host': context.cloudflare.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': context.cloudflare.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
+            'protocol': context.cloudflare.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
           }],
-          'apiKey': context.cloudflare.TYPESENSE_API_KEY,
+          'apiKey': context.cloudflare.env.TYPESENSE_API_KEY,
           'connectionTimeoutSeconds': 2,
           logLevel: "debug",
         });

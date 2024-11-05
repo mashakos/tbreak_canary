@@ -62,11 +62,11 @@ export default {
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': context.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': context.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
-            'protocol': context.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+            'host': env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': env.TYPESENSE_PORT,      // For Typesense Cloud use 443
+            'protocol': env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
           }],
-          'apiKey': context.env.TYPESENSE_API_KEY,
+          'apiKey': env.TYPESENSE_API_KEY,
           'connectionTimeoutSeconds': 2,
           logLevel: "debug",
         });

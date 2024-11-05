@@ -3,6 +3,7 @@
  * @type {import('tinacms').Collection}
  */
 
+
 import Typesense from 'typesense';
 
 export default {
@@ -13,38 +14,83 @@ export default {
   ui: {
     // Example of beforeSubmit
     beforeSubmit: async ({
+                           form,
+                           cms,
                            values,
                          }) => {
-      console.log("before submit triggered");
+      const replacer = (key, value) => {
+        if (key === "type" || key === "id") return undefined;
+        return value;
+      };
+      console.log(`before submit triggered. date is ${values.date}`);
+      var bodydata = "";
+      var postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
+      var postId = 0;
+      Object.entries(values.body.children).forEach(([k, v]) => {
+        // do something with key and val
+        //for(var i = 0; i < values.body[k].length; i++)
+
+          Object.entries(v).forEach(([k, v]) => {
+            if(k === "children")
+              if(v[0].text !== undefined)
+              {
+                bodydata = bodydata + v[0].text + '\n';
+              }
+          });
+        //console.log(JSON.stringify(k, null, 2) + ' - ' + JSON.stringify(v[0]["children"].text, null, 2));
+      });
+      console.log(bodydata);
+
+      // Object.keys(values.body).forEach(function([k, v]){
+      //   for(var i = 0; i < values.body[k].length; i++)
+      //   console.log(k + ' - ' + v);
+      // });
+      //console.log(JSON.stringify(values.body[k]));
       //typesense test
 
-      let typesenseClient = new Typesense.Client({
-        'nodes': [{
-          'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-          'port': process.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
-          'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
-        }],
-        'apiKey': process.env.TYPESENSE_API_KEY,
-        'connectionTimeoutSeconds': 2
-      });
 
-      {
-        let document = {
-          'title': values.title,
-          'abstract': values.abstract,
-          'banner': values.banner,
-          'date': values.date,
-          'body': values.body,
-          'slug': values.slug,
-        };
-        typesenseClient.collections('post').documents().upsert(
-          document,
-          {
-            "filter_by": `slug:=${values.slug}`
-          }
-        ).then(function (data) {
+      try{
+        let typesenseClient = new Typesense.Client({
+          'nodes': [{
+            'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': process.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
+            'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+          }],
+          'apiKey': process.env.TYPESENSE_API_KEY,
+          'connectionTimeoutSeconds': 2,
+          logLevel: "debug",
+        });
+
+        {
+          let searchParameters = {
+            'q'         : '*',
+            "filter_by": `slug:=${postSlug}`,
+          };
+          await typesenseClient.collections('post').documents().search(searchParameters).then(function (data) {
+            // console.log("search data - " + JSON.stringify(data, null, 2));
+            postId = data.hits[0].document.id;
+            console.log(postId);
+          });
+          let postDocument = {
+            'id': postId,
+            'title': values.title,
+            'abstract': values.abstract,
+            'banner': values.banner,
+            'date': new Date(values.date).getTime(),
+            'body': bodydata,
+            'slug': postSlug,
+          };
+          await typesenseClient.collections('post').documents().upsert(
+            postDocument,
+            {"filter_by": `slug:=${postSlug}`}
+          ).then(function (data) {
             console.log(data);
           });
+        }
+
+      }
+      catch (err) {
+        console.error(err);
       }
 
 

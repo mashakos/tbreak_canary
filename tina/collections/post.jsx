@@ -49,7 +49,7 @@ export default {
       //typesense test
 
 /*
-* local vars
+* local vars test
 *           'nodes': [{
             'host': 'search.delosian.pro', // For Typesense Cloud use xxx.a1.typesense.net
             'port': '443',      // For Typesense Cloud use 443

@@ -68,7 +68,7 @@ export default {
           }],
           'apiKey': 'xyz',
           'connectionTimeoutSeconds': 2,
-          logLevel: "debug",
+          // logLevel: "debug",
         });
 
         {

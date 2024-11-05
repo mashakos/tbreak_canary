@@ -48,15 +48,25 @@ export default {
       //console.log(JSON.stringify(values.body[k]));
       //typesense test
 
+/*
+* local vars
+*           'nodes': [{
+            'host': 'search.delosian.pro', // For Typesense Cloud use xxx.a1.typesense.net
+            'port': '443',      // For Typesense Cloud use 443
+            'protocol': 'https'  // For Typesense Cloud use https
+          }],
+          'apiKey': 'xyz',
+          'connectionTimeoutSeconds': 2,
 
+* */
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': process.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
-            'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+            'host': context.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': context.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
+            'protocol': context.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
           }],
-          'apiKey': process.env.TYPESENSE_API_KEY,
+          'apiKey': context.env.TYPESENSE_API_KEY,
           'connectionTimeoutSeconds': 2,
           logLevel: "debug",
         });

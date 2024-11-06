@@ -11,6 +11,7 @@ const branch =
   "master";
 
 export default defineConfig({
+
   branch,
 
   // Get this from tina.io

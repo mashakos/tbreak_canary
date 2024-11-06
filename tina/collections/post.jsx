@@ -90,6 +90,7 @@ export default {
             await typesenseClient.collections('post').documents().create(
               postDocument
             ).then(function (data) {
+              // get id after indexed post is created
               postId = data.id;
               console.log(postId + ' - ' + JSON.stringify(data, null, 2));
             });

@@ -90,7 +90,7 @@ export default {
               postDocument
             ).then(function (data) {
               postId = data.id;
-              console.log(postId + ' - ' + data);
+              console.log(postId + ' - ' + JSON.stringify(data, null, 2));
             });
           }
         }

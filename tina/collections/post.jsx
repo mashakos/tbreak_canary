@@ -89,7 +89,8 @@ export default {
             await typesenseClient.collections('post').documents().create(
               postDocument
             ).then(function (data) {
-              console.log(data);
+              postId = data.id;
+              console.log(postId + ' - ' + data);
             });
           }
         }

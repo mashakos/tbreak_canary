@@ -6,11 +6,6 @@
 
 import Typesense from 'typesense';
 
-const typesenseHost = 'search.delosian.pro'; // For Typesense Cloud use xxx.a1.typesense.net
-const typesensePort = 443;      // For Typesense Cloud use 443
-const typesenseProtocol = 'https';  // For Typesense Cloud use https
-const typesenseApiKey = 'xyz';
-
 
 export default {
   name: "post",

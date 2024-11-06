@@ -6,6 +6,12 @@
 
 import Typesense from 'typesense';
 
+const typesenseHost = process.env.TYPESENSE_HOST; // For Typesense Cloud use xxx.a1.typesense.net
+const typesensePort = process.env.TYPESENSE_PORT;      // For Typesense Cloud use 443
+const typesenseProtocol = process.env.PUBLIC_TYPESENSE_PROTOCOL;  // For Typesense Cloud use https
+const typesenseApiKey =process.env.TYPESENSE_API_KEY;
+
+
 export default {
   name: "post",
   label: "Posts",
@@ -17,18 +23,11 @@ export default {
                            form,
                            values,
                          }) => {
-      // const replacer = (key, value) => {
-      //   if (key === "type" || key === "id") return undefined;
-      //   return value;
-      // };
       console.log(`before submit triggered. date is ${values.date}`);
       var bodydata = "";
       var postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
       var postId = 0;
       Object.entries(values.body.children).forEach(([k, v]) => {
-        // do something with key and val
-        //for(var i = 0; i < values.body[k].length; i++)
-
           Object.entries(v).forEach(([k, v]) => {
             if(k === "children")
               if(v[0].text !== undefined)
@@ -36,46 +35,17 @@ export default {
                 bodydata = bodydata + v[0].text + '\n';
               }
           });
-        //console.log(JSON.stringify(k, null, 2) + ' - ' + JSON.stringify(v[0]["children"].text, null, 2));
       });
-      console.log(bodydata);
+      // console.log(bodydata);
 
-      // Object.keys(values.body).forEach(function([k, v]){
-      //   for(var i = 0; i < values.body[k].length; i++)
-      //   console.log(k + ' - ' + v);
-      // });
-      //console.log(JSON.stringify(values.body[k]));
-      //typesense test
-
-/*
-* local vars test
-*           'nodes': [{
-            'host': 'search.delosian.pro', // For Typesense Cloud use xxx.a1.typesense.net
-            'port': '443',      // For Typesense Cloud use 443
-            'protocol': 'https'  // For Typesense Cloud use https
-          }],
-          'apiKey': 'xyz',
-          'connectionTimeoutSeconds': 2,
-
-* */
-/*
-* remoet vars test
-*           'nodes': [{
-            'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': parseInt(process.env.TYPESENSE_PORT),      // For Typesense Cloud use 443
-            'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
-          }],
-          'apiKey': process.env.TYPESENSE_API_KEY,
-          'connectionTimeoutSeconds': 2,
-* */
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': process.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
-            'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+            'host': typesenseHost, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': typesensePort,      // For Typesense Cloud use 443
+            'protocol': typesenseProtocol  // For Typesense Cloud use https
           }],
-          'apiKey': process.env.TYPESENSE_API_KEY,
+          'apiKey': typesenseApiKey,
           'connectionTimeoutSeconds': 2,
           // logLevel: "debug",
         });
@@ -86,7 +56,6 @@ export default {
             "filter_by": `slug:=${postSlug}`,
           };
           await typesenseClient.collections('post').documents().search(searchParameters).then(function (data) {
-            // console.log("search data - " + JSON.stringify(data, null, 2));
             if(data.found !== 0)
             {
               postId = data.hits[0].document.id;

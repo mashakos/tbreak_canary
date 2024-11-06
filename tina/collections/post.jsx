@@ -8,7 +8,6 @@ import Typesense from 'typesense';
 
 
 export default {
-  define: {'process.env': process.env},
   name: "post",
   label: "Posts",
   path: "app/routes",

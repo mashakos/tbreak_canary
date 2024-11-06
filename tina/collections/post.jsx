@@ -71,11 +71,11 @@ export default {
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': TYPESENSE_PORT,      // For Typesense Cloud use 443
-            'protocol': PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
+            'host': process.env.TYPESENSE_HOST, // For Typesense Cloud use xxx.a1.typesense.net
+            'port': process.env.TYPESENSE_PORT,      // For Typesense Cloud use 443
+            'protocol': process.env.PUBLIC_TYPESENSE_PROTOCOL  // For Typesense Cloud use https
           }],
-          'apiKey': TYPESENSE_API_KEY,
+          'apiKey': process.env.TYPESENSE_API_KEY,
           'connectionTimeoutSeconds': 2,
           // logLevel: "debug",
         });

@@ -41,11 +41,11 @@ export default {
       try{
         let typesenseClient = new Typesense.Client({
           'nodes': [{
-            'host': typesenseHost, // For Typesense Cloud use xxx.a1.typesense.net
-            'port': typesensePort,      // For Typesense Cloud use 443
-            'protocol': typesenseProtocol  // For Typesense Cloud use https
+            'host': 'search.delosian.pro', // For Typesense Cloud use xxx.a1.typesense.net
+            'port': '443',      // For Typesense Cloud use 443
+            'protocol': 'https'  // For Typesense Cloud use https
           }],
-          'apiKey': typesenseApiKey,
+          'apiKey': 'xyz',
           'connectionTimeoutSeconds': 2,
           // logLevel: "debug",
         });

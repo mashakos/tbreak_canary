@@ -8,6 +8,7 @@ import Typesense from 'typesense';
 
 
 export default {
+  define: {'process.env': process.env},
   name: "post",
   label: "Posts",
   path: "app/routes",
@@ -40,7 +41,7 @@ export default {
             'port': '443',      // For Typesense Cloud use 443
             'protocol': 'https'  // For Typesense Cloud use https
           }],
-          'apiKey': process.env.TYPESENSE_API_KEY,
+          'apiKey': 'xyz',
           'connectionTimeoutSeconds': 2,
           // logLevel: "debug",
         });

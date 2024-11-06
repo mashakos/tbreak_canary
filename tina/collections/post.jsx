@@ -6,10 +6,10 @@
 
 import Typesense from 'typesense';
 
-const typesenseHost = process.env.TYPESENSE_HOST; // For Typesense Cloud use xxx.a1.typesense.net
-const typesensePort = process.env.TYPESENSE_PORT;      // For Typesense Cloud use 443
-const typesenseProtocol = process.env.PUBLIC_TYPESENSE_PROTOCOL;  // For Typesense Cloud use https
-const typesenseApiKey =process.env.TYPESENSE_API_KEY;
+const typesenseHost = 'search.delosian.pro'; // For Typesense Cloud use xxx.a1.typesense.net
+const typesensePort = 443;      // For Typesense Cloud use 443
+const typesenseProtocol = 'https';  // For Typesense Cloud use https
+const typesenseApiKey = 'xyz';
 
 
 export default {
@@ -107,7 +107,8 @@ export default {
 
       return {
         ...values,
-        lastUpdated: new Date().toISOString()
+        lastUpdated: new Date().toISOString(),
+        postId: postId
       };
     },
     router: ({ document }) => {

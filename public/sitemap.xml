@@ -44,6 +44,10 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://delosian.pro/articles/windows-hello-fix</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.delosian.pro/articles/adding-a-youtube-embed-component-to-tinacms</loc>
     <changefreq>monthly</changefreq>
   </url>

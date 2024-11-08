@@ -81,5 +81,5 @@ export async function action({request}) {
   }
 
   // return json({ text : 'Post:' + postId + ' Indexed.', data: returnedData });
-  return json({ text : 'Post:' + postId + ' Indexed.' });
+  return json({ text : 'Post:' + postId + ' Indexed.', id: postId });
 }

@@ -18,9 +18,16 @@ export default {
                            form,
                            values,
                          }) => {
-      console.log(`before submit triggered. date is ${values.date}`);
+      console.log(`before submit triggered. date is ${values.date} and slug is ${form.id}`);
       var bodydata = "";
-      var postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
+      var postSlug = "";
+      if(form.id === "app/routes/new-post.mdx")
+        postSlug = `/articles/${values?.title
+          ?.toLowerCase()
+          .replace(/[|&;$%@"<>()+,:]/g, "")
+          .replace(/ /g, '-')}`;
+      else
+        postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
       var postId = 0;
       Object.entries(values.body.children).forEach(([k, v]) => {
           Object.entries(v).forEach(([k, v]) => {
@@ -101,6 +108,7 @@ export default {
       type: "image",
       name: "banner",
       label: "Banner",
+      required: true,
     },
     {
       type: "datetime",

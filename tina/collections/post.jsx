@@ -33,71 +33,26 @@ export default {
       });
       // console.log(bodydata);
 
-      try{
-        let typesenseClient = new Typesense.Client({
-          'nodes': [{
-            'host': 'search.delosian.pro', // For Typesense Cloud use xxx.a1.typesense.net
-            'port': '443',      // For Typesense Cloud use 443
-            'protocol': 'https'  // For Typesense Cloud use https
-          }],
-          'apiKey': 'xyz',
-          'connectionTimeoutSeconds': 2,
-          // logLevel: "debug",
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("date", values.date);
+      formData.append("banner", values.banner);
+      formData.append("abstract", values.abstract);
+      formData.append("body", bodydata);
+      formData.append("slug", postSlug);
+
+      try {
+        const response = await fetch("/tsindex", {
+          method: "POST",
+          // Set the FormData instance as the request body
+          body: formData,
         });
-
-        {
-          let searchParameters = {
-            'q'         : '*',
-            "filter_by": `slug:=${postSlug}`,
-          };
-          await typesenseClient.collections('post').documents().search(searchParameters).then(function (data) {
-            if(data.found !== 0)
-            {
-              postId = data.hits[0].document.id;
-              console.log(postId);
-            }
-          });
-
-          if(postId !== 0)
-          {
-            let postDocument = {
-              'id': postId,
-              'title': values.title,
-              'abstract': values.abstract,
-              'banner': values.banner,
-              'date': new Date(values.date).getTime(),
-              'body': bodydata,
-              'slug': postSlug,
-            };
-            await typesenseClient.collections('post').documents().upsert(
-              postDocument,
-              {"filter_by": `slug:=${postSlug}`}
-            ).then(function (data) {
-              console.log(data);
-            });
-          }
-          else
-          {
-            let postDocument = {
-              'title': values.title,
-              'abstract': values.abstract,
-              'banner': values.banner,
-              'date': new Date(values.date).getTime(),
-              'body': bodydata,
-              'slug': postSlug,
-            };
-            await typesenseClient.collections('post').documents().create(
-              postDocument
-            ).then(function (data) {
-              // get id after indexed post is created
-              postId = data.id;
-              console.log(postId + ' - ' + JSON.stringify(data, null, 2));
-            });
-          }
-        }
-
+        const returnedData = await response.json();
+        postId = returnedData.id;
+        console.log(JSON.stringify(returnedData, null, 2));
       }
-      catch (err) {
+      catch (err)
+      {
         console.error(err);
       }
 

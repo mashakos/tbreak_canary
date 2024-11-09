@@ -13,14 +13,19 @@ export default {
   path: "app/routes",
   format: 'mdx',
   ui: {
-    // Example of beforeSubmit
+    /*
+    * index post on creating new post or updating existing post.
+    * values sent to /tsindex API endpoint in remix site.
+    * indexed post id returned and added as custom field on saving.
+    * */
     beforeSubmit: async ({
                            form,
                            values,
                          }) => {
       console.log(`before submit triggered. date is ${values.date} and slug is ${form.id}`);
-      var bodydata = "";
-      var postSlug = "";
+      let postId = 0;
+      let bodydata = "";
+      let postSlug = "";
       if(form.id === "app/routes/new-post.mdx")
         postSlug = `/articles/${values?.title
           ?.toLowerCase()
@@ -28,7 +33,6 @@ export default {
           .replace(/ /g, '-')}`;
       else
         postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
-      var postId = 0;
       Object.entries(values.body.children).forEach(([k, v]) => {
           Object.entries(v).forEach(([k, v]) => {
             if(k === "children")
@@ -62,7 +66,6 @@ export default {
       {
         console.error(err);
       }
-
 
       return {
         ...values,

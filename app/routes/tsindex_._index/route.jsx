@@ -9,13 +9,14 @@ export async function action({request}) {
 
   let returnedData;
   const requestData = await request.formData();
+  //form fields
   const title = requestData.get("title");
   const date = new Date(requestData.get("date")).getTime();
   const banner = requestData.get("banner");
   const abstract = requestData.get("abstract");
   const bodydata = requestData.get("body");
   const postSlug = requestData.get("slug");
-  var postId = 0;
+  let postId = 0;
 
   let typesenseClient = new Typesense.Client({
     'nodes': [{
@@ -28,6 +29,7 @@ export async function action({request}) {
   });
 
   {
+    // search query based on post slug.
     let searchParameters = {
       'q'         : '*',
       "filter_by": `slug:=${postSlug}`,
@@ -35,11 +37,13 @@ export async function action({request}) {
     await typesenseClient.collections('post').documents().search(searchParameters).then(function (data) {
       if(data.found !== 0)
       {
+        // only one result should be retrieved.
         postId = data.hits[0].document.id;
         console.log(postId);
       }
     });
 
+    // check if post is already indexed and update the post index. If not, create post index and send its id back to post admin logic.
     if(postId !== 0)
     {
       let postDocument = {
@@ -55,7 +59,6 @@ export async function action({request}) {
         postDocument,
         {"filter_by": `slug:=${postSlug}`}
       ).then(function (data) {
-        // console.log(data);
         returnedData = data;
       });
     }
@@ -74,7 +77,6 @@ export async function action({request}) {
       ).then(function (data) {
         // get id after indexed post is created
         postId = data.id;
-        // console.log(postId + ' - ' + JSON.stringify(data, null, 2));
         returnedData = data;
       });
     }

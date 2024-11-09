@@ -15,6 +15,9 @@ const isStorybook = process.argv[1]?.includes('storybook');
 
 export default defineConfig({
   define: {'process.env': process.env},
+  optimizeDeps: {
+    exclude: ["@rollup/browser"],
+  },
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
   build: {
     assetsInlineLimit: 1024,

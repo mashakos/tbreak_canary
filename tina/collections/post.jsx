@@ -36,10 +36,31 @@ export default {
       Object.entries(values.body.children).forEach(([k, v]) => {
           Object.entries(v).forEach(([k, v]) => {
             if(k === "children")
+            {
+              // Check for unordered list
+              if(v[0].type === "li")
+              {
+                Object.entries(v).forEach(([k, v]) => {
+                  Object.entries(v.children).forEach(([k, v]) => {
+                    // if list item has sublist, loop through it
+                    if(v.type === "ul")
+                    {
+                      Object.entries(v.children).forEach(([k, v]) => {
+                        bodydata = bodydata + '  - ' + v.children[0].children[0].text+ '\n';
+                      });
+                    }
+                    else
+                      bodydata = bodydata + ' * ' + v.children[0].text+ '\n';
+                  });
+                });
+              }
+              else
+              // Regular text
               if(v[0].text !== undefined)
               {
                 bodydata = bodydata + v[0].text + '\n';
               }
+            }
           });
       });
       // console.log(bodydata);

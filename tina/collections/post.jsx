@@ -33,6 +33,12 @@ export default {
           .replace(/ /g, '-')}`;
       else
         postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
+      /*
+      *  body object parser
+      *  parses body object, extracts text from HTML elements
+      *  supported elements:
+      *  H1,H2,H3,P,QUOTE,UL,LI
+      * */
       Object.entries(values.body.children).forEach(([k, v]) => {
           Object.entries(v).forEach(([k, v]) => {
             if(k === "children")
@@ -43,7 +49,7 @@ export default {
                 Object.entries(v).forEach(([k, v]) => {
                   Object.entries(v.children).forEach(([k, v]) => {
                     // if list item has sublist, loop through it
-                    if(v.type === "ul")
+                    if(v.type === "ul" || v.type === "ol")
                     {
                       Object.entries(v.children).forEach(([k, v]) => {
                         bodydata = bodydata + '  - ' + v.children[0].children[0].text+ '\n';

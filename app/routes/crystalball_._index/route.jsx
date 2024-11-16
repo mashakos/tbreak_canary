@@ -1,58 +1,16 @@
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
-import { useEffect, useRef, useMemo, Suspense, lazy, useState } from 'react';
+import { useMemo, Suspense, lazy } from 'react';
 import config from '~/config.json';
 import styles from './crystalball.module.css';
 
-
-import legendSprLarge from '~/assets/legend-bg.jpg';
-import backgroundSprLarge from '~/assets/main-bg-large.jpg';
-import backgroundSprPlaceholder from '~/assets/spr-background-placeholder.jpg';
-import imageSprBackgroundVolcanismLarge from '~/assets/spr-background-volcanism-large.jpg';
-import imageSprBackgroundVolcanismPlaceholder from '~/assets/spr-background-volcanism-placeholder.jpg';
-import imageSprBackgroundVolcanism from '~/assets/spr-background-volcanism.jpg';
-import legendSpr from '~/assets/legend-bg.jpg';
-import backgroundSpr from '~/assets/main-bg.jpg';
-import videoSprMotionLarge from '~/assets/tinacmseditor.mp4';
-import videoSprMotionPlaceholder from '~/assets/spr-motion-placeholder.jpg';
-import videoSprMotion from '~/assets/tinacmseditor.mp4';
-import imageSprSchema1DarkLarge from '~/assets/spr-schema-1-dark-large.png';
-import imageSprSchema1DarkPlaceholder from '~/assets/spr-schema-1-dark-placeholder.png';
-import imageSprSchema1Dark from '~/assets/spr-schema-1-dark.png';
-import imageSprSchema1LightLarge from '~/assets/spr-schema-1-light-large.png';
-import imageSprSchema1LightPlaceholder from '~/assets/spr-schema-1-light-placeholder.png';
-import imageSprSchema1Light from '~/assets/spr-schema-1-light.png';
-import imageSprSchema2DarkLarge from '~/assets/spr-schema-2-dark-large.png';
-import imageSprSchema2DarkPlaceholder from '~/assets/spr-schema-2-dark-placeholder.png';
-import imageSprSchema2Dark from '~/assets/spr-schema-2-dark.png';
-import imageSprSchema2LightLarge from '~/assets/spr-schema-2-light-large.png';
-import imageSprSchema2LightPlaceholder from '~/assets/spr-schema-2-light-placeholder.png';
-import imageSprSchema2Light from '~/assets/spr-schema-2-light.png';
-import imageSprStoryboarderDarkLarge from '~/assets/spr-storyboarder-dark-large.png';
-import imageSprStoryboarderDarkPlaceholder from '~/assets/spr-storyboarder-dark-placeholder.png';
-import imageSprStoryboarderDark from '~/assets/spr-storyboarder-dark.png';
-import imageSprStoryboarderLightLarge from '~/assets/spr-storyboarder-light-large.png';
-import imageSprStoryboarderLightPlaceholder from '~/assets/spr-storyboarder-light-placeholder.png';
-import imageSprStoryboarderLight from '~/assets/spr-storyboarder-light.png';
-import { Image } from '~/components/image';
-import { Link } from '~/components/link';
-import { SegmentedControl, SegmentedControlOption } from '~/components/segmented-control';
-import { ThemeProvider, useTheme } from '~/components/theme-provider';
 import {
-  HomeBackground,
-  HomeContainer,
-  HomeHeader,
-  HomeImage,
   HomeSection,
-  HomeSectionColumns,
   HomeSectionContent,
   HomeSectionHeading,
   HomeSectionText,
   HomeTextRow,
 } from '~/layouts/home';
-import { media } from '~/utils/style';
-import { ProjectSectionHeading } from '~/layouts/project/index.js';
-import {DelosianLogo} from '~/routes/home/home-content/delosian-logo.jsx';
 
 const Earth = lazy(() => import('./earth').then(module => ({ default: module.Earth })));
 const EarthSection = lazy(() =>

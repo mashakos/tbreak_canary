@@ -34,11 +34,13 @@ export default {
       else
         postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');
       /*
+      *
       *  body object parser
       *  parses body object, extracts text from HTML elements
       *  supported elements:
-      *  H1,H2,H3,P,QUOTE,UL,LI
-      * */
+      *  H1,H2,H3,P,BLOCKQUOTE,UL,LI
+      *
+      */
       Object.entries(values.body.children).forEach(([k, v]) => {
           Object.entries(v).forEach(([k, v]) => {
             if(k === "children")

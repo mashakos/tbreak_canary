@@ -66,6 +66,7 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
         prefetch="intent"
         to={`/articles/${slug}`}
         className={styles.postLink}
+        rel="canonical"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

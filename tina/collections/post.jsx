@@ -30,6 +30,7 @@ export default {
         postSlug = `/articles/${values?.title
           ?.toLowerCase()
           .replace(/[|&;$%@"<>()+,:]/g, "")
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
           .replace(/ /g, '-')}`;
       else
         postSlug = form.id.replace('app/routes/articles.', '/articles/').replace(/\.mdx$/, '');

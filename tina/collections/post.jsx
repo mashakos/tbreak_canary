@@ -115,7 +115,8 @@ export default {
         // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
         return `articles.${values?.title
           ?.toLowerCase()
-          .replace(/[|&;$%@"<>()+,:]/g, "")
+          .replace(/([^a-z0-9 -])/g, "")
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
           .replace(/ /g, '-')}`;
       },
     },

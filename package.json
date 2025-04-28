@@ -1,9 +1,9 @@
 {
-  "name": "delosian",
-  "homepage": "https://delosian.pro",
-  "description": "Delosian Digital",
-  "repository": "https://github.com/mashakos/delosian.git",
-  "author": "Delosian Digital",
+  "name": "tbreak",
+  "homepage": "https://tbreak.com",
+  "description": "Tbreak Middle East",
+  "repository": "https://github.com/mashakos/tbreak_canary.git",
+  "author": "Tbreak Middle East",
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
     "dev": "npx tinacms dev -c \"node ./scripts/dev.cjs && remix vite:dev\"",
     "start": "wrangler pages dev ./build/client",
     "postinstall": "node ./scripts/draco.cjs",
-    "deploy": "npm run build && wrangler pages deploy ./build/client --project-name delosian",
+    "deploy": "npm run build && wrangler pages deploy ./build/client --project-name tbreak",
     "dev:storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
     "deploy:storybook": "wrangler pages deploy ./storybook-static --project-name delosian-storybook --branch main"

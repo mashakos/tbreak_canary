@@ -34,6 +34,7 @@ _______________________________________________________________________________
 
 FONTS | フォント
 
-Gotham
+Bauziet
+Montserrat
 IPA Gothic Regular
 Hiragino Kaku Gothic W8

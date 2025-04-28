@@ -9,7 +9,8 @@ export function formatTimecode(time) {
   const s = Math.floor(((hours - h) * 60 - m) * 60);
   const c = Math.floor(((((hours - h) * 60 - m) * 60 - s) * 1000) / 10);
 
-  return `${zeroPrefix(h)}:${zeroPrefix(m)}:${zeroPrefix(s)}:${zeroPrefix(c)}`;
+  // return `${zeroPrefix(h)}:${zeroPrefix(m)}:${zeroPrefix(s)}:${zeroPrefix(c)}`;
+  return `${m} min read`;
 }
 
 /**

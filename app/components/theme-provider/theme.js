@@ -4,6 +4,14 @@ import { pxToRem } from '~/utils/style';
 const baseTokens = {
   black: 'oklch(0% 0 0)',
   white: 'oklch(100% 0 0)',
+  titleColorDark: 'oklch(0.87 0.0566 281.85)',
+  titleColorLight: 'oklch(0.17 0.0799 270.35)',
+  textColorDark: 'oklch(0.55 0.0267 264.33)',
+  textColorLight: 'oklch(0.55 0.0267 264.33)',
+  borderColDark: 'oklch(0.32 0.0174 262.25 / 70%)',
+  borderColLight: 'oklch(0.87 0.0106 261.79 / 70%)',
+  authorColorDark: 'oklch(0.37 0.0343 260.17)',
+  authorColorLight: 'oklch(0.37 0.0343 260.17)',
   bezierFastoutSlowin: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
   durationXS: '200ms',
   durationS: '300ms',
@@ -12,7 +20,8 @@ const baseTokens = {
   durationXL: '800ms',
   systemFontStack:
     'system-ui, -apple-system, BlinkMacSystemFont, San Francisco, Roboto, Segoe UI, Ubuntu, Helvetica Neue, sans-serif',
-  fontStack: `Gotham, var(--systemFontStack)`,
+  headingFontStack: `Bauziet, var(--systemFontStack)`,
+  fontStack: `Montserrat, var(--systemFontStack)`,
   monoFontStack:
     'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
   japaneseFontStack:
@@ -26,6 +35,7 @@ const baseTokens = {
   fontSizeH3: pxToRem(38),
   fontSizeH4: pxToRem(28),
   fontSizeH5: pxToRem(24),
+  fontSizeH6: pxToRem(20),
   fontSizeBodyXL: pxToRem(22),
   fontSizeBodyL: pxToRem(20),
   fontSizeBodyM: pxToRem(18),
@@ -73,6 +83,7 @@ const tokensLaptop = {
   fontSizeH3: pxToRem(36),
   fontSizeH4: pxToRem(26),
   fontSizeH5: pxToRem(22),
+  fontSizeH6: pxToRem(18),
 };
 
 const tokensTablet = {
@@ -82,6 +93,7 @@ const tokensTablet = {
   fontSizeH3: pxToRem(32),
   fontSizeH4: pxToRem(24),
   fontSizeH5: pxToRem(20),
+  fontSizeH6: pxToRem(16),
 };
 
 const tokensMobile = {
@@ -92,6 +104,7 @@ const tokensMobile = {
   fontSizeH3: pxToRem(28),
   fontSizeH4: pxToRem(22),
   fontSizeH5: pxToRem(18),
+  fontSizeH6: pxToRem(14),
   fontSizeBodyL: pxToRem(17),
   fontSizeBodyM: pxToRem(16),
   fontSizeBodyS: pxToRem(14),
@@ -108,27 +121,31 @@ const tokensMobileSmall = {
 
 // Tokens that change based on theme
 const dark = {
-  background: 'oklch(17.76% 0 0)',
-  backgroundLight: 'oklch(21.78% 0 0)',
-  primary: 'oklch(84.42% 0.19 202.24)',
+  background: 'oklch(0.16 0 0)',
+  backgroundLight: 'oklch(0.18 0 0)',
+  primary: 'oklch(0.62 0.248751 15.5792)',
   accent: 'oklch(84.42% 0.19 202.24)',
   error: 'oklch(65.91% 0.249 13.76)',
-  text: 'var(--white)',
-  textTitle: 'var(--text)',
-  textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
+  text: 'oklch(0.45 0.0298 257.68)',
+  authorCol: 'var(--authorColorDark)',
+  borderCol: 'var(--borderColDark)',
+  textTitle: 'var(--titleColorDark)',
+  textBody: 'var(--textColorDark)',
+  textLight: 'var(--textColorDark)',
 };
 
 const light = {
-  background: 'oklch(96.12% 0 0)',
-  backgroundLight: 'var(--white)',
-  primary: 'var(--black)',
+  background: 'var(--white)',
+  backgroundLight: 'oklch(0.98 0.0017 247.84)',
+  primary: 'oklch(0.62 0.248751 15.5792)',
   accent: 'oklch(84.42% 0.19 202.24)',
   error: 'oklch(63.17% 0.259 25.41)',
   text: 'var(--black)',
-  textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
-  textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
+  authorCol: 'var(--authorColorLight)',
+  borderCol: 'var(--borderColLight)',
+  textTitle: 'var(--titleColorLight)',
+  textBody: 'var(--textColorLight)',
+  textLight: 'var(--textColorLight)',
 };
 
 export const tokens = {

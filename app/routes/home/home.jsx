@@ -1,109 +1,198 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+import { Button } from '~/components/button';
+import { DecoderText } from '~/components/decoder-text';
+import { Divider } from '~/components/divider';
 import { Footer } from '~/components/footer';
-import { baseMeta } from '~/utils/meta';
-import { Intro } from './intro';
-import { HomeContent } from '~/routes/home/home-content/home-content.jsx';
-import { useEffect, useRef, useState } from 'react';
-import config from '~/config.json';
+import { Heading } from '~/components/heading';
+import { Image } from '~/components/image';
+import { Section } from '~/components/section';
+import { Text } from '~/components/text';
+import { useReducedMotion } from 'framer-motion';
+import { useWindowSize } from '~/hooks';
+import { Link as RouterLink, useLoaderData } from '@remix-run/react';
+import { useState, useEffect } from 'react';
+import { formatDate } from '~/utils/date';
+import { classes, cssProps } from '~/utils/style';
 import styles from './home.module.css';
 
-// Prefetch draco decoader wasm
-export const links = () => {
-  return [
-    {
-      rel: 'prefetch',
-      href: '/draco/draco_wasm_wrapper.js',
-      as: 'script',
-      type: 'text/javascript',
-      importance: 'low',
-    },
-    {
-      rel: 'prefetch',
-      href: '/draco/draco_decoder.wasm',
-      as: 'fetch',
-      type: 'application/wasm',
-      importance: 'low',
-    },
-  ];
-};
-
-export const meta = () => {
-  return baseMeta({
-    title: 'Design + Develop',
-    description: `The official website of ${config.name}  ${config.role}. We weave digital dreams into reality.`,
-  });
-};
-
-export const Home = () => {
-  const [visibleSections, setVisibleSections] = useState([]);
-  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
-  const intro = useRef();
-  const projectOne = useRef();
-  const projectTwo = useRef();
-  const projectThree = useRef();
-  const homecontent = useRef();
-  const details = useRef();
+function RecentStoriesPost({ slug, frontmatter, timecode, index }) {
+  const [hovered, setHovered] = useState(false);
+  const [dateTime, setDateTime] = useState(null);
+  const reduceMotion = useReducedMotion();
+  const { title, abstract, date, featured, banner } = frontmatter;
 
   useEffect(() => {
-    const sections = [intro];
+    setDateTime(formatDate(date));
+  }, [date, dateTime]);
 
-    const sectionObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const section = entry.target;
-            observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
-            setVisibleSections(prevSections => [...prevSections, section]);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-    );
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
 
-    const indicatorObserver = new IntersectionObserver(
-      ([entry]) => {
-        setScrollIndicatorHidden(!entry.isIntersecting);
-      },
-      { rootMargin: '-100% 0px 0px 0px' }
-    );
-
-    sections.forEach(section => {
-      sectionObserver.observe(section.current);
-    });
-
-    indicatorObserver.observe(intro.current);
-
-    return () => {
-      sectionObserver.disconnect();
-      indicatorObserver.disconnect();
-    };
-  }, [visibleSections]);
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
 
   return (
-    <div className={styles.home}>
-      <Intro
-        id="intro"
-        sectionRef={intro}
-        scrollIndicatorHidden={scrollIndicatorHidden}
-      />
-      <HomeContent
-        id="homecontent"
-        sectionRef={homecontent}
-        visible={visibleSections.includes(homecontent.current)}
-      />
-      <Footer />
-    </div>
+    <article
+      className={styles.post}
+      data-featured={!!featured}
+      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
+    >
+      {/*{featured && (*/}
+      {/*  <Text className={styles.postLabel} size="s">*/}
+      {/*    Featured*/}
+      {/*  </Text>*/}
+      {/*)}*/}
+      {featured && !!banner && (
+        <div className={styles.postImage}>
+          <Image
+            noPauseButton
+            play={!reduceMotion ? hovered : undefined}
+            src={banner}
+            /*
+            * Cloudflare image transform
+            * make sure allow from other origins is checked!
+            * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
+            */
+            placeholder = {`/cdn-cgi/image/width=25,quality=75/${banner}`}
+            // placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
+            alt=""
+            role="presentation"
+          />
+        </div>
+      )}
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
+        className={styles.postLink}
+        rel="canonical"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {!featured && (
+          <div className={styles.sideArticleImage}>
+            <Image
+              noPauseButton
+              play={!reduceMotion ? hovered : undefined}
+              src={banner}
+              /*
+              * Cloudflare image transform
+              * make sure allow from other origins is checked!
+              * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
+              */
+              placeholder = {`/cdn-cgi/image/width=25,quality=75/${banner}`}
+              // placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
+              alt=""
+              role="presentation"
+            />
+          </div>
+          )}
+        <div className={styles.postDetails}>
+          <a className={styles.postCategory} href={`/articles/${slug}`}>
+            Category
+          </a>
+          <Heading as="h3" level={featured ? 2 : 6}>
+            {title}
+          </Heading>
+          <div aria-hidden className={styles.postAuthor}>
+            {/*<Divider notchWidth="64px" notchHeight="8px" />*/}
+            <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+          </div>
+          {featured && (
+            <Text size={featured ? 'l' : 's'} as="p">
+            {abstract}
+          </Text>
+          )}
+          {/*{featured && (*/}
+          {/*<div className={styles.postFooter}>*/}
+          {/*  <Button secondary iconHoverShift icon="chevron-right" as="div">*/}
+          {/*    Read article*/}
+          {/*  </Button>*/}
+          {/*  <Text className={styles.timecode} size="s">*/}
+          {/*    {timecode}*/}
+          {/*  </Text>*/}
+          {/*</div>*/}
+          {/*  )}*/}
+        </div>
+      </RouterLink>
+      {/*{featured && (*/}
+      {/*  <Text aria-hidden className={styles.postTag} size="s">*/}
+      {/*    477*/}
+      {/*  </Text>*/}
+      {/*)}*/}
+    </article>
   );
-};
+}
+
+function PostsHeader()
+{
+  return (
+    <header className={styles.header}>
+      <Heading className={styles.heading} level={5} as="h1">
+        Recent Stories
+      </Heading>
+    </header>
+  );
+}
+function CoverStoryPost(featured){
+  return (
+    <RecentStoriesPost {...featured} />
+  );
+}
+function RecentStoriesList({posts, isSingleColumn})
+{
+  return (
+    <div className={styles.list}>
+      {!isSingleColumn && (
+        <PostsHeader />
+      )}
+      {posts.slice(0, 6).map(({ slug, ...post }, index) => (
+        <RecentStoriesPost key={slug} slug={slug} index={index} {...post} />
+      ))}
+      {/*{Array(2)*/}
+      {/*  .fill()*/}
+      {/*  .map((skeleton, index) => (*/}
+      {/*    <SkeletonPost key={index} index={index} />*/}
+      {/*  ))}*/}
+    </div>
+
+  );
+
+}
+
+function HeroStoriesBlock({posts, isSingleColumn, featured})
+{
+  return (
+    <Section className={styles.content}>
+      {!isSingleColumn && (
+        <div className={styles.grid}>
+          <CoverStoryPost {...featured} />
+          <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+        </div>
+      )}
+      {isSingleColumn && (
+        <div className={styles.grid}>
+          <CoverStoryPost {...featured} />
+          <PostsHeader />
+          <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+        </div>
+      )}
+    </Section>
+  );
+}
+
+export function Home() {
+  const { posts, featured } = useLoaderData();
+  const { width } = useWindowSize();
+  const singleColumnWidth = 1190;
+  const isSingleColumn = width <= singleColumnWidth;
+
+
+  return (
+    <article className={styles.articles}>
+      <HeroStoriesBlock posts={posts} isSingleColumn={isSingleColumn} featured={featured} />
+      <Footer />
+    </article>
+  );
+}

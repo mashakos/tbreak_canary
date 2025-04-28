@@ -9,6 +9,8 @@
 @custom-media --mediaTouch (pointer: coarse);
 @custom-media --mediaNoTouch (pointer: fine);
 
+
+
 @layer base {
   :global(:root) {
     --mobileNavOffset: calc(var(--spaceOuter) * 2 + var(--space2XL));
@@ -24,6 +26,8 @@
     width: 100vw;
     overflow-x: hidden;
     opacity: 1;
+    --borderGradient: linear-gradient(90deg, var(--primary) 0%, var(--primary) 15%, var(--borderCol) 15%, var(--borderCol) 100%) 1;
+
 
     &:focus {
       outline: none;
@@ -47,6 +51,7 @@
   :global(:focus:not(:focus-visible)) {
     outline: none;
   }
+
 
   @keyframes :global(fade-in) {
     0% {

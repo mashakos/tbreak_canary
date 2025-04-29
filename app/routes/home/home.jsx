@@ -125,6 +125,76 @@ function RecentStoriesPost({ slug, frontmatter, timecode, index }) {
   );
 }
 
+function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
+  const [hovered, setHovered] = useState(false);
+  const [dateTime, setDateTime] = useState(null);
+  const reduceMotion = useReducedMotion();
+  const { title, abstract, date, featured, banner } = frontmatter;
+
+  useEffect(() => {
+    setDateTime(formatDate(date));
+  }, [date, dateTime]);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  return (
+    <article
+      className={styles.feedpost}
+      data-featured={!!featured}
+      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
+    >
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
+        className={styles.feedpostlink}
+        rel="canonical"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+          <div className={styles.feedpostimage}>
+            <Image
+              noPauseButton
+              play={!reduceMotion ? hovered : undefined}
+              src={banner}
+              /*
+              * Cloudflare image transform
+              * make sure allow from other origins is checked!
+              * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
+              */
+              placeholder = {`/cdn-cgi/image/width=25,quality=75/${banner}`}
+              // placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
+              alt=""
+              role="presentation"
+            />
+          </div>
+        <div className={styles.feedpostdetails}>
+          <div>
+            <a className={styles.postCategory} href={`/articles/${slug}`}>
+              Category
+            </a>
+            <Heading as="h3" level={featured ? 2 : 6} className={styles.feedpostheading}>
+              {title}
+            </Heading>
+            <Text size={featured ? 'l' : 's'} as="p" className={styles.feedposttext}>
+              {abstract}
+            </Text>
+          </div>
+          <div aria-hidden className={styles.feedpostauthor}>
+            <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+          </div>
+        </div>
+      </RouterLink>
+    </article>
+  );
+}
+
 function PostsHeader()
 {
   return (
@@ -161,9 +231,23 @@ function RecentStoriesList({posts, isSingleColumn})
 
 }
 
+function FeedStoriesList({posts, isSingleColumn})
+{
+  return (
+    <div className={styles.feedlist}>
+      {posts.slice(6, 12).map(({ slug, ...post }, index) => (
+        <FeedStoriesPost key={slug} slug={slug} index={index} {...post} />
+      ))}
+    </div>
+
+  );
+
+}
+
 function HeroStoriesBlock({posts, isSingleColumn, featured})
 {
   return (
+  <>
     <Section className={styles.content}>
       {!isSingleColumn && (
         <div className={styles.grid}>
@@ -179,6 +263,21 @@ function HeroStoriesBlock({posts, isSingleColumn, featured})
         </div>
       )}
     </Section>
+    <Section className={styles.content}>
+    <div className={styles.feedgrid}>
+      <div className={styles.feedleftpane}>
+        <div className={styles.feedleftpanegrid}>
+          <FeedStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+        </div>
+      </div>
+      <div className={styles.feedrightpane}>
+        <div className={styles.feedsidebar}>
+        test
+        </div>
+      </div>
+    </div>
+    </Section>
+  </>
   );
 }
 

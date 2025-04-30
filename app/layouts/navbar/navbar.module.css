@@ -14,8 +14,11 @@
     bottom: var(--spaceOuter);
     z-index: var(--zIndex4);
     isolation: isolate;
+    background-color: color-mix(in srgb, var(--background) 65%, transparent);
+    border-radius: 0.5rem;
 
     @media (--mediaMobile) {
+      background-color: color-mix(in srgb, var(--background) 0%, transparent);
       --headerNavFontSize: calc((22 / 16) * 1rem);
     }
 

@@ -18,3 +18,11 @@ export const ListItem = ({ children, ...rest }) => {
     </li>
   );
 };
+
+export const LicItem = ({ children, ...rest }) => {
+  return (
+      <>
+        {children}
+      </>
+  );
+};

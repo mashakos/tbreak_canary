@@ -9,6 +9,7 @@ import { Text } from '~/components/text';
 import { Children } from 'react';
 import styles from './post-markdown.module.css';
 import { Link as RouterLink } from '@remix-run/react';
+import { LicItem } from '~/components/list/list.jsx';
 
 const PostHeadingLink = ({ id }) => {
   return (
@@ -76,6 +77,10 @@ const PostOl = props => {
 
 const PostLi = ({ children, ...props }) => {
   return <ListItem {...props}>{children}</ListItem>;
+};
+
+const PostLic = ({ children, ...props }) => {
+  return <LicItem {...props}>{children}</LicItem>;
 };
 
 const PostCodeBlock = props => {
@@ -151,7 +156,8 @@ export const postMarkdown = {
   a: PostTinaLink,
   ul: PostUl,
   ol: PostOl,
-  lic: PostLi,
+  li: PostLi,
+  lic: PostLic,
   pre: PostPre,
   code_block: PostCodeBlock,
   code: PostCode,

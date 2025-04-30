@@ -1,4 +1,5 @@
 @custom-media --mediaDesktop (max-width: 2080px);
+@custom-media --mediaNetbook (max-width: 1500px);
 @custom-media --mediaLaptop (max-width: 1680px);
 @custom-media --mediaTablet (max-width: 1040px);
 @custom-media --mediaMobile (max-width: 696px);

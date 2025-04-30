@@ -795,7 +795,7 @@ span {
 .sideArticleImage {
   position: relative;
   inset: 0;
-  width: 60%;
+  width: 80%;
   height: 100%;
   isolation: isolate;
   clip-path: var(--sideArticleClip);

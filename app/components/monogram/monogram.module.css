@@ -1,11 +1,17 @@
 @layer components {
+  .tea {
+    fill: #133072;
+  }
+  .teabreak {
+    fill: #f80052;
+  }
   .monogram {
     fill: var(--textTitle);
     transition: fill var(--durationL) ease;
   }
 
   .highlight {
-    fill: var(--accent);
+    fill: var(--monogramHighLight);
     opacity: 0;
     transform: scale3d(1, 0, 1);
     transform-origin: top;

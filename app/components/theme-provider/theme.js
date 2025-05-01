@@ -7,6 +7,7 @@ const baseTokens = {
   accentDark: 'oklch(0.62 0.248751 15.5792)',
   widgetBGDark: 'oklch(0.18 0 0)',
   widgetBGLight: 'oklch(98.5% .002 247.839)',
+  monogramHighLight: 'oklch(0.81 0.1156 308)',
   heroBannerCoverBgDark: 'color-mix(in oklab, #0D0D0D 70%, transparent)',
   heroBannerCoverBgLight: 'color-mix(in oklab, #fff 90%, transparent)',
   accentLight: 'oklch(0.62 0.248751 15.5792)',

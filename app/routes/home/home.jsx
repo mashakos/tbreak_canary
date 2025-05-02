@@ -259,6 +259,80 @@ function FeaturedStoriesPost({ slug, frontmatter, timecode, index }) {
   );
 }
 
+function LowerFeedStoriesPost({ slug, frontmatter, timecode, index }) {
+  const [hovered, setHovered] = useState(false);
+  const [dateTime, setDateTime] = useState(null);
+  const reduceMotion = useReducedMotion();
+  const { title, abstract, date, featured, banner } = frontmatter;
+
+  useEffect(() => {
+    setDateTime(formatDate(date));
+  }, [date, dateTime]);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  return (
+    <article
+      className={styles.lowerfeedpost}
+      data-featured={!!featured}
+      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
+    >
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
+        className={styles.lowerfeedpostLink}
+        rel="canonical"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {!featured && (
+          <div className={styles.lowerfeedsideArticleImage}>
+            <Image
+              noPauseButton
+              play={!reduceMotion ? hovered : undefined}
+              src={banner}
+              /*
+              * Cloudflare image transform
+              * make sure allow from other origins is checked!
+              * for details see: https://developers.cloudflare.com/images/transform-images/transform-via-url/
+              */
+              placeholder = {`/cdn-cgi/image/width=25,quality=75/${banner}`}
+              // placeholder={`${banner.split('.')[0]}-placeholder.jpg`}
+              alt=""
+              role="presentation"
+            />
+          </div>
+        )}
+        <div className={styles.lowerfeedpostLinkWrap}>
+          <div className={styles.lowerfeedpostDetails}>
+            <a className={styles.lowerfeedpostCategory} href={`/articles/${slug}`}>
+              Category
+            </a>
+            <Heading as="h3" level={featured ? 2 : 6}>
+              {title}
+            </Heading>
+            <div aria-hidden className={styles.lowerfeedpostAbstract}>
+              <Text size={featured ? 'l' : 's'} as="p">
+                {abstract}
+              </Text>
+            </div>
+            <div aria-hidden className={styles.lowerfeedpostAuthor}>
+              <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+            </div>
+          </div>
+        </div>
+      </RouterLink>
+    </article>
+  );
+}
+
 function SideBarHeader({children})
 {
   return (
@@ -301,7 +375,7 @@ function FeaturedStoriesList({posts})
 {
   return (
     <div className={styles.featuredfeedlist}>
-      {posts.slice(12, 18).map(({ slug, ...post }, index) => (
+      {posts.slice(12, 16).map(({ slug, ...post }, index) => (
         <FeaturedStoriesPost key={slug} slug={slug} index={index} {...post} />
       ))}
     </div>
@@ -322,6 +396,20 @@ function FeedStoriesList({posts})
   );
 
 }
+
+function LowerFeedStoriesList({posts})
+{
+  return (
+    <div className={styles.lowerfeedlist}>
+      {posts.slice(14, 20).map(({ slug, ...post }, index) => (
+        <LowerFeedStoriesPost key={slug} slug={slug} index={index} {...post} />
+      ))}
+    </div>
+
+  );
+
+}
+
 
 function HeroStoriesBlock({posts, isSingleColumn, featured})
 {
@@ -374,6 +462,34 @@ function DualColFeedBlock({posts, isSingleColumn})
     </>
   );
 }
+
+function LowerFeedBlock({posts, isSingleColumn})
+{
+  return (
+    <>
+      <Section className={styles.content}>
+        <div className={styles.feedgrid}>
+          <div className={styles.feedleftpane}>
+            <div className={styles.feedleftpanegrid}>
+              <LowerFeedStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+            </div>
+          </div>
+          <div className={styles.feedrightpane}>
+            <div className={styles.feedsidebar}>
+              <div className={styles.sidebarwidget}>
+                <SideBarHeader>
+                  Most Read
+                </SideBarHeader>
+                <FeaturedStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}
+
 
 function HeroStoryBlock({posts, isSingleColumn})
 {
@@ -432,6 +548,7 @@ export function Home() {
       <HeroStoriesBlock posts={posts} isSingleColumn={isSingleColumn} featured={featured} />
       <DualColFeedBlock posts={posts} isSingleColumn={isSingleColumn} />
       <HeroStoryBlock posts={posts} isSingleColumn={isSingleColumn} />
+      <LowerFeedBlock posts={posts} isSingleColumn={isSingleColumn} />
       <Footer />
     </article>
   );

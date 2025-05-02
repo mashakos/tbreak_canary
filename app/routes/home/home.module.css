@@ -64,18 +64,18 @@
   padding-bottom: var(--space4XL);
   padding-left: var(--space3XL);
   padding-right: var(--spaceL);
-  gap: var(--space5XL);
+  gap: var(--spaceL);
   height: 100%;
 
   @media (--mediaDesktop) {
     --verticalPadding: var(--spaceOuter);
 
-    gap: var(--space4XL);
+    gap: var(--spaceL);
     //padding-left: 0;
   }
 
   @media (--mediaLaptop) {
-    gap: var(--space3XL);
+    gap: var(--spaceL);
     padding-bottom: var(--space3XL);
   }
 
@@ -404,7 +404,6 @@ span {
 .herobannermodal {
   position: absolute;
   inset-inline: 0;
-  bottom: 0;
   translate: 0 -50%;
   padding-inline: 1.5rem;
   margin-inline: auto;
@@ -492,6 +491,264 @@ span {
 }
 
 
+
+.lowerfeedlist {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.lowerfeedheader {
+  padding-top: var(--spaceS);
+  padding-bottom: var(--spaceM);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border-bottom: 1px double var(--borderCol);
+  border-image: var(--borderGradient);
+  grid-column: unset;
+
+  @media (--mediaLaptop) {
+    grid-template-columns: none;
+    grid-column: 1 / span 2;
+  }
+
+  @media (--singleColumnWidth) {
+    padding-top: calc(var(--spaceM) - var(--spaceXS));
+  //padding-bottom: 0;
+  }
+
+  @media (--mediaMobileLS) and (orientation: landscape) {
+    padding-top: 0;
+  //padding-bottom: 0;
+  }
+}
+
+.lowerfeedheading {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.lowerfeedpost {
+  --featuredPostPadding: var(--space5XL);
+//--featuredPostClip: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+  --featuredPostClip: inset(0% round 20px);
+  --sideArticleClip: inset(0% round 15px);
+  --postBorder: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+
+  position: relative;
+  isolation: isolate;
+  border-top: var(--postBorder);
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: var(--postBorder);
+
+    @media (--mediaLaptop) {
+      border: 0;
+    }
+  }
+
+  @media (--mediaDesktop) {
+    --featuredPostPadding: var(--space4XL);
+  }
+
+  @media (--mediaLaptop) {
+    border: 0;
+    --featuredPostPadding: var(--space3XL);
+  }
+
+  @media (--mediaTablet) {
+    --featuredPostPadding: var(--spaceXL);
+  }
+
+  @media (--mediaMobile), (--mediaMobileLS) and (orientation: landscape) {
+    --featuredPostPadding: var(--spaceOuter);
+  }
+
+  &[data-featured='true'] {
+    margin: 0;
+    border: 0;
+    position: sticky;
+    top: var(--verticalPadding);
+    height: calc(100vh - (var(--verticalPadding) * 2));
+    display: grid;
+
+    @media (--singleColumnWidth) {
+      position: relative;
+      height: auto;
+      top: 0;
+    }
+  }
+}
+
+.lowerfeedpostLink {
+  --linkPadding: var(--spaceL);
+
+  display: grid;
+  position: relative;
+  align-items: flex-start;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: var(--linkPadding) 0;
+  gap: var(--spaceM);
+
+  @media (--mediaLaptop) {
+    --linkPadding: var(--space2XL);
+  }
+
+  [data-featured='false'] & {
+    &::before {
+      content: '';
+      position: absolute;
+      inset: var(--spaceS) calc(var(--spaceS) * -1);
+      transform: scale3d(0, 1, 1);
+      transform-origin: right;
+      background-color: var(--backgroundLight);
+      transition: transform var(--durationM) var(--bezierFastoutSlowin);
+    }
+
+    @media (--mediaUseMotion) {
+      &:hover::before {
+        transform: scale3d(1, 1, 1);
+        transform-origin: left;
+      }
+    }
+
+
+    @media (--mediaLaptop), (--singleColumnWidth), (--mediaMobile) {
+      grid-template-columns: 1fr;
+    }
+    @media (--mediaMobileLS) and (orientation: landscape) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+  }
+
+  [data-featured='true'] & {
+    padding: var(--featuredPostPadding);
+    clip-path: var(--featuredPostClip);
+
+    @media (--singleColumnWidth) {
+      padding-top: 50%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--accent);
+      z-index: var(--zIndex2);
+      pointer-events: none;
+      transform: scale3d(0, 1, 1);
+    }
+  }
+}
+
+.lowerfeedsideArticleImage {
+  position: relative;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  isolation: isolate;
+  clip-path: var(--sideArticleClip);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+
+  }
+
+  @media (--mediaLaptop), (--singleColumnWidth), (--mediaMobile) {
+    width: 30vh;
+    margin-bottom: 5%;
+    margin-right: 0;
+  }
+
+  @media (--mediaMobileLS) and (orientation: landscape) {
+    width: 60%;
+    margin-right: 5%;
+    margin-bottom: 0;
+  }
+
+  @media (--mediaUseMotion) {
+    .lowerfeedpost:hover & :where(img, video) {
+      transform: scale(1.06);
+    }
+  }
+
+  & img,
+  & video {
+    transition: transform var(--durationM) var(--bezierFastoutSlowin);
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
+}
+
+.lowerfeedpostLinkWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-wrap: wrap;
+  grid-column: span 3 / span 3;
+  width: 100%;
+  height: 100%;
+}
+
+.lowerfeedpostDetails {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  grid-column: span 3 / span 3;
+  gap: var(--spaceL);
+  width: 100%;
+
+  [data-featured='true'] & {
+    opacity: 0;
+
+    &:global {
+      animation: fade-in 1s var(--bezierFastoutSlowin) forwards 0.2s;
+    }
+  }
+}
+
+.lowerfeedpostCategory {
+  font-size: var(--fontSizeBodyXS);
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.lowerfeedpostAuthor {
+//display: grid;
+//grid-template-columns: 45% 1fr;
+  font-size: var(--fontSizeBodyXS);
+  gap: var(--spaceM);
+  align-items: flex-end;
+  color: var(--textBody);
+  justify-self: stretch;
+  margin-bottom: var(--spaceS);
+
+  a {
+    color: var(--authorCol);
+    text-decoration: none;
+    display: inline;
+  }
+  span {
+    display: inline;
+  }
+}
+
+.lowerfeedpostAbstract {
+  align-items: flex-start;
+  display: grid;
+  grid-template-rows: minmax(1px, auto);
+  height: 8vh;
+}
 
 
 .heading {

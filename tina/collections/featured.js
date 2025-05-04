@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * @type {import('tinacms').Collection}
  */
@@ -23,6 +25,15 @@ export default {
       label: "Featured Post",
       collections: ['post'],
       required: true,
+      ui: {
+        optionComponent: (props, _internalSys) => {
+          return (
+            <div>
+              <b>{props.title}</b>
+            </div>
+          );
+        }
+      },
     },
   ],
 };

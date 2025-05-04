@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import Home from "./collections/home.jsx";
 import Page from "./collections/page.jsx";
 import Category from "./collections/category.jsx";
 import Author from "./collections/author.jsx";
@@ -35,6 +36,6 @@ export default defineConfig({
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
-    collections: [Page, Category, Author, Tag, Post, Featured],
+    collections: [Home, Page, Category, Author, Tag, Post, Featured],
   },
 });

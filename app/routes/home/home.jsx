@@ -18,7 +18,7 @@ function RecentStoriesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -90,14 +90,14 @@ function RecentStoriesPost({ slug, frontmatter, timecode, index }) {
           )}
         <div className={styles.postDetails}>
           <a className={styles.postCategory} href={`/articles/${slug}`}>
-            Category
+            {category}
           </a>
           <Heading as="h3" level={featured ? 2 : 6}>
             {title}
           </Heading>
           <div aria-hidden className={styles.postAuthor}>
             {/*<Divider notchWidth="64px" notchHeight="8px" />*/}
-            <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+            <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a><span> · {dateTime}</span><span> · {timecode}</span>
           </div>
           {featured && (
             <Text size={featured ? 'l' : 's'} as="p">
@@ -129,7 +129,7 @@ function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -177,7 +177,7 @@ function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
         <div className={styles.feedpostdetails}>
           <div>
             <a className={styles.postCategory} href={`/articles/${slug}`}>
-              Category
+              {category}
             </a>
             <Heading as="h3" level={featured ? 2 : 6} className={styles.feedpostheading}>
               {title}
@@ -187,7 +187,7 @@ function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
             </Text>
           </div>
           <div aria-hidden className={styles.feedpostauthor}>
-            <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+            <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a><span> · {dateTime}</span><span> · {timecode}</span>
           </div>
         </div>
       </RouterLink>
@@ -199,7 +199,7 @@ function FeaturedStoriesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -251,7 +251,7 @@ function FeaturedStoriesPost({ slug, frontmatter, timecode, index }) {
             </Heading>
           </div>
           <div aria-hidden className={styles.feedpostauthor}>
-            <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a>
+            <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a>
           </div>
         </div>
       </RouterLink>
@@ -263,7 +263,7 @@ function LowerFeedStoriesPost({ slug, frontmatter, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -313,7 +313,7 @@ function LowerFeedStoriesPost({ slug, frontmatter, timecode, index }) {
         <div className={styles.lowerfeedpostLinkWrap}>
           <div className={styles.lowerfeedpostDetails}>
             <a className={styles.lowerfeedpostCategory} href={`/articles/${slug}`}>
-              Category
+              {category}
             </a>
             <Heading as="h3" level={featured ? 2 : 6}>
               {title}
@@ -324,7 +324,7 @@ function LowerFeedStoriesPost({ slug, frontmatter, timecode, index }) {
               </Text>
             </div>
             <div aria-hidden className={styles.lowerfeedpostAuthor}>
-              <span>By</span> <a href={`/articles/${slug}`} rel='author'>Veronica Mars</a><span> · {dateTime}</span><span> · {timecode}</span>
+              <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a><span> · {dateTime}</span><span> · {timecode}</span>
             </div>
           </div>
         </div>
@@ -348,8 +348,21 @@ function CoverStoryPost(featured){
     <RecentStoriesPost {...featured} />
   );
 }
-function RecentStoriesList({posts, isSingleColumn})
+function RecentStoriesList({posts, isSingleColumn, homePost})
 {
+  let refPostOne = homePost.blocks[0].recentArticleOne;
+  let recentRefOne =  posts.filter(post => post.frontmatter.title === refPostOne.title)[0];
+  let refPostTwo = homePost.blocks[0].recentArticleTwo;
+  let recentRefTwo =  posts.filter(post => post.frontmatter.title === refPostTwo.title)[0];
+  let refPostThree = homePost.blocks[0].recentArticleThree;
+  let recentRefThree =  posts.filter(post => post.frontmatter.title === refPostThree.title)[0];
+  let refPostFour = homePost.blocks[0].recentArticleFour;
+  let recentRefFour =  posts.filter(post => post.frontmatter.title === refPostFour.title)[0];
+  let refPostFive = homePost.blocks[0].recentArticleFive;
+  let recentRefFive =  posts.filter(post => post.frontmatter.title === refPostFive.title)[0];
+  let refPostSix = homePost.blocks[0].recentArticleSix;
+  let recentRefSix =  posts.filter(post => post.frontmatter.title === refPostSix.title)[0];
+
   return (
     <div className={styles.list}>
       {!isSingleColumn && (
@@ -357,14 +370,12 @@ function RecentStoriesList({posts, isSingleColumn})
           Recent Stories
         </SideBarHeader>
       )}
-      {posts.slice(0, 6).map(({ slug, ...post }, index) => (
-        <RecentStoriesPost key={slug} slug={slug} index={index} {...post} />
-      ))}
-      {/*{Array(2)*/}
-      {/*  .fill()*/}
-      {/*  .map((skeleton, index) => (*/}
-      {/*    <SkeletonPost key={index} index={index} />*/}
-      {/*  ))}*/}
+      <RecentStoriesPost key={recentRefOne.slug} slug={recentRefOne.slug} index={0} {...recentRefOne}  />
+      <RecentStoriesPost key={recentRefTwo.slug} slug={recentRefTwo.slug} index={0} {...recentRefTwo}  />
+      <RecentStoriesPost key={recentRefThree.slug} slug={recentRefThree.slug} index={0} {...recentRefThree}  />
+      <RecentStoriesPost key={recentRefFour.slug} slug={recentRefFour.slug} index={0} {...recentRefFour}  />
+      <RecentStoriesPost key={recentRefFive.slug} slug={recentRefFive.slug} index={0} {...recentRefFive}  />
+      <RecentStoriesPost key={recentRefSix.slug} slug={recentRefSix.slug} index={0} {...recentRefSix}  />
     </div>
 
   );
@@ -411,7 +422,7 @@ function LowerFeedStoriesList({posts})
 }
 
 
-function HeroStoriesBlock({posts, isSingleColumn, featured})
+function HeroStoriesBlock({posts, isSingleColumn, homePost, featured})
 {
   return (
     <>
@@ -419,7 +430,7 @@ function HeroStoriesBlock({posts, isSingleColumn, featured})
         {!isSingleColumn && (
           <div className={styles.grid}>
             <CoverStoryPost {...featured} />
-            <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+            <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} homePost={homePost} />
           </div>
         )}
         {isSingleColumn && (
@@ -428,7 +439,7 @@ function HeroStoriesBlock({posts, isSingleColumn, featured})
             <SideBarHeader>
               Recent Stories
             </SideBarHeader>
-            <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} />
+            <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} homePost={homePost} />
           </div>
         )}
       </Section>
@@ -491,38 +502,64 @@ function LowerFeedBlock({posts, isSingleColumn})
 }
 
 
-function HeroStoryBlock({posts, isSingleColumn})
+function HeroStoryBlock({slug, timecode, frontmatter, isSingleColumn})
 {
+  const [hovered, setHovered] = useState(false);
+  const [dateTime, setDateTime] = useState(null);
+  const reduceMotion = useReducedMotion();
+  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+
+  useEffect(() => {
+    setDateTime(formatDate(date));
+  }, [date, dateTime]);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+
   return (
     <>
       <Section className={styles.herobannercontent}>
-        <a href="/articles/the-first-nuclear-power-plant">
+        <RouterLink
+          unstable_viewTransition
+          prefetch="intent"
+          to={`/articles/${slug}`}
+          className=""
+          rel="canonical"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className={styles.herobannerimage}>
-            <img alt="banner" src="/images/posts/featured-12.jpeg" />
+            <img alt="banner" src={banner} />
           </div>
-        </a>
+        </RouterLink>
         <div className={styles.herobannermodal}>
           <div className={styles.covercontainer}>
             <div className={styles.coverblock}>
-              <a className={styles.postCategory} href="/categories/science">
-                Science
+              <a className={styles.postCategory} href={`/articles/${slug}`}>
+                {category}
               </a>
-              <a className={styles.headerblock} href="/articles/the-first-nuclear-power-plant">
+              <a className={styles.headerblock} href={`/articles/${slug}`}>
                 <Heading as="h3" level={3} className={styles.heading}>
-                  A Look Into the Construction of the World’s First Nuclear Power Station
+                  {title}
                 </Heading>
               </a>
               <div className={styles.herobannerfooter}>
                 <div className={styles.authorcontainer}>
                   <a className={styles.avatar} href="/authors/karina-bell">
-                    <img alt="Karina Bell" loading="lazy" decoding="async" data-nimg="fill" src="/images/authors/karina-bell.jpg" />
+                    <img alt={author.name} loading="lazy" decoding="async" data-nimg="fill" src={author.avatar} />
                   </a>
                   <div className={styles.postAuthor}>
                     <span>By&nbsp;</span>
-                    <a href="/authors/karina-bell">Karina Bell</a>
+                    <a href={author.avatar}>{author.name}</a>
                     <time> · Mar 27, 2022</time>
                     <span className={styles.herobannerreadtime}>
-                      <span> · 17 min read</span>
+                      <span> · {timecode}</span>
                     </span>
                   </div>
                 </div>
@@ -537,7 +574,7 @@ function HeroStoryBlock({posts, isSingleColumn})
 
 
 export function Home() {
-  const { posts, featured } = useLoaderData();
+  const { posts, bannerPost, homePost, featured } = useLoaderData();
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
@@ -545,9 +582,9 @@ export function Home() {
 
   return (
     <article className={styles.articles}>
-      <HeroStoriesBlock posts={posts} isSingleColumn={isSingleColumn} featured={featured} />
+      <HeroStoriesBlock posts={posts} isSingleColumn={isSingleColumn} featured={featured} homePost={homePost} />
       <DualColFeedBlock posts={posts} isSingleColumn={isSingleColumn} />
-      <HeroStoryBlock posts={posts} isSingleColumn={isSingleColumn} />
+      <HeroStoryBlock isSingleColumn={isSingleColumn} {...bannerPost} />
       <LowerFeedBlock posts={posts} isSingleColumn={isSingleColumn} />
       <Footer />
     </article>

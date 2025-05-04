@@ -12,6 +12,9 @@ export function formatTimecode(time) {
   // return `${zeroPrefix(h)}:${zeroPrefix(m)}:${zeroPrefix(s)}:${zeroPrefix(c)}`;
   return `${m} min read`;
 }
+export function timePhrase(time) {
+  return `${time} min read`;
+}
 
 /**
  * Prefix a number with zero as a string if less than 10

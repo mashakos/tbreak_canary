@@ -393,7 +393,7 @@ function RecentStoriesList({posts, isSingleColumn, block})
       <RecentStoriesPost
         key={recentRefThree.slug}
         slug={recentRefThree.slug}
-        index={1}
+        index={2}
         block={block}
         recentArticleField="recentArticleThree"
         {...recentRefThree}
@@ -401,7 +401,7 @@ function RecentStoriesList({posts, isSingleColumn, block})
       <RecentStoriesPost
         key={recentRefFour.slug}
         slug={recentRefFour.slug}
-        index={1}
+        index={3}
         block={block}
         recentArticleField="recentArticleFour"
         {...recentRefFour}
@@ -409,7 +409,7 @@ function RecentStoriesList({posts, isSingleColumn, block})
       <RecentStoriesPost
         key={recentRefFive.slug}
         slug={recentRefFive.slug}
-        index={1}
+        index={4}
         block={block}
         recentArticleField="recentArticleFive"
         {...recentRefFive}
@@ -417,7 +417,7 @@ function RecentStoriesList({posts, isSingleColumn, block})
       <RecentStoriesPost
         key={recentRefSix.slug}
         slug={recentRefSix.slug}
-        index={1}
+        index={5}
         block={block}
         recentArticleField="recentArticleSix"
         {...recentRefSix}
@@ -456,7 +456,7 @@ function FeaturedStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefTwo.slug}
         slug={recentRefTwo.slug}
-        index={0}
+        index={1}
         block={block}
         featuredStoryArticle="dualColFeedArticleTwo"
         {...recentRefTwo}
@@ -464,7 +464,7 @@ function FeaturedStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefThree.slug}
         slug={recentRefThree.slug}
-        index={0}
+        index={2}
         block={block}
         featuredStoryArticle="dualColFeedArticleThree"
         {...recentRefThree}
@@ -472,7 +472,7 @@ function FeaturedStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefFour.slug}
         slug={recentRefFour.slug}
-        index={0}
+        index={3}
         block={block}
         featuredStoryArticle="dualColFeedArticleFour"
         {...recentRefFour}
@@ -480,7 +480,7 @@ function FeaturedStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefFive.slug}
         slug={recentRefFive.slug}
-        index={0}
+        index={4}
         block={block}
         featuredStoryArticle="dualColFeedArticleFive"
         {...recentRefFive}
@@ -488,7 +488,7 @@ function FeaturedStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefSix.slug}
         slug={recentRefSix.slug}
-        index={0}
+        index={5}
         block={block}
         featuredStoryArticle="dualColFeedArticleSix"
         {...recentRefSix}
@@ -528,7 +528,7 @@ function MostReadStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefTwo.slug}
         slug={recentRefTwo.slug}
-        index={0}
+        index={1}
         block={block}
         featuredStoryArticle="lowerFeedArticleTwo"
         {...recentRefTwo}
@@ -536,7 +536,7 @@ function MostReadStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefThree.slug}
         slug={recentRefThree.slug}
-        index={0}
+        index={2}
         block={block}
         featuredStoryArticle="lowerFeedArticleThree"
         {...recentRefThree}
@@ -544,7 +544,7 @@ function MostReadStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefFour.slug}
         slug={recentRefFour.slug}
-        index={0}
+        index={3}
         block={block}
         featuredStoryArticle="lowerFeedArticleFour"
         {...recentRefFour}
@@ -552,7 +552,7 @@ function MostReadStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefFive.slug}
         slug={recentRefFive.slug}
-        index={0}
+        index={4}
         block={block}
         featuredStoryArticle="lowerFeedArticleFive"
         {...recentRefFive}
@@ -560,7 +560,7 @@ function MostReadStoriesList({posts, block})
       <FeaturedStoriesPost
         key={recentRefSix.slug}
         slug={recentRefSix.slug}
-        index={0}
+        index={5}
         block={block}
         featuredStoryArticle="lowerFeedArticleSix"
         {...recentRefSix}
@@ -650,7 +650,7 @@ function DualColFeedBlock({posts, block, isSingleColumn})
   );
 }
 
-function LowerFeedBlock({posts, homePost, block, isSingleColumn})
+function LowerFeedBlock({posts, block, isSingleColumn})
 {
   return (
     <>
@@ -752,16 +752,13 @@ function HeroStoryBlock({slug, timecode, frontmatter, block})
 export function Home() {
   const { posts, props } = useLoaderData();
   const { data } = useTina(props);
-  console.log(data);
-  const homePost = data.home;
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
 
   return (
     <article className={styles.articles}>
-      {homePost.blocks?.map((block) => {
-        console.log(block?.__typename);
+      {data.home.blocks?.map((block) => {
           switch (block?.__typename) {
             case "HomeBlocksHeroStories" : {
               const featuredPost = block.featuredArticle;
@@ -778,7 +775,7 @@ export function Home() {
               return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} {...heroStoryRef} />;
             }
             case "HomeBlocksLowerFeed" : {
-              return <LowerFeedBlock posts={posts} isSingleColumn={isSingleColumn} homePost={homePost} block={block} />;
+              return <LowerFeedBlock posts={posts} isSingleColumn={isSingleColumn} block={block} />;
             }
           }
         }

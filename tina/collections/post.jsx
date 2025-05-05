@@ -11,7 +11,7 @@ export default {
   label: "Posts",
   path: "app/routes",
   match: {
-    include: 'articles.*',
+    exclude: '{authors/**/**,categories/**/**,homepage/**/**,pages/**/**,tags/**/**}',
   },
   format: 'mdx',
   ui: {

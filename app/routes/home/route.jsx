@@ -8,10 +8,9 @@ export async function loader() {
   // Custom Tina query, for featured post & homepage page.
   // Home: page, route is app/routes/pages/homepage.mdx, baked in graphql query.
   // Featured: Blank reference page. Route is app/routes/featured
-  const homeQuery = await client.queries.homeWithFeatured({
+  const { data, query, variables } = await client.queries.homeWithFeatured({
     relativePath: 'Featured.md',
   });
-
   // console.log(homeQuery.data.home.title);
   // console.log(homeQuery.data.featured.post.title);
 
@@ -25,15 +24,17 @@ export async function loader() {
   const allPosts = await getPosts();
   // console.log(allPosts[0].frontmatter.title);
 
-  const homePost = homeQuery.data.home;
-  const featuredPost = homePost.blocks[0].featuredArticle;
-  const bannerPost = allPosts[19];
-  const featured = allPosts.filter(post => post.frontmatter.title === featuredPost.title)[0];
-  const posts = allPosts.filter(post => featured?.slug !== post.slug).filter(post => bannerPost.slug !== post.slug);
-  featured.frontmatter.featured = true;
+  const posts = allPosts;
   posts.map( post => post.frontmatter.featured = false);
 
-  return json({ posts, bannerPost, homePost, featured });
+  return json({
+    posts,
+    props: {
+      data,
+      query,
+      variables,
+    },
+  });
 }
 export function meta() {
   return baseMeta({

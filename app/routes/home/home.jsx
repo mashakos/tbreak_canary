@@ -16,11 +16,11 @@ import { tinaField, useTina } from 'tinacms/dist/react';
 
 import styles from './home.module.css';
 
-function RecentStoriesPost({ slug, frontmatter, timecode, index, block }) {
+function RecentStoriesPost({ slug, post, timecode, index, block }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -349,24 +349,11 @@ function SideBarHeader({children})
 }
 function CoverStoryPost(featured){
   return (
-    <RecentStoriesPost {...featured} />
+    <RecentStoriesPost post={featured} />
   );
 }
 function RecentStoriesList({posts, isSingleColumn, block})
 {
-  let refPostOne = block.recentArticleOne;
-  let recentRefOne =  posts.filter(post => post.frontmatter.title === refPostOne.title)[0];
-  let refPostTwo = block.recentArticleTwo;
-  let recentRefTwo =  posts.filter(post => post.frontmatter.title === refPostTwo.title)[0];
-  let refPostThree = block.recentArticleThree;
-  let recentRefThree =  posts.filter(post => post.frontmatter.title === refPostThree.title)[0];
-  let refPostFour = block.recentArticleFour;
-  let recentRefFour =  posts.filter(post => post.frontmatter.title === refPostFour.title)[0];
-  let refPostFive = block.recentArticleFive;
-  let recentRefFive =  posts.filter(post => post.frontmatter.title === refPostFive.title)[0];
-  let refPostSix = block.recentArticleSix;
-  let recentRefSix =  posts.filter(post => post.frontmatter.title === refPostSix.title)[0];
-
   return (
     <div className={styles.list}>
       {!isSingleColumn && (
@@ -374,54 +361,20 @@ function RecentStoriesList({posts, isSingleColumn, block})
           Recent Stories
         </SideBarHeader>
       )}
-      <RecentStoriesPost
-        key={recentRefOne.slug}
-        slug={recentRefOne.slug}
-        index={0}
-        block={block}
-        recentArticleField="recentArticleOne"
-        {...recentRefOne}
-      />
-      <RecentStoriesPost
-        key={recentRefTwo.slug}
-        slug={recentRefTwo.slug}
-        index={1}
-        block={block}
-        recentArticleField="recentArticleTwo"
-        {...recentRefTwo}
-      />
-      <RecentStoriesPost
-        key={recentRefThree.slug}
-        slug={recentRefThree.slug}
-        index={2}
-        block={block}
-        recentArticleField="recentArticleThree"
-        {...recentRefThree}
-      />
-      <RecentStoriesPost
-        key={recentRefFour.slug}
-        slug={recentRefFour.slug}
-        index={3}
-        block={block}
-        recentArticleField="recentArticleFour"
-        {...recentRefFour}
-      />
-      <RecentStoriesPost
-        key={recentRefFive.slug}
-        slug={recentRefFive.slug}
-        index={4}
-        block={block}
-        recentArticleField="recentArticleFive"
-        {...recentRefFive}
-      />
-      <RecentStoriesPost
-        key={recentRefSix.slug}
-        slug={recentRefSix.slug}
-        index={5}
-        block={block}
-        recentArticleField="recentArticleSix"
-        {...recentRefSix}
-      />
+      {
+        posts?.map((post, index) => {
+          return (
+            <RecentStoriesPost
+              key={post.slug}
+              slug={post.slug}
+              index={index}
+              block={block}
+              recentArticleField="dualColFeedArticleOne"
+              post={post}
+            />
+          );
+        })
+      }
     </div>
 
   );
@@ -677,7 +630,7 @@ export function Home() {
               return <DualColFeedBlock posts={feedPosts} featuredPosts={featuredArticlePosts} isSingleColumn={isSingleColumn} block={block} />;
             }
             case "HomeBlocksHeroStory" : {
-              return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} post={heroStoryRef} />;
+              return <HeroStoryBlock isSingleColumn={isSingleColumn} slug={heroStoryRef.slug} block={block} post={heroStoryRef} />;
             }
             case "HomeBlocksLowerFeed" : {
               return <LowerFeedBlock posts={lowerFeedPosts} mostReadPosts={lowerFeedArticlePosts} isSingleColumn={isSingleColumn} block={block} />;

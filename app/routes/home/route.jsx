@@ -1,5 +1,5 @@
 import { baseMeta } from '~/utils/meta';
-import { getPosts } from './posts.server';
+import { getReservedPosts } from './posts.server';
 import { json } from '@remix-run/cloudflare';
 import client from 'tina/__generated__/client.js';
 
@@ -8,32 +8,68 @@ export async function loader() {
   // Custom Tina query, for featured post & homepage page.
   // Home: page, route is app/routes/pages/homepage.mdx, baked in graphql query.
   // Featured: Blank reference page. Route is app/routes/featured
-  const { data, query, variables } = await client.queries.homeWithFeatured({
-    relativePath: 'Featured.md',
+  const { data, query, variables } = await client.queries.homeWithPosts({
+    relativePath: 'home.mdx',
   });
-  // console.log(homeQuery.data.home.title);
-  // console.log(homeQuery.data.featured.post.title);
+  const { reservedPosts, featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = await getReservedPosts(data);
+
+  const build = await import('virtual:remix/server-build');
+  let feedPosts = [];
+  let lowerFeedPosts = [];
+  let frontmatter = {};
+  let postFactory = data.postConnection.edges;
+  postFactory.map((postData, index) => {
+    const post = postData.node;
+
+    reservedPosts.map((reservedPost) => {
+      if(reservedPost.id === post.id)
+      {
+        delete postFactory[index];
+      }
+    });
+  });
 
 
-  // const allPosts = await client.queries.postConnection({
-  //   sort: 'date',
-  //   last: 1
-  // });
+  postFactory.map((postData) => {
+    const post = postData.node;
+    frontmatter = {
+      title: post.title,
+      abstract: post.abstract,
+      banner: post.banner,
+      date: post.date,
+      category: post.category?.name,
+      author: {
+        name: post.author?.name || 'Anonymous',
+        avatar: post.author?.avatar,
+      },
+      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+    };
+    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+    post.frontmatter = frontmatter;
+    post.frontmatter.featured = false;
+    if(feedPosts.length >= 6)
+      lowerFeedPosts.push(post);
+      else
+    feedPosts.push(post);
+  });
 
-
-  const allPosts = await getPosts();
-  // console.log(allPosts[0].frontmatter.title);
-
-  const posts = allPosts;
-  posts.map( post => post.frontmatter.featured = false);
 
   return json({
-    posts,
     props: {
       data,
       query,
       variables,
     },
+    reservedPosts,
+    feedPosts,
+    lowerFeedPosts,
+    homePosts: {
+      featuredPostRef,
+      recentArticlePosts,
+      featuredArticlePosts,
+      heroStoryRef,
+      lowerFeedArticlePosts,
+    }
   });
 }
 export function meta() {

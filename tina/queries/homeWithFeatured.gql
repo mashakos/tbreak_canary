@@ -1,8 +1,0 @@
-query homeWithFeatured($relativePath: String!) {
-    home(relativePath: "home.mdx") {
-        ...HomeParts
-    }
-    featured(relativePath: $relativePath) {
-        ...FeaturedParts
-    }
-}

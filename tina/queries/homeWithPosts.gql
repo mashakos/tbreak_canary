@@ -1,0 +1,29 @@
+query homeWithPosts($relativePath: String!) {
+    home(relativePath: $relativePath) {
+        ...HomeParts
+    }
+    postConnection(sort: "date", last: 25) {
+        edges {
+            node {
+                id
+                title
+                abstract
+                date
+                banner
+                category {
+                    ... on Category
+                    {
+                        name
+                    }
+                }
+                author {
+                    ... on Author
+                    {
+                        name
+                        avatar
+                    }
+                }
+            }
+        }
+    }
+}

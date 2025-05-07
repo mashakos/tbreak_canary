@@ -128,11 +128,11 @@ function RecentStoriesPost({ slug, frontmatter, timecode, index, block }) {
   );
 }
 
-function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
+function FeedStoriesPost({ slug, post, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -198,11 +198,11 @@ function FeedStoriesPost({ slug, frontmatter, timecode, index }) {
   );
 }
 
-function FeaturedStoriesPost({ slug, frontmatter, block, featuredStoryArticle, index }) {
+function FeaturedStoriesPost({ slug, post, block, featuredStoryArticle, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -263,11 +263,11 @@ function FeaturedStoriesPost({ slug, frontmatter, block, featuredStoryArticle, i
   );
 }
 
-function LowerFeedStoriesPost({ slug, frontmatter, timecode, index }) {
+function LowerFeedStoriesPost({ slug, post, timecode, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -430,69 +430,23 @@ function RecentStoriesList({posts, isSingleColumn, block})
 
 function FeaturedStoriesList({posts, block})
 {
-  let refPostOne = block.dualColFeedArticleOne;
-  let recentRefOne =  posts.filter(post => post.frontmatter.title === refPostOne.title)[0];
-  let refPostTwo = block.dualColFeedArticleTwo;
-  let recentRefTwo =  posts.filter(post => post.frontmatter.title === refPostTwo.title)[0];
-  let refPostThree = block.dualColFeedArticleThree;
-  let recentRefThree =  posts.filter(post => post.frontmatter.title === refPostThree.title)[0];
-  let refPostFour = block.dualColFeedArticleFour;
-  let recentRefFour =  posts.filter(post => post.frontmatter.title === refPostFour.title)[0];
-  let refPostFive = block.dualColFeedArticleFive;
-  let recentRefFive =  posts.filter(post => post.frontmatter.title === refPostFive.title)[0];
-  let refPostSix = block.dualColFeedArticleSix;
-  let recentRefSix =  posts.filter(post => post.frontmatter.title === refPostSix.title)[0];
 
   return (
     <div className={styles.featuredfeedlist}>
-      <FeaturedStoriesPost
-        key={recentRefOne.slug}
-        slug={recentRefOne.slug}
-        index={0}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleOne"
-        {...recentRefOne}
-      />
-      <FeaturedStoriesPost
-        key={recentRefTwo.slug}
-        slug={recentRefTwo.slug}
-        index={1}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleTwo"
-        {...recentRefTwo}
-      />
-      <FeaturedStoriesPost
-        key={recentRefThree.slug}
-        slug={recentRefThree.slug}
-        index={2}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleThree"
-        {...recentRefThree}
-      />
-      <FeaturedStoriesPost
-        key={recentRefFour.slug}
-        slug={recentRefFour.slug}
-        index={3}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleFour"
-        {...recentRefFour}
-      />
-      <FeaturedStoriesPost
-        key={recentRefFive.slug}
-        slug={recentRefFive.slug}
-        index={4}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleFive"
-        {...recentRefFive}
-      />
-      <FeaturedStoriesPost
-        key={recentRefSix.slug}
-        slug={recentRefSix.slug}
-        index={5}
-        block={block}
-        featuredStoryArticle="dualColFeedArticleSix"
-        {...recentRefSix}
-      />
+      {
+        posts?.map((post) => {
+          return (
+            <FeaturedStoriesPost
+              key={post.slug}
+              slug={post.slug}
+              index={0}
+              block={block}
+              featuredStoryArticle="dualColFeedArticleOne"
+              post={post}
+            />
+          );
+        })
+      }
     </div>
 
   );
@@ -502,69 +456,22 @@ function FeaturedStoriesList({posts, block})
 
 function MostReadStoriesList({posts, block})
 {
-  let refPostOne = block.lowerFeedArticleOne;
-  let recentRefOne =  posts.filter(post => post.frontmatter.title === refPostOne.title)[0];
-  let refPostTwo = block.lowerFeedArticleTwo;
-  let recentRefTwo =  posts.filter(post => post.frontmatter.title === refPostTwo.title)[0];
-  let refPostThree = block.lowerFeedArticleThree;
-  let recentRefThree =  posts.filter(post => post.frontmatter.title === refPostThree.title)[0];
-  let refPostFour = block.lowerFeedArticleFour;
-  let recentRefFour =  posts.filter(post => post.frontmatter.title === refPostFour.title)[0];
-  let refPostFive = block.lowerFeedArticleFive;
-  let recentRefFive =  posts.filter(post => post.frontmatter.title === refPostFive.title)[0];
-  let refPostSix = block.lowerFeedArticleSix;
-  let recentRefSix =  posts.filter(post => post.frontmatter.title === refPostSix.title)[0];
-
   return (
     <div className={styles.featuredfeedlist}>
-      <FeaturedStoriesPost
-        key={recentRefOne.slug}
-        slug={recentRefOne.slug}
-        index={0}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleOne"
-        {...recentRefOne}
-      />
-      <FeaturedStoriesPost
-        key={recentRefTwo.slug}
-        slug={recentRefTwo.slug}
-        index={1}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleTwo"
-        {...recentRefTwo}
-      />
-      <FeaturedStoriesPost
-        key={recentRefThree.slug}
-        slug={recentRefThree.slug}
-        index={2}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleThree"
-        {...recentRefThree}
-      />
-      <FeaturedStoriesPost
-        key={recentRefFour.slug}
-        slug={recentRefFour.slug}
-        index={3}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleFour"
-        {...recentRefFour}
-      />
-      <FeaturedStoriesPost
-        key={recentRefFive.slug}
-        slug={recentRefFive.slug}
-        index={4}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleFive"
-        {...recentRefFive}
-      />
-      <FeaturedStoriesPost
-        key={recentRefSix.slug}
-        slug={recentRefSix.slug}
-        index={5}
-        block={block}
-        featuredStoryArticle="lowerFeedArticleSix"
-        {...recentRefSix}
-      />
+      {
+        posts?.map((post) => {
+          return (
+            <FeaturedStoriesPost
+              key={post.slug}
+              slug={post.slug}
+              index={0}
+              block={block}
+              featuredStoryArticle="lowerFeedArticleOne"
+              post={post}
+            />
+          );
+        })
+      }
     </div>
 
   );
@@ -575,8 +482,8 @@ function FeedStoriesList({posts})
 {
   return (
     <div className={styles.feedlist}>
-      {posts.slice(6, 12).map(({ slug, ...post }, index) => (
-        <FeedStoriesPost key={slug} slug={slug} index={index} {...post} />
+      {posts.map((post, index) => (
+        <FeedStoriesPost key={post.slug} slug={post.slug} index={index} post={post} />
       ))}
     </div>
 
@@ -588,8 +495,8 @@ function LowerFeedStoriesList({posts})
 {
   return (
     <div className={styles.lowerfeedlist}>
-      {posts.slice(14, 20).map(({ slug, ...post }, index) => (
-        <LowerFeedStoriesPost key={slug} slug={slug} index={index} {...post} />
+      {posts.map((post, index) => (
+        <LowerFeedStoriesPost key={post.slug} slug={post.slug} index={index} post={post} />
       ))}
     </div>
 
@@ -623,7 +530,7 @@ function HeroStoriesBlock({posts, isSingleColumn, block, featured})
   );
 }
 
-function DualColFeedBlock({posts, block, isSingleColumn})
+function DualColFeedBlock({posts, featuredPosts, block, isSingleColumn})
 {
   return (
     <>
@@ -640,7 +547,7 @@ function DualColFeedBlock({posts, block, isSingleColumn})
                 <SideBarHeader>
                   Featured Stories
                 </SideBarHeader>
-                <FeaturedStoriesList posts={posts} isSingleColumn={isSingleColumn} block={block} />
+                <FeaturedStoriesList posts={featuredPosts} isSingleColumn={isSingleColumn} block={block} />
               </div>
             </div>
           </div>
@@ -650,7 +557,7 @@ function DualColFeedBlock({posts, block, isSingleColumn})
   );
 }
 
-function LowerFeedBlock({posts, block, isSingleColumn})
+function LowerFeedBlock({posts, mostReadPosts, block, isSingleColumn})
 {
   return (
     <>
@@ -667,7 +574,7 @@ function LowerFeedBlock({posts, block, isSingleColumn})
                 <SideBarHeader>
                   Most Read
                 </SideBarHeader>
-                <MostReadStoriesList posts={posts} block={block} />
+                <MostReadStoriesList posts={mostReadPosts}  block={block} />
               </div>
             </div>
           </div>
@@ -678,12 +585,12 @@ function LowerFeedBlock({posts, block, isSingleColumn})
 }
 
 
-function HeroStoryBlock({slug, timecode, frontmatter, block})
+function HeroStoryBlock({slug, timecode, post, block})
 {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = frontmatter;
+  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -750,32 +657,30 @@ function HeroStoryBlock({slug, timecode, frontmatter, block})
 
 
 export function Home() {
-  const { posts, props } = useLoaderData();
+  const { props, reservedPosts, feedPosts, lowerFeedPosts, homePosts } = useLoaderData();
   const { data } = useTina(props);
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
+  const { featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = homePosts;
+
 
   return (
     <article className={styles.articles}>
       {data.home.blocks?.map((block) => {
           switch (block?.__typename) {
             case "HomeBlocksHeroStories" : {
-              const featuredPost = block.featuredArticle;
-              const featuredPostRef =  posts.filter(post => post.frontmatter.title === featuredPost.title)[0];
-              featuredPostRef.frontmatter.featured = true;
-              return <HeroStoriesBlock posts={posts} isSingleColumn={isSingleColumn} featured={featuredPostRef} block={block} />;
+
+              return <HeroStoriesBlock posts={recentArticlePosts} isSingleColumn={isSingleColumn} featured={featuredPostRef} block={block} />;
             }
             case "HomeBlocksDualColFeed" : {
-              return <DualColFeedBlock posts={posts} isSingleColumn={isSingleColumn} block={block} />;
+              return <DualColFeedBlock posts={feedPosts} featuredPosts={featuredArticlePosts} isSingleColumn={isSingleColumn} block={block} />;
             }
             case "HomeBlocksHeroStory" : {
-              const heroStory = block.heroStoryArticle;
-              const heroStoryRef =  posts.filter(post => post.frontmatter.title === heroStory.title)[0];
-              return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} {...heroStoryRef} />;
+              return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} post={heroStoryRef} />;
             }
             case "HomeBlocksLowerFeed" : {
-              return <LowerFeedBlock posts={posts} isSingleColumn={isSingleColumn} block={block} />;
+              return <LowerFeedBlock posts={lowerFeedPosts} mostReadPosts={lowerFeedArticlePosts} isSingleColumn={isSingleColumn} block={block} />;
             }
           }
         }

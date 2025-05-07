@@ -44,6 +44,7 @@ export async function getReservedPosts(data) {
                   featuredPostRef.frontmatter = frontmatter;
                   featuredPostRef.frontmatter = frontmatter;
                   featuredPostRef.frontmatter.featured = true;
+                  featuredPostRef.frontmatter.tinafield = key;
                   if(typeof featuredPostRef.frontmatter !== 'undefined')
                   {
                     reservedPosts.push(featuredPostRef);
@@ -69,6 +70,7 @@ export async function getReservedPosts(data) {
                     recentArticleRef.slug = build.routes[recentArticleRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
                     recentArticleRef.frontmatter = frontmatter;
                     recentArticleRef.frontmatter.featured = false;
+                    recentArticleRef.frontmatter.tinafield = key;
                     recentArticlePosts.push(recentArticleRef);
                     if(typeof recentArticleRef.frontmatter !== 'undefined')
                     {
@@ -104,6 +106,7 @@ export async function getReservedPosts(data) {
               featuredArticleRef.slug = build.routes[featuredArticleRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
               featuredArticleRef.frontmatter = frontmatter;
               featuredArticleRef.frontmatter.featured = false;
+              featuredArticleRef.frontmatter.tinafield = key;
               featuredArticlePosts.push(featuredArticleRef);
               if(typeof featuredArticleRef.frontmatter !== 'undefined')
               {
@@ -133,6 +136,7 @@ export async function getReservedPosts(data) {
           heroStoryRef.slug = build.routes[heroStoryRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
           heroStoryRef.frontmatter = frontmatter;
           heroStoryRef.frontmatter.featured = false;
+          heroStoryRef.frontmatter.tinafield = "heroStoryArticle";
           if(typeof heroStoryRef.frontmatter !== 'undefined')
           {
             reservedPosts.push(heroStoryRef);
@@ -160,6 +164,7 @@ export async function getReservedPosts(data) {
                 lowerFeedArticleRef.slug = build.routes[lowerFeedArticleRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
                 lowerFeedArticleRef.frontmatter = frontmatter;
                 lowerFeedArticleRef.frontmatter.featured = false;
+                lowerFeedArticleRef.frontmatter.tinafield = key;
                 lowerFeedArticlePosts.push(lowerFeedArticleRef);
                 if(typeof lowerFeedArticleRef.frontmatter !== 'undefined')
                 {

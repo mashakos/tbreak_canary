@@ -198,7 +198,7 @@ function FeedStoriesPost({ slug, post, timecode, index }) {
   );
 }
 
-function FeaturedStoriesPost({ slug, post, block, featuredStoryArticle, index }) {
+function FeaturedStoriesPost({ slug, post, block, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
@@ -221,7 +221,7 @@ function FeaturedStoriesPost({ slug, post, block, featuredStoryArticle, index })
       className={styles.featuredfeedpost}
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-      data-tina-field={tinaField(block, featuredStoryArticle)}
+      data-tina-field={tinaField(block, post.frontmatter.tinafield)}
     >
       <RouterLink
         unstable_viewTransition
@@ -369,7 +369,6 @@ function RecentStoriesList({posts, isSingleColumn, block})
               slug={post.slug}
               index={index}
               block={block}
-              recentArticleField="dualColFeedArticleOne"
               post={post}
             />
           );
@@ -387,14 +386,13 @@ function FeaturedStoriesList({posts, block})
   return (
     <div className={styles.featuredfeedlist}>
       {
-        posts?.map((post) => {
+        posts?.map((post, index) => {
           return (
             <FeaturedStoriesPost
               key={post.slug}
               slug={post.slug}
-              index={0}
+              index={index}
               block={block}
-              featuredStoryArticle="dualColFeedArticleOne"
               post={post}
             />
           );
@@ -412,14 +410,13 @@ function MostReadStoriesList({posts, block})
   return (
     <div className={styles.featuredfeedlist}>
       {
-        posts?.map((post) => {
+        posts?.map((post, index) => {
           return (
             <FeaturedStoriesPost
               key={post.slug}
               slug={post.slug}
-              index={0}
+              index={index}
               block={block}
-              featuredStoryArticle="lowerFeedArticleOne"
               post={post}
             />
           );

@@ -38,4 +38,12 @@ export default defineConfig({
   schema: {
     collections: [Home, Page, Category, Author, Tag, Post, Featured],
   },
+  search: {
+    tina: {
+      indexerToken: '115bbce839ad15cd20da77b140f47bd456528b63',
+      stopwordLanguages: ['eng'],
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100,
+  },
 });

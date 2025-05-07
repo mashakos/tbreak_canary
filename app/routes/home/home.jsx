@@ -349,7 +349,7 @@ function SideBarHeader({children})
 }
 function CoverStoryPost(featured){
   return (
-    <RecentStoriesPost post={featured} />
+    <RecentStoriesPost slug={featured.slug} post={featured} />
   );
 }
 function RecentStoriesList({posts, isSingleColumn, block})

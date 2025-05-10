@@ -9,7 +9,15 @@ import { Text } from '~/components/text';
 import { useReducedMotion } from 'framer-motion';
 import { useWindowSize } from '~/hooks';
 import { Link as RouterLink, useLoaderData } from '@remix-run/react';
-import { useState, useEffect } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 import { formatDate } from '~/utils/date';
 import { classes, cssProps } from '~/utils/style';
 import { tinaField, useTina } from 'tinacms/dist/react';
@@ -64,10 +72,8 @@ function RecentStoriesPost({ slug, post, timecode, index, block }) {
           />
         </div>
       )}
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={`/articles/${slug}`}
+      <a
+        href={`/articles/${slug}`}
         className={styles.postLink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -118,7 +124,7 @@ function RecentStoriesPost({ slug, post, timecode, index, block }) {
           {/*</div>*/}
           {/*  )}*/}
         </div>
-      </RouterLink>
+      </a>
       {/*{featured && (*/}
       {/*  <Text aria-hidden className={styles.postTag} size="s">*/}
       {/*    477*/}
@@ -152,10 +158,8 @@ function FeedStoriesPost({ slug, post, timecode, index }) {
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
     >
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={`/articles/${slug}`}
+      <a
+        href={`/articles/${slug}`}
         className={styles.feedpostlink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -193,7 +197,7 @@ function FeedStoriesPost({ slug, post, timecode, index }) {
             <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a><span> · {dateTime}</span><span> · {timecode}</span>
           </div>
         </div>
-      </RouterLink>
+      </a>
     </article>
   );
 }
@@ -223,10 +227,8 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
       data-tina-field={tinaField(block, post.frontmatter.tinafield)}
     >
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={`/articles/${slug}`}
+      <a
+        href={`/articles/${slug}`}
         className={styles.featuredfeedpostlink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -258,7 +260,7 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
             <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a>
           </div>
         </div>
-      </RouterLink>
+      </a>
     </article>
   );
 }
@@ -287,10 +289,8 @@ function LowerFeedStoriesPost({ slug, post, timecode, index }) {
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
     >
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={`/articles/${slug}`}
+      <a
+        href={`/articles/${slug}`}
         className={styles.lowerfeedpostLink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -332,7 +332,7 @@ function LowerFeedStoriesPost({ slug, post, timecode, index }) {
             </div>
           </div>
         </div>
-      </RouterLink>
+      </a>
     </article>
   );
 }
@@ -347,13 +347,20 @@ function SideBarHeader({children})
     </header>
   );
 }
-function CoverStoryPost(featured){
+function CoverStoryPost(){
+
+  const {featuredPostRef} = useHome();
+  const featured = featuredPostRef;
+  const slug = featuredPostRef.slug;
   return (
-    <RecentStoriesPost slug={featured.slug} post={featured} />
+    <RecentStoriesPost slug={slug} post={featured} />
   );
 }
-function RecentStoriesList({posts, isSingleColumn, block})
+function RecentStoriesList({isSingleColumn, block})
 {
+
+  const {recentArticlePosts} = useHome();
+  const posts = recentArticlePosts;
   return (
     <div className={styles.list}>
       {!isSingleColumn && (
@@ -455,20 +462,20 @@ function LowerFeedStoriesList({posts})
 }
 
 
-function HeroStoriesBlock({posts, isSingleColumn, block, featured})
+function HeroStoriesBlock({posts, isSingleColumn, block})
 {
   return (
     <>
       <Section className={styles.content}>
         {!isSingleColumn && (
           <div className={styles.grid}>
-            <CoverStoryPost {...featured} />
+            <CoverStoryPost />
             <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} block={block} />
           </div>
         )}
         {isSingleColumn && (
           <div className={styles.grid}>
-            <CoverStoryPost {...featured} />
+            <CoverStoryPost />
             <SideBarHeader>
               Recent Stories
             </SideBarHeader>
@@ -480,8 +487,13 @@ function HeroStoriesBlock({posts, isSingleColumn, block, featured})
   );
 }
 
-function DualColFeedBlock({posts, featuredPosts, block, isSingleColumn})
+function DualColFeedBlock({block, isSingleColumn})
 {
+  const {feedPostsContext} = useHome();
+  const posts = feedPostsContext;
+  const {featuredArticlePosts} = useHome();
+  const featuredPosts = featuredArticlePosts;
+
   return (
     <>
       <Section className={styles.content}>
@@ -507,8 +519,13 @@ function DualColFeedBlock({posts, featuredPosts, block, isSingleColumn})
   );
 }
 
-function LowerFeedBlock({posts, mostReadPosts, block, isSingleColumn})
+function LowerFeedBlock({block, isSingleColumn})
 {
+  const {lowerFeedPostsContext} = useHome();
+  const posts = lowerFeedPostsContext;
+  const {lowerFeedArticlePosts} = useHome();
+  const mostReadPosts = lowerFeedArticlePosts;
+
   return (
     <>
       <Section className={styles.content}>
@@ -535,12 +552,17 @@ function LowerFeedBlock({posts, mostReadPosts, block, isSingleColumn})
 }
 
 
-function HeroStoryBlock({slug, timecode, post, block})
+function HeroStoryBlock({timecode, block})
 {
+  const {heroStoryRef} = useHome();
+  const post = heroStoryRef;
+  const slug = heroStoryRef.slug;
+
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
   const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
+
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -558,10 +580,8 @@ function HeroStoryBlock({slug, timecode, post, block})
   return (
     <>
       <Section className={styles.herobannercontent} data-tina-field={tinaField(block, "heroStoryArticle")}>
-        <RouterLink
-          unstable_viewTransition
-          prefetch="intent"
-          to={`/articles/${slug}`}
+        <a
+          href={`/articles/${slug}`}
           className=""
           rel="canonical"
           onMouseEnter={handleMouseEnter}
@@ -570,7 +590,7 @@ function HeroStoryBlock({slug, timecode, post, block})
           <div className={styles.herobannerimage}>
             <img alt="banner" src={banner} />
           </div>
-        </RouterLink>
+        </a>
         <div className={styles.herobannermodal}>
           <div className={styles.covercontainer}>
             <div className={styles.coverblock}>
@@ -605,42 +625,62 @@ function HeroStoryBlock({slug, timecode, post, block})
   );
 }
 
+const HomeContext = createContext({});
+
+export const useHome = () => useContext(HomeContext);
 
 export function Home() {
   const { props, reservedPosts, feedPosts, lowerFeedPosts, homePosts } = useLoaderData();
   const { data } = useTina(props);
+  const [tinaData, setTinaData] = useState(data);
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
-  const { featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = homePosts;
+  const [featuredPostRef, setFeaturedPostRef] = useState(homePosts.featuredPostRef);
+  const [recentArticlePosts, setRecentArticlePosts] = useState(homePosts.recentArticlePosts);
+  const [featuredArticlePosts, setFeaturedArticlePosts] = useState(homePosts.featuredArticlePosts);
+  const [heroStoryRef, setHeroStoryRef] = useState(homePosts.heroStoryRef);
+  const [lowerFeedArticlePosts, setLowerFeedArticlePosts] = useState(homePosts.lowerFeedArticlePosts);
+
+  const [feedPostsContext, setFeedPostsContext] = useState(feedPosts);
+  const [lowerFeedPostsContext, setLowerFeedPostsContext] = useState(feedPosts);
+  // setFeaturedPostRef(homePosts.featuredPostRef);
+  // setRecentArticlePosts(homePosts.recentArticlePosts);
+  // setFeaturedArticlePosts(homePosts.featuredArticlePosts);
+  // setHeroStoryRef(homePosts.heroStoryRef);
+  // setLowerFeedArticlePosts(homePosts.lowerFeedArticlePosts);
+  // const { featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = homePosts;
 
 
   return (
-    <article className={styles.articles}>
-      {data.home.blocks?.map((block) => {
-          switch (block?.__typename) {
-            case "HomeBlocksHeroStories" : {
-
-              return <HeroStoriesBlock posts={recentArticlePosts} isSingleColumn={isSingleColumn} featured={featuredPostRef} block={block} />;
-            }
-            case "HomeBlocksDualColFeed" : {
-              return <DualColFeedBlock posts={feedPosts} featuredPosts={featuredArticlePosts} isSingleColumn={isSingleColumn} block={block} />;
-            }
-            case "HomeBlocksHeroStory" : {
-              return <HeroStoryBlock isSingleColumn={isSingleColumn} slug={heroStoryRef.slug} block={block} post={heroStoryRef} />;
-            }
-            case "HomeBlocksLowerFeed" : {
-              return <LowerFeedBlock posts={lowerFeedPosts} mostReadPosts={lowerFeedArticlePosts} isSingleColumn={isSingleColumn} block={block} />;
+    <HomeContext.Provider
+      value={{ tinaData, featuredPostRef, recentArticlePosts, featuredArticlePosts, feedPostsContext, lowerFeedPostsContext, heroStoryRef, lowerFeedArticlePosts }}
+    >
+      <article className={styles.articles}>
+        {tinaData.home.blocks?.map((block) => {
+            switch (block?.__typename) {
+              case "HomeBlocksHeroStories" : {
+                return <HeroStoriesBlock isSingleColumn={isSingleColumn} block={block} />;
+              }
+              case "HomeBlocksDualColFeed" : {
+                return <DualColFeedBlock isSingleColumn={isSingleColumn} block={block} />;
+              }
+              case "HomeBlocksHeroStory" : {
+                return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} />;
+              }
+              case "HomeBlocksLowerFeed" : {
+                return <LowerFeedBlock isSingleColumn={isSingleColumn} block={block} />;
+              }
             }
           }
+
+        )
+
         }
 
-      )
 
-      }
-
-
-      <Footer />
-    </article>
+        <Footer />
+      </article>
+    </HomeContext.Provider>
   );
 }

@@ -70,6 +70,10 @@ export async function loader() {
       heroStoryRef,
       lowerFeedArticlePosts,
     }
+  }, {
+    headers: {
+      "Cache-Control": "public, max-age=604800", // 7 days
+    },
   });
 }
 export function meta() {

@@ -5,7 +5,6 @@ import Category from "./collections/category.jsx";
 import Author from "./collections/author.jsx";
 import Tag from "./collections/tag.jsx";
 import Post from "./collections/post.jsx";
-import Featured from "./collections/featured";
 
 
 // Your hosting provider likely exposes this as an environment variable

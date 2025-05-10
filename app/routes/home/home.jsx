@@ -643,7 +643,7 @@ export function Home() {
   const [lowerFeedArticlePosts, setLowerFeedArticlePosts] = useState(homePosts.lowerFeedArticlePosts);
 
   const [feedPostsContext, setFeedPostsContext] = useState(feedPosts);
-  const [lowerFeedPostsContext, setLowerFeedPostsContext] = useState(feedPosts);
+  const [lowerFeedPostsContext, setLowerFeedPostsContext] = useState(lowerFeedPosts);
   // setFeaturedPostRef(homePosts.featuredPostRef);
   // setRecentArticlePosts(homePosts.recentArticlePosts);
   // setFeaturedArticlePosts(homePosts.featuredArticlePosts);

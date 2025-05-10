@@ -206,7 +206,7 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
+  const { title, date, featured, banner, author } = post.frontmatter;
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -561,7 +561,7 @@ function HeroStoryBlock({timecode, block})
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
-  const { title, abstract, date, featured, banner, category, author } = post.frontmatter;
+  const { title, date, banner, category, author } = post.frontmatter;
 
 
   useEffect(() => {

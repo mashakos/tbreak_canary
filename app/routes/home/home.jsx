@@ -604,14 +604,30 @@ function HeroStoryBlock({timecode, block})
         <div className={styles.herobannermodal}>
           <div className={styles.covercontainer}>
             <div className={styles.coverblock}>
-              <a className={styles.postCategory} href={`/articles/${slug}`}>
+              <RouterLink
+                unstable_viewTransition
+                prefetch="intent"
+                to={`/articles/${slug}`}
+                className={styles.postCategory}
+                rel="canonical"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 {category}
-              </a>
-              <a className={styles.headerblock} href={`/articles/${slug}`}>
+              </RouterLink>
+              <RouterLink
+                unstable_viewTransition
+                prefetch="intent"
+                to={`/articles/${slug}`}
+                className={styles.headerblock}
+                rel="canonical"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <Heading as="h3" level={3} className={styles.heading}>
                   {title}
                 </Heading>
-              </a>
+              </RouterLink>
               <div className={styles.herobannerfooter}>
                 <div className={styles.authorcontainer}>
                   <a className={styles.avatar} href="/authors/karina-bell">

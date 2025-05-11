@@ -72,8 +72,10 @@ function RecentStoriesPost({ slug, post, timecode, index, block }) {
           />
         </div>
       )}
-      <a
-        href={`/articles/${slug}`}
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
         className={styles.postLink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -124,7 +126,7 @@ function RecentStoriesPost({ slug, post, timecode, index, block }) {
           {/*</div>*/}
           {/*  )}*/}
         </div>
-      </a>
+      </RouterLink>
       {/*{featured && (*/}
       {/*  <Text aria-hidden className={styles.postTag} size="s">*/}
       {/*    477*/}
@@ -158,8 +160,10 @@ function FeedStoriesPost({ slug, post, timecode, index }) {
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
     >
-      <a
-        href={`/articles/${slug}`}
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
         className={styles.feedpostlink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -197,7 +201,7 @@ function FeedStoriesPost({ slug, post, timecode, index }) {
             <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a><span> · {dateTime}</span><span> · {timecode}</span>
           </div>
         </div>
-      </a>
+      </RouterLink>
     </article>
   );
 }
@@ -227,8 +231,10 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
       data-tina-field={tinaField(block, post.frontmatter.tinafield)}
     >
-      <a
-        href={`/articles/${slug}`}
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
         className={styles.featuredfeedpostlink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -260,7 +266,7 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
             <span>By</span> <a href={`/articles/${slug}`} rel='author'>{author.name}</a>
           </div>
         </div>
-      </a>
+      </RouterLink>
     </article>
   );
 }
@@ -289,8 +295,10 @@ function LowerFeedStoriesPost({ slug, post, timecode, index }) {
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
     >
-      <a
-        href={`/articles/${slug}`}
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to={`/articles/${slug}`}
         className={styles.lowerfeedpostLink}
         rel="canonical"
         onMouseEnter={handleMouseEnter}
@@ -332,7 +340,7 @@ function LowerFeedStoriesPost({ slug, post, timecode, index }) {
             </div>
           </div>
         </div>
-      </a>
+      </RouterLink>
     </article>
   );
 }
@@ -580,8 +588,10 @@ function HeroStoryBlock({timecode, block})
   return (
     <>
       <Section className={styles.herobannercontent} data-tina-field={tinaField(block, "heroStoryArticle")}>
-        <a
-          href={`/articles/${slug}`}
+        <RouterLink
+          unstable_viewTransition
+          prefetch="intent"
+          to={`/articles/${slug}`}
           className=""
           rel="canonical"
           onMouseEnter={handleMouseEnter}
@@ -590,7 +600,7 @@ function HeroStoryBlock({timecode, block})
           <div className={styles.herobannerimage}>
             <img alt="banner" src={banner} />
           </div>
-        </a>
+        </RouterLink>
         <div className={styles.herobannermodal}>
           <div className={styles.covercontainer}>
             <div className={styles.coverblock}>

@@ -47,7 +47,7 @@ function RecentStoriesPost({ slug, post, timecode, index, block }) {
       className={styles.post}
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-      data-tina-field={tinaField(block, "featuredArticle")}
+      data-tina-field={tinaField(block, post.frontmatter.tinafield)}
     >
       {/*{featured && (*/}
       {/*  <Text className={styles.postLabel} size="s">*/}
@@ -229,7 +229,7 @@ function FeaturedStoriesPost({ slug, post, block, index }) {
       className={styles.featuredfeedpost}
       data-featured={!!featured}
       style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-      data-tina-field={tinaField(block, post.frontmatter.tinafield)}
+        data-tina-field={tinaField(block, post.frontmatter.tinafield)}
     >
       <RouterLink
         unstable_viewTransition
@@ -658,7 +658,6 @@ export const useHome = () => useContext(HomeContext);
 export function Home() {
   const { props, reservedPosts, feedPosts, lowerFeedPosts, homePosts } = useLoaderData();
   const { data } = useTina(props);
-  const [tinaData, setTinaData] = useState(data);
   const { width } = useWindowSize();
   const singleColumnWidth = 1190;
   const isSingleColumn = width <= singleColumnWidth;
@@ -680,10 +679,10 @@ export function Home() {
 
   return (
     <HomeContext.Provider
-      value={{ tinaData, featuredPostRef, recentArticlePosts, featuredArticlePosts, feedPostsContext, lowerFeedPostsContext, heroStoryRef, lowerFeedArticlePosts }}
+      value={{ featuredPostRef, recentArticlePosts, featuredArticlePosts, feedPostsContext, lowerFeedPostsContext, heroStoryRef, lowerFeedArticlePosts }}
     >
       <article className={styles.articles}>
-        {tinaData.home.blocks?.map((block) => {
+        {data.home.blocks?.map((block) => {
             switch (block?.__typename) {
               case "HomeBlocksHeroStories" : {
                 return <HeroStoriesBlock isSingleColumn={isSingleColumn} block={block} />;

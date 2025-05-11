@@ -60,7 +60,7 @@ export async function loader() {
       query,
       variables,
     },
-    reservedPosts,
+    // reservedPosts,
     feedPosts,
     lowerFeedPosts,
     homePosts: {

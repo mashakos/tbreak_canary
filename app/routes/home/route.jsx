@@ -11,23 +11,140 @@ export async function loader() {
   const { data, query, variables } = await client.queries.homeWithPosts({
     relativePath: 'home.mdx',
   });
-  const { reservedPosts, featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = await getReservedPosts(data);
+  const { reservedPosts, featuredPostRef, heroStoryRef, } = await getReservedPosts(data);
 
   const build = await import('virtual:remix/server-build');
+  const recentArticlePostCnt = 5;
+  const featuredArticlePostCnt = 5;
+  const mostReadArticlePostCnt = 5;
+  let recentArticlePosts = [];
+  let featuredArticlePosts = [];
+  let mostReadArticlePosts = [];
   let feedPosts = [];
   let lowerFeedPosts = [];
   let frontmatter = {};
   let postFactory = data.postConnection.edges;
+
+
+
+  // reserved articles
   postFactory.map((postData, index) => {
     const post = postData.node;
 
     reservedPosts.map((reservedPost) => {
       if(reservedPost.id === post.id)
       {
-        delete postFactory[index];
+        postFactory.splice(index, 1);
       }
     });
   });
+
+
+  // recent articles
+  for (const postData of postFactory) {
+    const post = postData.node;
+    frontmatter = {
+      title: post.title,
+      abstract: post.abstract,
+      banner: post.banner,
+      date: post.date,
+      category: post.category?.name,
+      author: {
+        name: post.author?.name || 'Anonymous',
+        avatar: post.author?.avatar,
+      },
+      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+    };
+    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+    post.frontmatter = frontmatter;
+    post.frontmatter.featured = false;
+    recentArticlePosts.push(post);
+
+    if(recentArticlePosts.length >= recentArticlePostCnt)
+    {
+      break;
+    }
+  }
+  postFactory.map((postData, index) => {
+    const post = postData.node;
+
+    recentArticlePosts.map((recentArticlePost) => {
+      if(recentArticlePost.id === post.id)
+      {
+        postFactory.splice(index, 1);
+      }
+    });
+  });
+
+  // featured articles
+  for (const postData of postFactory) {
+    const post = postData.node;
+    frontmatter = {
+      title: post.title,
+      abstract: post.abstract,
+      banner: post.banner,
+      date: post.date,
+      category: post.category?.name,
+      author: {
+        name: post.author?.name || 'Anonymous',
+        avatar: post.author?.avatar,
+      },
+      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+    };
+    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+    post.frontmatter = frontmatter;
+    post.frontmatter.featured = false;
+    featuredArticlePosts.push(post);
+
+    if(featuredArticlePosts.length >= featuredArticlePostCnt)
+      break;
+  }
+  postFactory.map((postData, index) => {
+    const post = postData.node;
+
+    featuredArticlePosts.map((featuredArticlePost) => {
+      if(featuredArticlePost.id === post.id)
+      {
+        postFactory.splice(index, 1);
+      }
+    });
+  });
+
+  // most read articles
+  for (const postData of postFactory) {
+    const post = postData.node;
+    frontmatter = {
+      title: post.title,
+      abstract: post.abstract,
+      banner: post.banner,
+      date: post.date,
+      category: post.category?.name,
+      author: {
+        name: post.author?.name || 'Anonymous',
+        avatar: post.author?.avatar,
+      },
+      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+    };
+    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+    post.frontmatter = frontmatter;
+    post.frontmatter.featured = false;
+    mostReadArticlePosts.push(post);
+
+    if(mostReadArticlePosts.length >= mostReadArticlePostCnt)
+      break;
+  }
+  postFactory.map((postData, index) => {
+    const post = postData.node;
+
+    mostReadArticlePosts.map((mostReadArticlePost) => {
+      if(mostReadArticlePost.id === post.id)
+      {
+        postFactory.splice(index, 1);
+      }
+    });
+  });
+
+
 
 
   postFactory.map((postData) => {
@@ -47,10 +164,19 @@ export async function loader() {
     post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
     post.frontmatter = frontmatter;
     post.frontmatter.featured = false;
+
+
     if(feedPosts.length >= 6)
-      lowerFeedPosts.push(post);
-      else
-    feedPosts.push(post);
+    {
+      if(lowerFeedPosts.length < 6)
+      {
+        lowerFeedPosts.push(post);
+      }
+    }
+    else
+    {
+      feedPosts.push(post);
+    }
   });
 
 
@@ -68,7 +194,7 @@ export async function loader() {
       recentArticlePosts,
       featuredArticlePosts,
       heroStoryRef,
-      lowerFeedArticlePosts,
+      mostReadArticlePosts,
     },
   });
 }

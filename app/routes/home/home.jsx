@@ -492,19 +492,61 @@ function MostReadStoriesList({posts, block})
 {
   return (
     <div className={styles.featuredfeedlist}>
-      {
-        posts?.map((post, index) => {
-          return (
-            <FeaturedStoriesPost
-              key={post.slug}
-              slug={post.slug}
-              index={index}
-              block={block}
-              post={post}
-            />
-          );
-        })
-      }
+      <FeaturedStoriesPost
+        key={posts[0].slug}
+        slug={posts[0].slug}
+        index={0}
+        block={block}
+        post={posts[0]}
+      />
+      <FeaturedStoriesPost
+        key={posts[1].slug}
+        slug={posts[1].slug}
+        index={1}
+        block={block}
+        post={posts[1]}
+      />
+      <FeaturedStoriesPost
+        key={posts[2].slug}
+        slug={posts[2].slug}
+        index={2}
+        block={block}
+        post={posts[2]}
+      />
+      <FeaturedStoriesPost
+        key={posts[3].slug}
+        slug={posts[3].slug}
+        index={3}
+        block={block}
+        post={posts[3]}
+      />
+      <FeaturedStoriesPost
+        key={posts[4].slug}
+        slug={posts[4].slug}
+        index={4}
+        block={block}
+        post={posts[4]}
+      />
+      <FeaturedStoriesPost
+        key={posts[5].slug}
+        slug={posts[5].slug}
+        index={5}
+        block={block}
+        post={posts[5]}
+      />
+      {/*{*/}
+      {/*  posts?.map((post, index) => {*/}
+      {/*    return (*/}
+      {/*      <FeaturedStoriesPost*/}
+      {/*        key={post.slug}*/}
+      {/*        slug={post.slug}*/}
+      {/*        index={index}*/}
+      {/*        block={block}*/}
+      {/*        post={post}*/}
+      {/*      />*/}
+      {/*    );*/}
+      {/*  })*/}
+      {/*}*/}
     </div>
 
   );
@@ -596,12 +638,11 @@ function DualColFeedBlock({featured, block, isSingleColumn})
   );
 }
 
-function LowerFeedBlock({block, isSingleColumn})
+function LowerFeedBlock({mostReadPosts, block, isSingleColumn})
 {
   const {lowerFeedPostsContext} = useHome();
   const posts = lowerFeedPostsContext;
-  const {lowerFeedArticlePosts} = useHome();
-  const mostReadPosts = lowerFeedArticlePosts;
+
 
   return (
     <>
@@ -741,6 +782,9 @@ export function Home() {
   let featuredArticleRefPlaceholder = {};
   let featuredArticlePostsPlaceholder = [];
 
+  let lowerFeedArticleRefPlaceholder = {};
+  let lowerFeedArticlePostsPlaceholder = [];
+
   let heroStoriesPlaceholder = {};
   let heroStoryPlaceholder = {};
   let frontmatter = {};
@@ -871,7 +915,34 @@ export function Home() {
                 return <HeroStoryBlock isSingleColumn={isSingleColumn} post={heroStoryPlaceholder} block={block} />;
               }
               case "HomeBlocksLowerFeed" : {
-                return <LowerFeedBlock isSingleColumn={isSingleColumn} block={block} />;
+                let articlepostsCnt=0;
+                for(const [key, articleBlock] of Object.entries(block)) {
+                  if(articleBlock !== "HomeBlocksLowerFeed")
+                  {
+                    lowerFeedArticleRefPlaceholder = articleBlock;
+                    frontmatter = {
+                      title: lowerFeedArticleRefPlaceholder.title,
+                      abstract: lowerFeedArticleRefPlaceholder.abstract,
+                      banner: lowerFeedArticleRefPlaceholder.banner,
+                      date: lowerFeedArticleRefPlaceholder.date,
+                      category: lowerFeedArticleRefPlaceholder.category?.name,
+                      author: {
+                        name: lowerFeedArticleRefPlaceholder.author?.name || 'Anonymous',
+                        avatar: lowerFeedArticleRefPlaceholder.author?.avatar,
+                      },
+                      tags: lowerFeedArticleRefPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
+                    };
+                    lowerFeedArticleRefPlaceholder.slug = lowerFeedArticlePosts[articlepostsCnt].slug;
+                    lowerFeedArticleRefPlaceholder.frontmatter = frontmatter;
+                    lowerFeedArticleRefPlaceholder.frontmatter.featured = false;
+                    lowerFeedArticleRefPlaceholder.frontmatter.tinafield = key;
+                    if(articlepostsCnt < 5)
+                      articlepostsCnt++;
+                    lowerFeedArticlePostsPlaceholder.push(lowerFeedArticleRefPlaceholder);
+                  }
+
+                }
+                return <LowerFeedBlock isSingleColumn={isSingleColumn} mostReadPosts={lowerFeedArticlePostsPlaceholder} block={block} />;
               }
             }
           }

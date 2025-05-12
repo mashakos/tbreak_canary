@@ -25,6 +25,7 @@ import { tinaField, useTina } from 'tinacms/dist/react';
 import styles from './home.module.css';
 
 function RecentStoriesPost({ slug, post, timecode, index, block }) {
+
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
   const reduceMotion = useReducedMotion();
@@ -355,20 +356,16 @@ function SideBarHeader({children})
     </header>
   );
 }
-function CoverStoryPost(){
-
-  const {featuredPostRef} = useHome();
-  const featured = featuredPostRef;
-  const slug = featuredPostRef.slug;
+function CoverStoryPost(featured, block){
+  const slug = featured.slug;
   return (
-    <RecentStoriesPost slug={slug} post={featured} />
+    <RecentStoriesPost slug={slug} post={featured} block={block} />
   );
 }
-function RecentStoriesList({isSingleColumn, block})
+function RecentStoriesList({posts, isSingleColumn, block})
 {
 
-  const {recentArticlePosts} = useHome();
-  const posts = recentArticlePosts;
+
   return (
     <div className={styles.list}>
       {!isSingleColumn && (
@@ -376,19 +373,48 @@ function RecentStoriesList({isSingleColumn, block})
           Recent Stories
         </SideBarHeader>
       )}
-      {
-        posts?.map((post, index) => {
-          return (
-            <RecentStoriesPost
-              key={post.slug}
-              slug={post.slug}
-              index={index}
-              block={block}
-              post={post}
-            />
-          );
-        })
-      }
+      <RecentStoriesPost
+        key={posts[0].slug}
+        slug={posts[0].slug}
+        index={0}
+        block={block}
+        post={posts[0]}
+      />
+      <RecentStoriesPost
+        key={posts[1].slug}
+        slug={posts[1].slug}
+        index={1}
+        block={block}
+        post={posts[1]}
+      />
+      <RecentStoriesPost
+        key={posts[2].slug}
+        slug={posts[2].slug}
+        index={2}
+        block={block}
+        post={posts[2]}
+      />
+      <RecentStoriesPost
+        key={posts[3].slug}
+        slug={posts[3].slug}
+        index={3}
+        block={block}
+        post={posts[3]}
+      />
+      <RecentStoriesPost
+        key={posts[4].slug}
+        slug={posts[4].slug}
+        index={4}
+        block={block}
+        post={posts[4]}
+      />
+      <RecentStoriesPost
+        key={posts[5].slug}
+        slug={posts[5].slug}
+        index={5}
+        block={block}
+        post={posts[5]}
+      />
     </div>
 
   );
@@ -400,19 +426,61 @@ function FeaturedStoriesList({posts, block})
 
   return (
     <div className={styles.featuredfeedlist}>
-      {
-        posts?.map((post, index) => {
-          return (
-            <FeaturedStoriesPost
-              key={post.slug}
-              slug={post.slug}
-              index={index}
-              block={block}
-              post={post}
-            />
-          );
-        })
-      }
+      <FeaturedStoriesPost
+        key={posts[0].slug}
+        slug={posts[0].slug}
+        index={0}
+        block={block}
+        post={posts[0]}
+      />
+      <FeaturedStoriesPost
+        key={posts[1].slug}
+        slug={posts[1].slug}
+        index={1}
+        block={block}
+        post={posts[1]}
+      />
+      <FeaturedStoriesPost
+        key={posts[2].slug}
+        slug={posts[2].slug}
+        index={2}
+        block={block}
+        post={posts[2]}
+      />
+      <FeaturedStoriesPost
+        key={posts[3].slug}
+        slug={posts[3].slug}
+        index={3}
+        block={block}
+        post={posts[3]}
+      />
+      <FeaturedStoriesPost
+        key={posts[4].slug}
+        slug={posts[4].slug}
+        index={4}
+        block={block}
+        post={posts[4]}
+      />
+      <FeaturedStoriesPost
+        key={posts[5].slug}
+        slug={posts[5].slug}
+        index={5}
+        block={block}
+        post={posts[5]}
+      />
+      {/*{*/}
+      {/*  posts?.map((post, index) => {*/}
+      {/*    return (*/}
+      {/*      <FeaturedStoriesPost*/}
+      {/*        key={post.slug}*/}
+      {/*        slug={post.slug}*/}
+      {/*        index={index}*/}
+      {/*        block={block}*/}
+      {/*        post={post}*/}
+      {/*      />*/}
+      {/*    );*/}
+      {/*  })*/}
+      {/*}*/}
     </div>
 
   );
@@ -470,20 +538,23 @@ function LowerFeedStoriesList({posts})
 }
 
 
-function HeroStoriesBlock({posts, isSingleColumn, block})
+function HeroStoriesBlock({featured, posts, isSingleColumn, block})
 {
+
   return (
     <>
       <Section className={styles.content}>
         {!isSingleColumn && (
           <div className={styles.grid}>
-            <CoverStoryPost />
+            {/*<CoverStoryPost featured={featured} block={block} />*/}
+            <RecentStoriesPost slug={featured.slug} post={featured} block={block} />
             <RecentStoriesList posts={posts} isSingleColumn={isSingleColumn} block={block} />
           </div>
         )}
         {isSingleColumn && (
           <div className={styles.grid}>
-            <CoverStoryPost />
+            <RecentStoriesPost slug={featured.slug} post={featured} block={block} />
+            {/*<CoverStoryPost featured={featured} block={block} />*/}
             <SideBarHeader>
               Recent Stories
             </SideBarHeader>
@@ -495,12 +566,10 @@ function HeroStoriesBlock({posts, isSingleColumn, block})
   );
 }
 
-function DualColFeedBlock({block, isSingleColumn})
+function DualColFeedBlock({featured, block, isSingleColumn})
 {
   const {feedPostsContext} = useHome();
   const posts = feedPostsContext;
-  const {featuredArticlePosts} = useHome();
-  const featuredPosts = featuredArticlePosts;
 
   return (
     <>
@@ -517,7 +586,7 @@ function DualColFeedBlock({block, isSingleColumn})
                 <SideBarHeader>
                   Featured Stories
                 </SideBarHeader>
-                <FeaturedStoriesList posts={featuredPosts} isSingleColumn={isSingleColumn} block={block} />
+                <FeaturedStoriesList posts={featured} isSingleColumn={isSingleColumn} block={block} />
               </div>
             </div>
           </div>
@@ -560,11 +629,11 @@ function LowerFeedBlock({block, isSingleColumn})
 }
 
 
-function HeroStoryBlock({timecode, block})
+function HeroStoryBlock({timecode, post, block})
 {
-  const {heroStoryRef} = useHome();
-  const post = heroStoryRef;
-  const slug = heroStoryRef.slug;
+  // const {heroStoryRef} = useHome();
+  // const post = heroStoryRef;
+  const slug = post.slug;
 
   const [hovered, setHovered] = useState(false);
   const [dateTime, setDateTime] = useState(null);
@@ -664,34 +733,142 @@ export function Home() {
   const [featuredPostRef, setFeaturedPostRef] = useState(homePosts.featuredPostRef);
   const [recentArticlePosts, setRecentArticlePosts] = useState(homePosts.recentArticlePosts);
   const [featuredArticlePosts, setFeaturedArticlePosts] = useState(homePosts.featuredArticlePosts);
-  const [heroStoryRef, setHeroStoryRef] = useState(homePosts.heroStoryRef);
+
+  let featuredPostRefPlaceholder = {};
+
+  let recentArticleRefPlaceholder = {};
+  let recentArticlePostsPlaceholder = [];
+  let featuredArticleRefPlaceholder = {};
+  let featuredArticlePostsPlaceholder = [];
+
+  let heroStoriesPlaceholder = {};
+  let heroStoryPlaceholder = {};
+  let frontmatter = {};
+
+
+  // const [heroStoryRef, setHeroStoryRef] = useState(heroStoryPlaceholder);
+
   const [lowerFeedArticlePosts, setLowerFeedArticlePosts] = useState(homePosts.lowerFeedArticlePosts);
 
   const [feedPostsContext, setFeedPostsContext] = useState(feedPosts);
   const [lowerFeedPostsContext, setLowerFeedPostsContext] = useState(lowerFeedPosts);
-  // setFeaturedPostRef(homePosts.featuredPostRef);
-  // setRecentArticlePosts(homePosts.recentArticlePosts);
-  // setFeaturedArticlePosts(homePosts.featuredArticlePosts);
-  // setHeroStoryRef(homePosts.heroStoryRef);
-  // setLowerFeedArticlePosts(homePosts.lowerFeedArticlePosts);
-  // const { featuredPostRef, recentArticlePosts, featuredArticlePosts, heroStoryRef, lowerFeedArticlePosts, } = homePosts;
-
 
   return (
     <HomeContext.Provider
-      value={{ featuredPostRef, recentArticlePosts, featuredArticlePosts, feedPostsContext, lowerFeedPostsContext, heroStoryRef, lowerFeedArticlePosts }}
+      value={{ featuredPostRef, recentArticlePosts, featuredArticlePosts, feedPostsContext, lowerFeedPostsContext, lowerFeedArticlePosts }}
     >
       <article className={styles.articles}>
         {data.home.blocks?.map((block) => {
             switch (block?.__typename) {
               case "HomeBlocksHeroStories" : {
-                return <HeroStoriesBlock isSingleColumn={isSingleColumn} block={block} />;
+                let articlepostsCnt = 0;
+                for(const [key, articleBlock] of Object.entries(block)) {
+                  {
+                    switch (key) {
+                      case "featuredArticle" : {
+                        Object.assign(featuredPostRefPlaceholder, articleBlock);
+                        frontmatter = {
+                          title: featuredPostRefPlaceholder.title,
+                          abstract: featuredPostRefPlaceholder.abstract,
+                          banner: featuredPostRefPlaceholder.banner,
+                          date: featuredPostRefPlaceholder.date,
+                          category: featuredPostRefPlaceholder.category?.name,
+                          author: {
+                            name: featuredPostRefPlaceholder.author?.name || 'Anonymous',
+                            avatar: featuredPostRefPlaceholder.author?.avatar,
+                          },
+                          tags: featuredPostRefPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
+                        };
+                        featuredPostRefPlaceholder.slug = featuredPostRef.slug;
+                        featuredPostRefPlaceholder.frontmatter = frontmatter;
+                        featuredPostRefPlaceholder.frontmatter.featured = true;
+                        featuredPostRefPlaceholder.frontmatter.tinafield = key;
+                      }
+                        break;
+                      default: {
+                        if(articleBlock !== "HomeBlocksHeroStories")
+                        {
+                          recentArticleRefPlaceholder = articleBlock;
+                          frontmatter = {
+                            title: recentArticleRefPlaceholder.title,
+                            abstract: recentArticleRefPlaceholder.abstract,
+                            banner: recentArticleRefPlaceholder.banner,
+                            date: recentArticleRefPlaceholder.date,
+                            category: recentArticleRefPlaceholder.category?.name,
+                            author: {
+                              name: recentArticleRefPlaceholder.author?.name || 'Anonymous',
+                              avatar: recentArticleRefPlaceholder.author?.avatar,
+                            },
+                            tags: recentArticleRefPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
+                          };
+                          console.log(recentArticlePosts[articlepostsCnt].slug);
+                          recentArticleRefPlaceholder.slug = recentArticlePosts[articlepostsCnt].slug;
+                          recentArticleRefPlaceholder.frontmatter = frontmatter;
+                          recentArticleRefPlaceholder.frontmatter.featured = false;
+                          recentArticleRefPlaceholder.frontmatter.tinafield = key;
+                          if(articlepostsCnt < 5)
+                          articlepostsCnt++;
+                          recentArticlePostsPlaceholder.push(recentArticleRefPlaceholder);
+                        }
+
+                      }
+                    }
+
+                  }
+
+                }
+
+                return <HeroStoriesBlock isSingleColumn={isSingleColumn} featured={featuredPostRefPlaceholder} posts={recentArticlePostsPlaceholder} block={block} />;
               }
               case "HomeBlocksDualColFeed" : {
-                return <DualColFeedBlock isSingleColumn={isSingleColumn} block={block} />;
+                let articlepostsCnt = 0;
+                for(const [key, articleBlock] of Object.entries(block)) {
+                  if(articleBlock !== "HomeBlocksDualColFeed")
+                  {
+                    featuredArticleRefPlaceholder = articleBlock;
+                    frontmatter = {
+                      title: featuredArticleRefPlaceholder.title,
+                      abstract: featuredArticleRefPlaceholder.abstract,
+                      banner: featuredArticleRefPlaceholder.banner,
+                      date: featuredArticleRefPlaceholder.date,
+                      category: featuredArticleRefPlaceholder.category?.name,
+                      author: {
+                        name: featuredArticleRefPlaceholder.author?.name || 'Anonymous',
+                        avatar: featuredArticleRefPlaceholder.author?.avatar,
+                      },
+                      tags: featuredArticleRefPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
+                    };
+                    featuredArticleRefPlaceholder.slug = featuredArticlePosts[articlepostsCnt].slug;
+                    featuredArticleRefPlaceholder.frontmatter = frontmatter;
+                    featuredArticleRefPlaceholder.frontmatter.featured = false;
+                    featuredArticleRefPlaceholder.frontmatter.tinafield = key;
+                    if(articlepostsCnt < 5)
+                      articlepostsCnt++;
+                    featuredArticlePostsPlaceholder.push(featuredArticleRefPlaceholder);
+                  }
+
+                }
+                return <DualColFeedBlock isSingleColumn={isSingleColumn} featured={featuredArticlePostsPlaceholder} block={block} />;
               }
               case "HomeBlocksHeroStory" : {
-                return <HeroStoryBlock isSingleColumn={isSingleColumn} block={block} />;
+                heroStoryPlaceholder = block.heroStoryArticle;
+                frontmatter = {
+                  title: heroStoryPlaceholder.title,
+                  abstract: heroStoryPlaceholder.abstract,
+                  banner: heroStoryPlaceholder.banner,
+                  date: heroStoryPlaceholder.date,
+                  category: heroStoryPlaceholder.category?.name,
+                  author: {
+                    name: heroStoryPlaceholder.author?.name || 'Anonymous',
+                    avatar: heroStoryPlaceholder.author?.avatar,
+                  },
+                  tags: heroStoryPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
+                };
+                heroStoryPlaceholder.slug = homePosts.heroStoryRef.slug;
+                heroStoryPlaceholder.frontmatter = frontmatter;
+                heroStoryPlaceholder.frontmatter.featured = false;
+                heroStoryPlaceholder.frontmatter.tinafield = "heroStoryArticle";
+                return <HeroStoryBlock isSingleColumn={isSingleColumn} post={heroStoryPlaceholder} block={block} />;
               }
               case "HomeBlocksLowerFeed" : {
                 return <LowerFeedBlock isSingleColumn={isSingleColumn} block={block} />;

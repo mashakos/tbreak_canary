@@ -693,7 +693,7 @@ export function Home() {
                   },
                   tags: featuredPostRefPlaceholder.tags?.map((tag) => tag?.tag?.name) || [],
                 };
-                featuredPostRefPlaceholder.slug = homePosts.heroStoryRef.slug;
+                featuredPostRefPlaceholder.slug = homePosts.featuredPostRef.slug;
                 featuredPostRefPlaceholder.frontmatter = frontmatter;
                 featuredPostRefPlaceholder.frontmatter.featured = true;
                 featuredPostRefPlaceholder.frontmatter.tinafield = "featuredArticle";

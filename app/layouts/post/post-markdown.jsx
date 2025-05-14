@@ -19,33 +19,45 @@ const PostHeadingLink = ({ id }) => {
   );
 };
 
-const PostH1 = ({ children, id, ...rest }) => (
-  <Heading className={styles.heading} id={id} level={2} as="h1" {...rest}>
-    <PostHeadingLink id={id} />
-    {children}
-  </Heading>
-);
+const PostH1 = ({ children, id, ...rest }) => {
+  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  return (
+    <Heading className={styles.heading} id={idText} level={2} as="h1" {...rest}>
+      <PostHeadingLink id={idText} />
+      {children}
+    </Heading>
+  );
+};
 
-const PostH2 = ({ children, id, ...rest }) => (
-  <Heading className={styles.heading} id={id} level={3} as="h2" {...rest}>
-    <PostHeadingLink id={id} />
+const PostH2 = ({ children, id, ...rest }) => {
+  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  return (
+  <Heading className={styles.heading} id={idText} level={3} as="h2" {...rest}>
+    <PostHeadingLink id={idText} />
     {children}
   </Heading>
-);
+  );
+};
 
-const PostH3 = ({ children, id, ...rest }) => (
-  <Heading className={styles.heading} id={id} level={4} as="h3" {...rest}>
-    <PostHeadingLink id={id} />
-    {children}
-  </Heading>
-);
+const PostH3 = ({ children, id, ...rest }) => {
+  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  return (
+    <Heading className={styles.heading} id={idText} level={4} as="h3" {...rest}>
+      <PostHeadingLink id={idText} />
+      {children}
+    </Heading>
+  );
+};
 
-const PostH4 = ({ children, id, ...rest }) => (
-  <Heading className={styles.heading} id={id} level={5} as="h4" {...rest}>
-    <PostHeadingLink id={id} />
-    {children}
-  </Heading>
-);
+const PostH4 = ({ children, id, ...rest }) => {
+  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  return (
+    <Heading className={styles.heading} id={idText} level={5} as="h4" {...rest}>
+      <PostHeadingLink id={idText} />
+      {children}
+    </Heading>
+  );
+};
 
 const PostParagraph = ({ children, ...rest }) => {
   const hasSingleChild = Children.count(children) === 1;

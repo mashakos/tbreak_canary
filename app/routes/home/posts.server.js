@@ -32,7 +32,7 @@ export async function getReservedPosts(data) {
                     },
                     tags: featuredPostRef.tags?.map((tag) => tag?.tag?.name) || [],
                   };
-                  featuredPostRef.slug = build.routes[featuredPostRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
+                  featuredPostRef.slug = build.routes[featuredPostRef.id.replace('app/', '').replace(/\.mdx$/, '')].path;
                   featuredPostRef.frontmatter = frontmatter;
                   featuredPostRef.frontmatter = frontmatter;
                   featuredPostRef.frontmatter.featured = true;
@@ -63,7 +63,7 @@ export async function getReservedPosts(data) {
             },
             tags: heroStoryRef.tags?.map((tag) => tag?.tag?.name) || [],
           };
-          heroStoryRef.slug = build.routes[heroStoryRef._sys.path.replace('app/', '').replace(/\.mdx$/, '')].path;
+          heroStoryRef.slug = build.routes[heroStoryRef.id.replace('app/', '').replace(/\.mdx$/, '')].path;
           heroStoryRef.frontmatter = frontmatter;
           heroStoryRef.frontmatter.featured = false;
           heroStoryRef.frontmatter.tinafield = "heroStoryArticle";

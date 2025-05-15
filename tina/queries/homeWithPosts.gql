@@ -1,6 +1,6 @@
 query homeWithPosts($relativePath: String!) {
     home(relativePath: $relativePath) {
-        ...HomeParts
+        ...CustomHomeParts
     }
     postConnection(sort: "date", last: 25) {
         edges {

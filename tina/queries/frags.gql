@@ -1,0 +1,59 @@
+fragment CustomHomeParts on Home {
+    __typename
+    title
+    blocks {
+        __typename
+        ... on HomeBlocksHeroStories {
+            featuredArticle {
+                ... on Post {
+                    __typename
+                    id
+                    title
+                    abstract
+                    banner
+                    date
+                    author {
+                        ... on Author {
+                            __typename
+                            name
+                            avatar
+                        }
+                    }
+                    category {
+                        ... on Category {
+                            __typename
+                            name
+                        }
+                    }
+                    time_to_read_in_minutes
+                }
+            }
+        }
+        ... on HomeBlocksHeroStory {
+            heroStoryArticle {
+                ... on Post {
+                    __typename
+                    id
+                    title
+                    abstract
+                    banner
+                    date
+                    author {
+                        ... on Author {
+                            __typename
+                            name
+                            avatar
+                        }
+                    }
+                    category {
+                        ... on Category {
+                            __typename
+                            name
+                        }
+                    }
+                    time_to_read_in_minutes
+                }
+            }
+        }
+    }
+}

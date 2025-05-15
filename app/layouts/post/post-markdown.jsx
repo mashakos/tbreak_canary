@@ -20,7 +20,12 @@ const PostHeadingLink = ({ id }) => {
 };
 
 const PostH1 = ({ children, id, ...rest }) => {
-  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  let idText = "";
+  if(children.props.content[0].type === "text")
+    idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  else
+  if(children.props.content[0].type === "a")
+    idText = children.props.content[0].children[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
   return (
     <Heading className={styles.heading} id={idText} level={2} as="h1" {...rest}>
       <PostHeadingLink id={idText} />
@@ -30,7 +35,12 @@ const PostH1 = ({ children, id, ...rest }) => {
 };
 
 const PostH2 = ({ children, id, ...rest }) => {
-  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  let idText = "";
+  if(children.props.content[0].type === "text")
+    idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  else
+  if(children.props.content[0].type === "a")
+    idText = children.props.content[0].children[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
   return (
   <Heading className={styles.heading} id={idText} level={3} as="h2" {...rest}>
     <PostHeadingLink id={idText} />
@@ -40,7 +50,12 @@ const PostH2 = ({ children, id, ...rest }) => {
 };
 
 const PostH3 = ({ children, id, ...rest }) => {
-  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  let idText = "";
+  if(children.props.content[0].type === "text")
+    idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  else
+  if(children.props.content[0].type === "a")
+    idText = children.props.content[0].children[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
   return (
     <Heading className={styles.heading} id={idText} level={4} as="h3" {...rest}>
       <PostHeadingLink id={idText} />
@@ -50,7 +65,12 @@ const PostH3 = ({ children, id, ...rest }) => {
 };
 
 const PostH4 = ({ children, id, ...rest }) => {
-  const idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  let idText = "";
+  if(children.props.content[0].type === "text")
+  idText = children.props.content[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
+  else
+    if(children.props.content[0].type === "a")
+      idText = children.props.content[0].children[0].text.toLowerCase().replace(/([^a-z0-9 -])/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '-');
   return (
     <Heading className={styles.heading} id={idText} level={5} as="h4" {...rest}>
       <PostHeadingLink id={idText} />

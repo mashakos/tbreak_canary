@@ -68,7 +68,7 @@ export async function loader() {
         };
         post.frontmatter.featured = false;
         post.frontmatter = frontmatter;
-        console.log(post.frontmatter);
+        // console.log(post.frontmatter);
       }
     });
   });

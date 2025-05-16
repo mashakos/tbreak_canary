@@ -297,6 +297,11 @@ export async function loader() {
       heroStoryRef,
       mostReadArticlePosts,
     },
+  },
+  {
+    headers: {
+    "Cache-Control": "public, max-age=3600, stable-while-revalidate=240", // 1 hour age, 4 minutes stale while refreshing
+    },
   });
 }
 

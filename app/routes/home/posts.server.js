@@ -85,7 +85,34 @@ export async function getReservedPosts(data) {
 
 }
 
+
 export async function getPosts() {
+  const modules = import.meta.glob('../articles.*.mdx', { eager: true });
+  const build = await import('virtual:remix/server-build');
+
+  const posts = await Promise.all(
+    Object.entries(modules).map(async ([file, post]) => {
+      let id = file.replace('../', 'routes/').replace(/\.mdx$/, '');
+      let slug = build.routes[id].path;
+      if (slug === undefined) throw new Error(`No route for ${id}`);
+
+      let timecode = timePhrase(post.time_to_read_in_minutes);
+
+      post.frontmatter.id = file.replace('../', 'app/routes/');
+
+      return {
+        slug,
+        timecode,
+        frontmatter: post.frontmatter,
+      };
+    })
+  );
+
+  return sortBy(posts, post => post.frontmatter.date, 'desc');
+}
+
+
+export async function getPostsa() {
 
   const build = await import('virtual:remix/server-build');
 

@@ -1,5 +1,5 @@
 import { baseMeta } from '~/utils/meta';
-import { getReservedPosts } from './posts.server';
+import { getPosts, getReservedPosts } from './posts.server';
 import { json } from '@remix-run/cloudflare';
 import client from 'tina/__generated__/client.js';
 
@@ -25,39 +25,57 @@ export async function loader() {
   let frontmatter = {};
   let postFactory = data.postConnection.edges;
 
+  let posts = await getPosts();
 
 
-  // reserved articles
+  reservedPosts.map((reservedPost) => {
+    posts = posts.filter(post => reservedPost?.slug !== post.slug);
+
+  });
+
+
+  // // reserved articles
+  // postFactory.map((postData, index) => {
+  //   const post = postData.node;
+  //
+  //   reservedPosts.map((reservedPost) => {
+  //     if(reservedPost.id === post.id)
+  //     {
+  //       postFactory.splice(index, 1);
+  //     }
+  //   });
+  // });
+
+
+  // replace author, category referenced fields
   postFactory.map((postData, index) => {
-    const post = postData.node;
+    const factorypost = postData.node;
 
-    reservedPosts.map((reservedPost) => {
-      if(reservedPost.id === post.id)
+    posts.map((post) => {
+      if(post.frontmatter.id === factorypost.id)
       {
-        postFactory.splice(index, 1);
+        frontmatter = {
+          title: factorypost.title,
+          abstract: factorypost.abstract,
+          banner: factorypost.banner,
+          date: factorypost.date,
+          category: factorypost.category?.name,
+          author: {
+            name: factorypost.author?.name || 'Anonymous',
+            avatar: factorypost.author?.avatar,
+          },
+          tags: factorypost.tags?.map((tag) => tag?.tag?.name) || [],
+        };
+        post.frontmatter.featured = false;
+        post.frontmatter = frontmatter;
+        console.log(post.frontmatter);
       }
     });
   });
 
 
   // recent articles
-  for (const postData of postFactory) {
-    const post = postData.node;
-    frontmatter = {
-      title: post.title,
-      abstract: post.abstract,
-      banner: post.banner,
-      date: post.date,
-      category: post.category?.name,
-      author: {
-        name: post.author?.name || 'Anonymous',
-        avatar: post.author?.avatar,
-      },
-      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
-    };
-    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
-    post.frontmatter = frontmatter;
-    post.frontmatter.featured = false;
+  for (const post of posts) {
     recentArticlePosts.push(post);
 
     if(recentArticlePosts.length >= recentArticlePostCnt)
@@ -65,106 +83,153 @@ export async function loader() {
       break;
     }
   }
-  postFactory.map((postData, index) => {
-    const post = postData.node;
+  posts.map((post, index) => {
 
     recentArticlePosts.map((recentArticlePost) => {
-      if(recentArticlePost.id === post.id)
-      {
-        postFactory.splice(index, 1);
-      }
+      posts = posts.filter(post => recentArticlePost?.slug !== post.slug);
     });
   });
 
+
+  // // recent articles
+  // for (const postData of postFactory) {
+  //   const post = postData.node;
+  //   frontmatter = {
+  //     title: post.title,
+  //     abstract: post.abstract,
+  //     banner: post.banner,
+  //     date: post.date,
+  //     category: post.category?.name,
+  //     author: {
+  //       name: post.author?.name || 'Anonymous',
+  //       avatar: post.author?.avatar,
+  //     },
+  //     tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+  //   };
+  //   post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+  //   post.frontmatter = frontmatter;
+  //   post.frontmatter.featured = false;
+  //   recentArticlePosts.push(post);
+  //
+  //   if(recentArticlePosts.length >= recentArticlePostCnt)
+  //   {
+  //     break;
+  //   }
+  // }
+  // postFactory.map((postData, index) => {
+  //   const post = postData.node;
+  //
+  //   recentArticlePosts.map((recentArticlePost) => {
+  //     if(recentArticlePost.id === post.id)
+  //     {
+  //       postFactory.splice(index, 1);
+  //     }
+  //   });
+  // });
+
+
   // featured articles
-  for (const postData of postFactory) {
-    const post = postData.node;
-    frontmatter = {
-      title: post.title,
-      abstract: post.abstract,
-      banner: post.banner,
-      date: post.date,
-      category: post.category?.name,
-      author: {
-        name: post.author?.name || 'Anonymous',
-        avatar: post.author?.avatar,
-      },
-      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
-    };
-    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
-    post.frontmatter = frontmatter;
-    post.frontmatter.featured = false;
+  for (const post of posts) {
     featuredArticlePosts.push(post);
 
     if(featuredArticlePosts.length >= featuredArticlePostCnt)
       break;
   }
-  postFactory.map((postData, index) => {
-    const post = postData.node;
+  posts.map((post, index) => {
 
     featuredArticlePosts.map((featuredArticlePost) => {
-      if(featuredArticlePost.id === post.id)
-      {
-        postFactory.splice(index, 1);
-      }
+      posts = posts.filter(post => featuredArticlePost?.slug !== post.slug);
     });
   });
 
+
+  // // featured articles
+  // for (const postData of postFactory) {
+  //   const post = postData.node;
+  //   frontmatter = {
+  //     title: post.title,
+  //     abstract: post.abstract,
+  //     banner: post.banner,
+  //     date: post.date,
+  //     category: post.category?.name,
+  //     author: {
+  //       name: post.author?.name || 'Anonymous',
+  //       avatar: post.author?.avatar,
+  //     },
+  //     tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+  //   };
+  //   post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+  //   post.frontmatter = frontmatter;
+  //   post.frontmatter.featured = false;
+  //   featuredArticlePosts.push(post);
+  //
+  //   if(featuredArticlePosts.length >= featuredArticlePostCnt)
+  //     break;
+  // }
+  // postFactory.map((postData, index) => {
+  //   const post = postData.node;
+  //
+  //   featuredArticlePosts.map((featuredArticlePost) => {
+  //     if(featuredArticlePost.id === post.id)
+  //     {
+  //       postFactory.splice(index, 1);
+  //     }
+  //   });
+  // });
+
+
   // most read articles
-  for (const postData of postFactory) {
-    const post = postData.node;
-    frontmatter = {
-      title: post.title,
-      abstract: post.abstract,
-      banner: post.banner,
-      date: post.date,
-      category: post.category?.name,
-      author: {
-        name: post.author?.name || 'Anonymous',
-        avatar: post.author?.avatar,
-      },
-      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
-    };
-    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
-    post.frontmatter = frontmatter;
-    post.frontmatter.featured = false;
+  for (const post of posts) {
     mostReadArticlePosts.push(post);
 
     if(mostReadArticlePosts.length >= mostReadArticlePostCnt)
       break;
   }
-  postFactory.map((postData, index) => {
-    const post = postData.node;
+  posts.map((post, index) => {
 
     mostReadArticlePosts.map((mostReadArticlePost) => {
-      if(mostReadArticlePost.id === post.id)
-      {
-        postFactory.splice(index, 1);
-      }
+      posts = posts.filter(post => mostReadArticlePost?.slug !== post.slug);
     });
   });
 
 
 
+  // // most read articles
+  // for (const postData of postFactory) {
+  //   const post = postData.node;
+  //   frontmatter = {
+  //     title: post.title,
+  //     abstract: post.abstract,
+  //     banner: post.banner,
+  //     date: post.date,
+  //     category: post.category?.name,
+  //     author: {
+  //       name: post.author?.name || 'Anonymous',
+  //       avatar: post.author?.avatar,
+  //     },
+  //     tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+  //   };
+  //   post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+  //   post.frontmatter = frontmatter;
+  //   post.frontmatter.featured = false;
+  //   mostReadArticlePosts.push(post);
+  //
+  //   if(mostReadArticlePosts.length >= mostReadArticlePostCnt)
+  //     break;
+  // }
+  // postFactory.map((postData, index) => {
+  //   const post = postData.node;
+  //
+  //   mostReadArticlePosts.map((mostReadArticlePost) => {
+  //     if(mostReadArticlePost.id === post.id)
+  //     {
+  //       postFactory.splice(index, 1);
+  //     }
+  //   });
+  // });
 
-  postFactory.map((postData) => {
-    const post = postData.node;
-    frontmatter = {
-      title: post.title,
-      abstract: post.abstract,
-      banner: post.banner,
-      date: post.date,
-      category: post.category?.name,
-      author: {
-        name: post.author?.name || 'Anonymous',
-        avatar: post.author?.avatar,
-      },
-      tags: post.tags?.map((tag) => tag?.tag?.name) || [],
-    };
-    post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
-    post.frontmatter = frontmatter;
-    post.frontmatter.featured = false;
 
+  posts.map((post) => {
 
     if(feedPosts.length >= 6)
     {
@@ -178,6 +243,42 @@ export async function loader() {
       feedPosts.push(post);
     }
   });
+
+
+
+
+
+  // postFactory.map((postData) => {
+  //   const post = postData.node;
+  //   frontmatter = {
+  //     title: post.title,
+  //     abstract: post.abstract,
+  //     banner: post.banner,
+  //     date: post.date,
+  //     category: post.category?.name,
+  //     author: {
+  //       name: post.author?.name || 'Anonymous',
+  //       avatar: post.author?.avatar,
+  //     },
+  //     tags: post.tags?.map((tag) => tag?.tag?.name) || [],
+  //   };
+  //   post.slug = build.routes[post.id.replace('app/', '').replace(/\.mdx$/, '')].path;
+  //   post.frontmatter = frontmatter;
+  //   post.frontmatter.featured = false;
+  //
+  //
+  //   if(feedPosts.length >= 6)
+  //   {
+  //     if(lowerFeedPosts.length < 6)
+  //     {
+  //       lowerFeedPosts.push(post);
+  //     }
+  //   }
+  //   else
+  //   {
+  //     feedPosts.push(post);
+  //   }
+  // });
 
 
   return json({

@@ -412,7 +412,7 @@ span {
 
 
   @media (--mediaMobile) {
-    translate: 0 -7rem;
+    translate: 0 -13rem;
   }
 
   & .covercontainer {
